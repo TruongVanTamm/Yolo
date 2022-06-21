@@ -19,7 +19,7 @@ const ProductCard = (props) => {
     reset = 'activeAlert';
   }
   const state = useContext(GlobalState);
-  const addCart=state.userAPI.addCart
+  const addCart = state.userAPI.addCart;
   return (
     <>
       <AlertLike
@@ -41,13 +41,13 @@ const ProductCard = (props) => {
               return (
                 <div key={index}>
                   <img
-                    src={item.image01}
+                    src={require(item.image01)}
                     alt=""
                     className={activeProduct === index ? 'active' : null}
                   />
-                  
+
                   <img
-                    src={item.image02}
+                    src={require(item.image02)}
                     alt=""
                     className={activeProduct === index ? 'active' : null}
                   />
@@ -114,13 +114,13 @@ const ProductCard = (props) => {
                 className={`product-card__choice__option`}
               >
                 <img
-                  src={item.image01}
+                      src={require(item.image01)}
                   alt=""
                   onClick={() => handleProductClick(index)}
                 />
-                
+
                 <img
-                  src={item.image02}
+                       src={require(item.image02)}
                   alt=""
                   onClick={() => handleProductClick(index)}
                 />
