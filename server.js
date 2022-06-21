@@ -14,13 +14,6 @@ app.use(
 		useTempFiles: true,
 	})
 );
-// if (process.env.NODE_ENV === 'production') {
-// 	app.use(express.static('client/build'))
-  
-// 	app.get('*', (req, res) => {
-// 	  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')) // relative path
-// 	})
-//   }
 // Routes
 app.use("/user", require("./routes/userRouter"));
 app.use("/api", require("./routes/categoryRouter"));
@@ -40,10 +33,15 @@ mongoose.connect(
 		if (err) throw err;
 		console.log("Connected to MongoDB");
 	}
-);
-app.get("/", (req, res) => res.send("Api Running"))
-app.get("/", (req, res) => {
-	res.json({ msg: "Hello" });
+	);
+	if(process.env.NODE_ENV === 'production'){
+		app.use(express.static('client/build'))
+		app.get('*', (req, res) => {
+			res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+		})
+	}
+	app.get("/", (req, res) => {
+		res.json({ msg: "Hello" });
 });
 
 const PORT = process.env.PORT || 5000;
