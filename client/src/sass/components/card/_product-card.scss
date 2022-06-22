@@ -44,6 +44,7 @@
     }
   }
   &__btn {
+    @include flex(center, space-between);
     @include tablet {
       .mobile-hide {
         display: none;

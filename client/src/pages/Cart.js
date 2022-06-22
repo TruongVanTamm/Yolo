@@ -120,10 +120,12 @@ const Cart = () => {
               key={index}
             >
               <div className="cart__list__item__img">
+                <Link to={product.id}>
                 <img
                   src={product.image01}
                   alt=""
                 />
+                </Link>
               </div>
 
               <div className="cart__list__item__detail">

@@ -1,24 +1,26 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GlobalState } from '../../GlobalState';
 import Loading from '../Notice/Loading';
 const CreateProduct = () => {
   const [price, setPrice] = useState(0);
-  const initialState = {
-    product_id: '',
-    title: '',
-    price: price,
-    description: '',
-    category: '',
-    old_price: 0,
-    discount: 0,
-    _id: '',
-    color: '',
-    size: '',
-  };
+  const initialStateMemo = useMemo(() => {
+    return {
+      product_id: '',
+      title: '',
+      price: price,
+      description: '',
+      category: '',
+      old_price: 0,
+      discount: 0,
+      _id: '',
+      color: '',
+      size: '',
+    };
+  }, [price]);
   const state = useContext(GlobalState);
-  const [product, setProduct] = useState(initialState);
+  const [product, setProduct] = useState(initialStateMemo);
   const [categories] = state.categoriesAPI.categories;
   const [image01, setImage01] = useState(false);
   const [image02, setImage02] = useState(false);
@@ -37,17 +39,17 @@ const CreateProduct = () => {
       products.forEach((product) => {
         if (product._id === param.id) {
           setProduct(product);
-          setImage01(product.images);
-          setImage02(product.images);
+          setImage01(product.image01);
+          setImage02(product.image02);
         }
       });
     } else {
       setOnEdit(false);
-      setProduct(initialState);
+      setProduct(initialStateMemo);
       setImage01(false);
       setImage02(false);
     }
-  }, [param.id, products]);
+  }, [param.id, products, initialStateMemo]);
   useEffect(() => {
     setPrice((product.old_price * product.discount) / 100);
   }, [product.old_price, product.discount]);

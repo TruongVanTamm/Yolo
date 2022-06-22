@@ -18,7 +18,6 @@ const ProductView = (props) => {
       window.scrollTo(0, 1000);
     }
   };
-  const navigate = useNavigate();
   useEffect(() => {
     setPreviewImg(props.image01);
     setDesHeight(descriptionHeight.current.offsetHeight);
@@ -76,7 +75,8 @@ const ProductView = (props) => {
       <div className="product__info">
         <div className="product__info__title">{props.name}</div>
         <div className="product__info__item">
-          <span className="product__info__item__price">{props.price}</span>
+        <span className="product__info__item__title">Giá tiền</span>
+          <span className="product__info__item__price">{` $${props.price}`}</span>
         </div>
         <div className="product__info__item">
           <span className="product__info__item__title">Màu sắc</span>

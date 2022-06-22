@@ -32,7 +32,7 @@ const ProductCard = (props) => {
             className="product-card__input"
             type="checkbox"
             checked={props.checked}
-            onChange={() => {}}
+            onChange={() => props.handleCheck(props.id)}
           />
         )}
         <Link to={`/catalog/${props.id}`}>
@@ -72,9 +72,11 @@ const ProductCard = (props) => {
                 icon="bx bx-cart-add"
                 animate={false}
                 backgroundColor="red"
+                onClick={()=>{props.deleteProduct(props.id,props.public_id )}}
               >
                 Xóa
               </Button>
+              <Link to={`/edit-product/${props.id}`}>
               <Button
                 size="sm"
                 icon="bx bx-cart-add"
@@ -82,6 +84,7 @@ const ProductCard = (props) => {
               >
                 Sửa
               </Button>
+              </Link>
             </>
           ) : (
             <>
@@ -92,7 +95,7 @@ const ProductCard = (props) => {
                 animate={true}
                 onClick={() => addCart(props)}
               >
-                Chọn mua
+                Mua
               </Button>
               <Link to={`/catalog/${props.id}`}  className='mobile-hide' >
                 <Button

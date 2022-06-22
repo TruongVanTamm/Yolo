@@ -20,10 +20,12 @@ const RoutesWrap = () => {
         <Routes>
           <Route path='/' exact element={<Home></Home>}></Route>
           <Route path='/catalog/:id' exact  element={<Products></Products>}></Route>
+          <Route path='/cart/:id' exact  element={<Products></Products>}></Route>
           <Route path='/catalog' exact element={<Catalog></Catalog> }></Route>
           <Route path='/cart' exact element={<Cart></Cart>}></Route>
           <Route path='/category' exact element={isAdmin? <Categories></Categories>:<NotFound></NotFound>}></Route>
           <Route path='/create_product' exact element={isAdmin? <CreateProduct></CreateProduct>:<NotFound></NotFound>}></Route>
+          <Route path='/edit-product/:id' exact element={isAdmin? <CreateProduct></CreateProduct>:<NotFound></NotFound>}></Route>
           <Route path='/history' exact element={isLogged ? <OrderHistory></OrderHistory>:<NotFound></NotFound>}></Route>
           <Route path='/history/:id' exact element={<OrderDetail></OrderDetail>}></Route>
           <Route path='/signup' exact element={isLogged ? <NotFound></NotFound>:<SignUpPage></SignUpPage>}></Route>
