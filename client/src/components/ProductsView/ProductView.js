@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
@@ -17,12 +17,11 @@ const ProductView = (props) => {
     }
   };
   const navigate = useNavigate();
-  const goToCart=()=>{
-    navigate("/cart");
-  }
   useEffect(() => {
     setPreviewImg(props.image01);
   }, [props]);
+  const descriptionHeight = useRef();
+  console.log(descriptionHeight.current);
   return (
     <div className="product">
       <div className="product__images">
@@ -86,7 +85,6 @@ const ProductView = (props) => {
                 <div
                   className={`product__info__item__list__item `}
                   key={index}
-                 
                 >
                   <div className={`circle bg-${item}`}></div>
                 </div>
@@ -102,7 +100,6 @@ const ProductView = (props) => {
                 <div
                   className={`product__info__item__list__item`}
                   key={index}
-                
                 >
                   <div className="product__info__item__list__item__size">
                     {item}
@@ -113,7 +110,10 @@ const ProductView = (props) => {
           </span>
         </div>
         <div className="product__info__item">
-          <span className="product__info__item__title"> Số sản phẩm đã bán: {props.sold} </span>
+          <span className="product__info__item__title">
+            {' '}
+            Số sản phẩm đã bán: {props.sold}{' '}
+          </span>
         </div>
         <div className="product__info__item">
           <Button
@@ -126,7 +126,7 @@ const ProductView = (props) => {
             size="sm"
             onClick={() => addCart(props)}
           >
-           Mua ngay
+            Mua ngay
           </Button>
         </div>
       </div>
@@ -137,17 +137,20 @@ const ProductView = (props) => {
       >
         <div className="product__description__title">Chi tiết sản phẩm</div>
         <div
+          ref={descriptionHeight}
           className="product__description__content"
           dangerouslySetInnerHTML={{ __html: props.description }}
         ></div>
-        <div className="product__description__toggle">
-          <Button
-            size="sm"
-            onClick={handleProductDescriptionClick}
-          >
-            {descriptionExpand ? 'Ẩn bớt' : 'Xem thêm'}
-          </Button>
-        </div>
+        {descriptionHeight.current.offsetHeight < 200 ? null : (
+          <div className="product__description__toggle">
+            <Button
+              size="sm"
+              onClick={handleProductDescriptionClick}
+            >
+              {descriptionExpand ? 'Ẩn bớt' : 'Xem thêm'}
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

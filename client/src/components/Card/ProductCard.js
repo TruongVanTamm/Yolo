@@ -58,9 +58,9 @@ const ProductCard = (props) => {
           <h3 className="product-card__name">{props.name}</h3>
           <div className="product-card__price">
             <span className="product-card__price__old">
-              <del>{`${props.old_price} $`}</del>
+              <del>{`$${props.old_price} `}</del>
             </span>
-            {`${props.price} $`}
+            {`$${props.price}`}
           </div>
         </Link>
         <div className="product-card__btn">
@@ -94,7 +94,7 @@ const ProductCard = (props) => {
               >
                 Chọn mua
               </Button>
-              <Link to={`/catalog/${props.id}`}>
+              <Link to={`/catalog/${props.id}`}  className='mobile-hide' >
                 <Button
                   size="sm"
                   icon="bx bx-cart-add"
