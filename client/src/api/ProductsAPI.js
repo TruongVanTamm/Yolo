@@ -19,7 +19,6 @@ function ProductsAPI() {
         }
         getProducts()
     },[callback, category, sort, search, page])
-    
     return {
         products: [products, setProducts],
         callback: [callback, setCallback],
