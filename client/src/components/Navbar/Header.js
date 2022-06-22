@@ -1,4 +1,4 @@
-import { axiosInstance } from '../../config'
+import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Asset/images/Logo-2.png';
@@ -42,7 +42,7 @@ const Header = () => {
     userOption.current.classList.toggle('active');
   };
   const logoutUser = async () => {
-    await axiosInstance.get('/user/logout');
+    await axios.get('/user/logout');
 
     localStorage.removeItem('firstLogin');
 
@@ -161,7 +161,7 @@ const Header = () => {
               <span className="header__menu__right__item__quantity">
                 {cart.length}
               </span>
-              <Tippy content={<TippyStyle content='Giỏ hàng '></TippyStyle>}>
+              <Tippy content={<TippyStyle content="Giỏ hàng "></TippyStyle>}>
                 <Link to="/cart">
                   <i className="bx bx-cart"></i>
                 </Link>

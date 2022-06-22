@@ -4,7 +4,7 @@ import Helmet from '../components/Notice/Helmet';
 import Button from '../components/Button/Button';
 import numberWithCommas from '../utils/numberWithCommas';
 import { GlobalState } from '../GlobalState';
-import {axiosInstance } from '../config'
+import axios from 'axios';
 import PaypalButton from '../components/Button/PaypalButton';
 
 const Cart = () => {
@@ -24,7 +24,7 @@ const Cart = () => {
     getTotal();
   }, [cart]);
   const addToCart = async (cart) => {
-    await axiosInstance.patch(
+    await axios.patch(
       '/user/addcart',
       { cart },
       {
@@ -69,7 +69,7 @@ const Cart = () => {
   const tranSuccess = async (payment) => {
     const { paymentID, address } = payment;
 
-    await axiosInstance.post(
+    await axios.post(
       '/api/payment',
       { cart, paymentID, address },
       {
@@ -82,8 +82,11 @@ const Cart = () => {
   };
   if (cart.length === 0)
     return (
-      <div className="cart__empty" >
-        <img src={require('../Asset/images/cart-empty.png')} alt='kanh '/>
+      <div className="cart__empty">
+        <img
+          src={require('../Asset/images/cart-empty.png')}
+          alt="kanh "
+        />
       </div>
     );
   return (

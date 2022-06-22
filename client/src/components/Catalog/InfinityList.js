@@ -4,7 +4,7 @@ import Grid from '../Layout/Grid';
 import ProductCard from '../Card/ProductCard';
 import { GlobalState } from '../../GlobalState';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import {axiosInstance } from '../../config'
+import axios from 'axios';
 
 const InfinityList = () => {
   const state = useContext(GlobalState);
@@ -12,7 +12,7 @@ const InfinityList = () => {
   const [isAdmin] = state.userAPI.isAdmin;
   const [hasMore, setHasMore] = useState(true);
   const fetchProducts = async () => {
-    const res = await axiosInstance.get(`/api/products`);
+    const res = await axios.get(`/api/products`);
     return res.data.products;
   };
   const fetchData = async () => {

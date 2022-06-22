@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
-import {axiosInstance } from '../../config'
+import axios from 'axios';
 const SignInForm = () => {
   const formik = useFormik({
     initialValues: {
@@ -24,17 +24,17 @@ const SignInForm = () => {
           'Mật khẩu yêu cầu 7-19 ký tự, chứa ít nhất một chữ cái, một số và một ký tự đặc biệt'
         ),
     }),
-    onSubmit: async (values)=>{
+    onSubmit: async (values) => {
       try {
-        await axiosInstance.post('/user/login', { ...values});
-  
+        await axios.post('/user/login', { ...values });
+
         localStorage.setItem('firstLogin', true);
-  
+
         window.location.href = '/';
       } catch (err) {
         alert(err.response.data.msg);
       }
-    }
+    },
   });
   return (
     <section>

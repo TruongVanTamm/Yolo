@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {axiosInstance } from '../../config'
+import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GlobalState } from '../../GlobalState';
 import Loading from '../Notice/Loading';
@@ -66,7 +66,7 @@ const CreateProduct = () => {
       let formData = new FormData();
       formData.append('file', file);
       setLoading(true);
-      const res = await axiosInstance.post('/api/upload', formData, {
+      const res = await axios.post('/api/upload', formData, {
         headers: {
           'content-type': 'multipart/form-data',
           Authorization: token,
@@ -96,7 +96,7 @@ const CreateProduct = () => {
       let formData = new FormData();
       formData.append('file', file);
       setLoading(true);
-      const res = await axiosInstance.post('/api/upload', formData, {
+      const res = await axios.post('/api/upload', formData, {
         headers: {
           'content-type': 'multipart/form-data',
           Authorization: token,
@@ -113,7 +113,7 @@ const CreateProduct = () => {
     try {
       if (!isAdmin) return alert("You're not an admin");
       setLoading(true);
-      await axiosInstance.post(
+      await axios.post(
         '/api/destroy',
         { public_id: image01.public_id },
         {
@@ -130,7 +130,7 @@ const CreateProduct = () => {
     try {
       if (!isAdmin) return alert("You're not an admin");
       setLoading(true);
-      await axiosInstance.post(
+      await axios.post(
         '/api/destroy',
         { public_id: image02.public_id },
         {
@@ -159,7 +159,7 @@ const CreateProduct = () => {
       if (!image01) return alert('No Image ');
 
       if (onEdit) {
-        await axiosInstance.put(
+        await axios.put(
           `/api/products/${product._id}`,
           { ...product, ...images },
           {
@@ -167,7 +167,7 @@ const CreateProduct = () => {
           }
         );
       } else {
-        await axiosInstance.post(
+        await axios.post(
           '/api/products',
           { ...product, ...images },
           {
@@ -298,7 +298,7 @@ const CreateProduct = () => {
             value={product.price}
             onChange={handleChangeInput}
           />
-          {product.discount !== 0 && product.old_price !==0 ? (
+          {product.discount !== 0 && product.old_price !== 0 ? (
             <div className="hint-price">
               <i className="bx bxs-bulb"></i>
               <span>{price}</span>

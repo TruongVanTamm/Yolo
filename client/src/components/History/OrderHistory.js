@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {axiosInstance } from '../../config'
+import axios from 'axios';
 import { GlobalState } from '../../GlobalState';
 
 function OrderHistory() {
@@ -12,12 +12,12 @@ function OrderHistory() {
     if (token) {
       const getHistory = async () => {
         if (isAdmin) {
-          const res = await axiosInstance.get('/api/payment', {
+          const res = await axios.get('/api/payment', {
             headers: { Authorization: token },
           });
           setHistory(res.data);
         } else {
-          const res = await axiosInstance.get('/user/history', {
+          const res = await axios.get('/user/history', {
             headers: { Authorization: token },
           });
           setHistory(res.data);

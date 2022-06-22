@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
-import {axiosInstance } from '../../config'
+import axios from 'axios'
 
 const SignupForm = () => {
   const formik = useFormik({
@@ -34,19 +34,18 @@ const SignupForm = () => {
         .required('Vui lòng nhập trường này')
         .oneOf([Yup.ref('password'), null], 'Mật khẩu không trùng khớp'),
     }),
-    onSubmit: async ( values) => {
-     try{  
-      await axiosInstance.post('/user/register', {...values});
+    onSubmit: async (values) => {
+      try {
+        await axios.post('/user/register', { ...values });
 
-          localStorage.setItem('firstLogin', true);
-  
-          window.location.href = '/';
-     }
-     catch (err) {
-      alert(err.response.data.msg);
-     }
+        localStorage.setItem('firstLogin', true);
 
-  }});
+        window.location.href = '/';
+      } catch (err) {
+        alert(err.response.data.msg);
+      }
+    },
+  });
 
   return (
     <section>

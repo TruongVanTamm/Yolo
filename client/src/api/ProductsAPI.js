@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {axiosInstance } from '../config'
+import axios from 'axios'
 
 
 function ProductsAPI() {
@@ -13,7 +13,7 @@ function ProductsAPI() {
 
     useEffect(() =>{
         const getProducts = async () => {
-            const res = await axiosInstance.get(`/api/products`)
+            const res = await axios.get(`/api/products?limit=${page*9}&${category}&${sort}&title[regex]=${search}`)
             setProducts(res.data.products)
             setResult(res.data.result)
         }

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import {axiosInstance } from '../../config'
+import axios from 'axios';
 import { GlobalState } from '../../GlobalState';
 
 function Categories() {
@@ -16,23 +16,21 @@ function Categories() {
     e.preventDefault();
     try {
       if (onEdit) {
-        const res = await axiosInstance.put(
+        const res = await axios.put(
           `/api/category/${id}`,
           { name: category },
           {
             headers: { Authorization: token },
           }
         );
-
       } else {
-        const res = await axiosInstance.post(
+        const res = await axios.post(
           '/api/category',
           { name: category },
           {
             headers: { Authorization: token },
           }
         );
-    
       }
       setOnEdit(false);
       setCategory('');
@@ -50,7 +48,7 @@ function Categories() {
 
   const deleteCategory = async (id) => {
     try {
-      const res = await axiosInstance.delete(`/api/category/${id}`, {
+      const res = await axios.delete(`/api/category/${id}`, {
         headers: { Authorization: token },
       });
       setCallback(!callback);
