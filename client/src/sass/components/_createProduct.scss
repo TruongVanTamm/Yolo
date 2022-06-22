@@ -87,6 +87,10 @@
       position: absolute;
       bottom: 16%;
       left:-15%;
+      @include mobile{
+        @include flex(center, space-between);
+        flex-direction: column;
+      }
       i{
         font-size:3rem;
         color:$main-color;

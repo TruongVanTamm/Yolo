@@ -18,7 +18,7 @@ const Cart = () => {
         return prev + item.price * item.quantity;
       }, 0);
 
-      setTotal(total);
+      setTotal(Math.ceil(total));
     };
 
     getTotal();
@@ -94,7 +94,7 @@ const Cart = () => {
       <div className="cart">
         <div className="cart__info">
           <div className="cart__info__txt">
-            <p>Bạn đang có sản phẩm trong giỏ hàng</p>
+            <p>Bạn đang có {cart.length} loại sản phẩm trong giỏ hàng</p>
             <div className="cart__info__txt__price">
               <span>Thành tiền:</span>{' '}
               <span>

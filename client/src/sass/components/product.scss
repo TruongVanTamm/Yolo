@@ -20,13 +20,13 @@
     }
     &__list {
       width: 20%;
+      @include flex(center, space-between);
+      flex-direction: column;
+      gap: 10px;
       @include mobile {
         width: 30%;
       }
       &__item {
-        :last-child{
-          margin-top: 10px;
-        }
         cursor: pointer;
       }
     }
@@ -157,7 +157,6 @@
       font-size: 1.4rem;
       line-height: 2;
       text-align: justify;
-      text-indent: 20px;
     }
     &__toggle {
       position: absolute;

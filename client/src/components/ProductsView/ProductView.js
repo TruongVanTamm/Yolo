@@ -8,6 +8,8 @@ const ProductView = (props) => {
   const addCart = state.userAPI.addCart;
   const [previewImg, setPreviewImg] = useState(props.image01);
   const [descriptionExpand, setDescriptionExpand] = useState(false);
+    const descriptionHeight = useRef();
+  const [desnHeight,setDesHeight]=useState(0);
   const handleProductDescriptionClick = () => {
     setDescriptionExpand(!descriptionExpand);
     if (descriptionExpand === true) {
@@ -19,9 +21,8 @@ const ProductView = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     setPreviewImg(props.image01);
+    setDesHeight(descriptionHeight.current.offsetHeight);
   }, [props]);
-  const descriptionHeight = useRef();
-  console.log(descriptionHeight.current);
   return (
     <div className="product">
       <div className="product__images">
@@ -141,7 +142,7 @@ const ProductView = (props) => {
           className="product__description__content"
           dangerouslySetInnerHTML={{ __html: props.description }}
         ></div>
-        {descriptionHeight.current.offsetHeight < 200 ? null : (
+        {desnHeight < 200 ? null : (
           <div className="product__description__toggle">
             <Button
               size="sm"

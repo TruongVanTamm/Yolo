@@ -1,115 +1,164 @@
 .cart {
-    &__empty{
-        height: 100%;
-        width: 100%;
-        @include flex ( center,center);
-    }
-    @include flex(flex-start, flex-start);
+  &__empty {
+    height: 100%;
+    width: 100%;
+    @include flex(center, center);
+  }
+  @include flex(flex-start, flex-start);
+  @include tablet {
+    flex-wrap: wrap;
+  }
+  @include mobile {
+    flex-wrap: wrap;
+  }
 
+  &__list {
+    width: 60%;
+    @include tablet {
+      width: 100%;
+    }
     @include mobile {
-        flex-wrap: wrap;
+      width: 100%;
     }
+    &__item {
+      @include tablet {
+        padding: 20px 0;
+        border-bottom: 2px solid $text-second-color;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+      @include flex(flex-start, space-between);
+      gap: 20px;
 
-    &__list {
-
-        width: 60%;
-
+      &__img {
+        width: 20%;
         @include mobile {
-            width: 100%;
+          width: 30%;
         }
-        &__item{
-            @include flex( flex-start, space-between);
-            gap: 20px;
-        
-            &__img{
-                width: 20%;
-                img{
-                    object-fit:cover;
-                    object-position: center;
-                }
-            }
-            &__detail{
-                width: 80%;
-                @include flex( center, space-around);
-                font-size: 1.6rem;
-                &__info{
-                    @include flex( flex-start,flex-start);
-                    gap: 10px;
-                    flex-direction: column;
-                    span{
-                        color: $text-main-color;
-                        font-weight: bold;
-                        font-size: 1.8rem;
-                    }
-                }
-                &__amount{
-                    @include flex( center, space-between);
-                    gap: 20px;
-                    font-size: 1.6rem;
-                    button{
-                        font-size: 2.4rem;
-                        padding: 0 25px;
-                        background: $main-color;
-                        color: #fff;
-                        border-radius:12px;
-                        &:active{
-                            transform: scale(0.9);
-                        }
-                    }
-                }
-                &__delete{
-                    font-size: 2.4rem;
-                    transform:translateY(5%);
-                    &:active{
-                        transform: scale(0.9);
-                    }
-                }
-            }   
+        img {
+          object-fit: cover;
+          object-position: center;
         }
-    }
-
-    &__info {
-        padding: 20px;
-        margin-right: 30px;
-        box-shadow: $box-shadow;
-        position: sticky;
-        top: calc(#{$header-shrink-height} + 20px);
-
+      }
+      &__detail {
+        width: 80%;
         @include mobile {
-            width: 100%;
-            margin-right: 0;
-            margin-bottom: 30px;
-            position: unset;
-        }
-
-        &__txt {
-            & > * {
-                margin-bottom: 10px;
+          width: 70%;
+          &__price {
+            h3 {
+              font-size: 1.4rem;
             }
-
+          }
+        }
+        @include flex(center, space-around);
+        font-size: 1.6rem;
+        @include mobile {
+          @include flex(center, space-between);
+          flex-direction: column;
+          gap: 10px;
+        }
+        &__info {
+          @include flex(flex-start, flex-start);
+          @include mobile {
+            @include flex(center, space-between);
             p {
-                font-size: 1.6rem;
+              font-size: 1.3rem;
             }
-
-            &__price {
-                @include flex(center, space-between);
-                padding: 10px 0;
-                font-size: 1.4rem;
-
-                span:nth-child(2) {
-                    font-size: 2rem;
-                    color: $main-color;
-                    font-weight: 600;
-                }
+            flex-direction: row;
+          }
+          gap: 10px;
+          flex-direction: column;
+          span {
+            color: $text-main-color;
+            font-weight: bold;
+            font-size: 1.8rem;
+            @include mobile {
+              font-size: 1.4rem;
             }
+          }
         }
-
-        &__btn {
-            & > * {
-                margin-bottom: 20px;
+        &__amount {
+          @include flex(center, space-between);
+          gap: 20px;
+          font-size: 1.6rem;
+          button {
+            font-size: 2.4rem;
+            padding: 0 25px;
+            background: $main-color;
+            color: #fff;
+            border-radius: 12px;
+            &:active {
+              transform: scale(0.9);
             }
+            @include mobile {
+              font-size: 1.6rem;
+            }
+          }
         }
+        &__delete {
+          font-size: 2.4rem;
+          @include mobile {
+            font-size: 1.6rem;
+          }
+          transform: translateY(5%);
+          &:active {
+            transform: scale(0.9);
+          }
+        }
+      }
+    }
+  }
+
+  &__info {
+    padding: 20px;
+    margin-right: 30px;
+    box-shadow: $box-shadow;
+    position: sticky;
+    top: calc(#{$header-shrink-height} + 20px);
+    @include tablet {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 30px;
+      position: unset;
+    }
+    @include mobile {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 30px;
+      position: unset;
     }
 
-   
+    &__txt {
+      & > * {
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1.6rem;
+      }
+
+      &__price {
+        @include flex(center, space-between);
+        @include tablet {
+          @include flex(center, flex-start);
+          gap: 20px;
+        }
+        padding: 10px 0;
+        font-size: 1.4rem;
+
+        span:nth-child(2) {
+          font-size: 2rem;
+          color: $main-color;
+          font-weight: 600;
+        }
+      }
+    }
+
+    &__btn {
+      & > * {
+        margin-bottom: 20px;
+      }
+    }
+  }
 }

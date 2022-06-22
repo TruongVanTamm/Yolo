@@ -301,7 +301,7 @@ const CreateProduct = () => {
           {product.discount !== 0 && product.old_price !== 0 ? (
             <div className="hint-price">
               <i className="bx bxs-bulb"></i>
-              <span>{price}</span>
+              <span>{Math.ceil(price)}</span>
             </div>
           ) : null}
         </div>

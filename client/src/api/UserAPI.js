@@ -29,9 +29,9 @@ function UserAPI(token) {
   const addCart = async (product) => {
     if (!isLogged) return alert('Bạn phải đăng nhập để mua hàng !');
     const check = cart.every((item) => {
-      return item._id !== product._id;
+      return item.id !== product.id;
     });
-    console.log(check);
+
     if (check) {
       setCart([...cart, { ...product, quantity: 1 }]);
       await axios.patch(

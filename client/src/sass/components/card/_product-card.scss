@@ -44,6 +44,11 @@
     }
   }
   &__btn {
+    @include tablet {
+      .mobile-hide {
+        display: none;
+      }
+    }
     @include mobile {
       .mobile-hide {
         display: none;
