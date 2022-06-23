@@ -11,7 +11,6 @@ function Filters() {
     setCategory(e.target.value);
     setSearch('');
   };
-
   return (
     <div className="catalog__content__action__filter_menu">
       <div className="catalog__content__action__filter_menu__category">

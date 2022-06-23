@@ -21,7 +21,6 @@ class APIfeatures {
 		//    lt = lesser than
 		//    gt = greater than
 		this.query.find(JSON.parse(queryStr));
-
 		return this;
 	}
 
@@ -98,11 +97,13 @@ const productCtrl = {
 	},
 	updateProduct: async(req, res) =>{
 	    try {
-	        const {title, price, description, content, image01,image02, category} = req.body;
+	        const {title, price, description, image01,image02, category,color,
+				size,old_price,discount} = req.body;
 	        if(!image01) return res.status(400).json({msg: "No image upload"})
 			if(!image02) return res.status(400).json({msg: "No image upload"})
 	        await Products.findOneAndUpdate({_id: req.params.id}, {
-	            title: title.toLowerCase(), price,description, content, image01,image02, category
+	            title: title, price,description,image01,image02, category,color,
+				size,old_price,discount
 	        })
 
 	        res.json({msg: "Updated a Product"})

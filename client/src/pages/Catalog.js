@@ -7,17 +7,18 @@ import { GlobalState } from '../GlobalState';
 import Loading from '../components/Notice/Loading';
 import axios from 'axios';
 import Filters from '../components/Filters';
+import LoadMore from '../components/Button/ButtonLoadMore';
 
 const Catalog = () => {
   const state = useContext(GlobalState);
-  const [products, setProducts] = state.productsAPI.products;
+  const [products, setProducts] =  state.productsAPI.products;
   const [notFound, setNotFound] = useState(false);
   const [isAdmin] = state.userAPI.isAdmin;
   const [token] = state.token;
   const [callback, setCallback] = state.productsAPI.callback;
   const [loading, setLoading] = useState(false);
   const [isCheck, setIsCheck] = useState(false);
-  const [page,] = useState(1);
+  const [page] = state.productsAPI.page
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -26,11 +27,7 @@ const Catalog = () => {
   }, []);
   useEffect(() => {
     const getProducts = async () => {
-      const res = await axios.get(
-        `/api/products?limit=${
-          page * 6
-        }}`
-      );
+      const res = await axios.get(`/api/products?limit=${page * 6}`);
       setProducts(res.data.products);
     };
     getProducts();
@@ -129,6 +126,7 @@ const Catalog = () => {
               checkAll={checkAll}
               deleteProduct={deleteProduct}
             ></InfinityList>
+              <LoadMore></LoadMore>
             <div className="catalog__content__not-found">
               {notFound ? <NoProduct></NoProduct> : null}
             </div>

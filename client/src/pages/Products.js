@@ -26,7 +26,6 @@ const Product = () => {
     };
     getProducts();
   }, []);
-  console.log(products);
   useEffect(() => {
     if (params.id) {
       products.forEach((product) => {

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Grid from '../Layout/Grid';
 import ProductCard from '../Card/ProductCard';
 import { GlobalState } from '../../GlobalState';
-import LoadMore from '../Button/ButtonLoadMore';
 
 const InfinityList = (props) => {
   const state = useContext(GlobalState);
@@ -48,7 +47,6 @@ const InfinityList = (props) => {
             })}
           </Grid>
         
-      <LoadMore></LoadMore>
     </div>
   );
 };
