@@ -97,7 +97,7 @@ const ProductCard = (props) => {
               >
                 Mua
               </Button>
-              <Link to={`/catalog/${props.id}`}  className='mobile-hide' >
+              <Link  to={`/${props.id}`} className='mobile-hide' >
                 <Button
                   size="sm"
                   icon="bx bx-cart-add"
