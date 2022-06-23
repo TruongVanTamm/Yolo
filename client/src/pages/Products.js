@@ -6,11 +6,27 @@ import ProductCard from '../components/Card/ProductCard';
 import { useParams } from 'react-router-dom';
 import ProductView from '../components/ProductsView/ProductView'
 import { GlobalState } from '../GlobalState';
+import axios from 'axios';
 const Product = () => {
-  const state = useContext(GlobalState);
-  const [products] = state.productsAPI.products;
+  const [products, setProducts] = useState([]);
   const params = useParams();
   const [detailProduct, setDetailProduct] = useState([]);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+  useEffect(() => {
+    const getProducts = async () => {
+      const res = await axios.get(
+        `/api/products`
+      );
+      setProducts(res.data.products);
+    };
+    getProducts();
+  }, []);
+  console.log(products);
   useEffect(() => {
     if (params.id) {
       products.forEach((product) => {
@@ -22,6 +38,7 @@ const Product = () => {
     window.scrollTo(0, 0);
   }, [detailProduct]);
   if (detailProduct.length === 0) return null;
+  
   return (
     <Helmet title={detailProduct.title}>
       <Section>

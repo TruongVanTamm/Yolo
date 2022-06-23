@@ -1,9 +1,12 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import heroSliderData from '../Asset/fake-data/hero-slider';
 import policy from '../Asset/fake-data/policy';
 import Helmet from '../components/Notice/Helmet';
 import HeroSlider from '../components/Hero/HeroSlider';
-import Section, { SectionBody, SectionTitle } from '../components/Layout/Section';
+import Section, {
+  SectionBody,
+  SectionTitle,
+} from '../components/Layout/Section';
 import PolicyCard from '../components/Card/PolicyCard';
 import Grid from '../components/Layout/Grid';
 import ProductCard from '../components/Card/ProductCard';
@@ -11,16 +14,48 @@ import banner from '../Asset/images/banner.png';
 import { Link } from 'react-router-dom';
 import ButtonSTT from '../components/Button/ButtonSTT';
 import ChatBot from '../components/Chatbot/ChatBot';
-import { GlobalState } from '../GlobalState';
+import axios from 'axios';
+
 const Home = () => {
-  const newLoadMore = useRef(null);
-  const [btnNewLoadMore, setBtnNewLoadMore] = useState(true);
-  const handleNewLoadMore = (params) => {
-    newLoadMore.current.classList.toggle('active');
-    setBtnNewLoadMore(false);
-  };
-  const state = useContext(GlobalState);
-  const [products] = state.productsAPI.products;
+  const [product1, setProduct1] = useState([]);
+  const [product2, setProduct2] = useState([]);
+  const [product3, setProduct3] = useState([]);
+  const [sort, setSort] = useState('');
+  const [sort1, setSort1] = useState('');
+  const [sort2, setSort2] = useState('');
+  const [page, setPage] = useState(1);
+  const [page1, setPage1] = useState(1);
+  const [page2, setPage2] = useState(1);
+  const [result, setResult] = useState(0);
+  const [result1, setResult1] = useState(0);
+  const [result2, setResult2] = useState(0);
+  useEffect(() => {
+    const getProducts = async () => {
+      const res = await axios.get(`/api/products?limit=${page * 4}&${sort}`);
+      setSort('sort=-sold');
+      setProduct1(res.data.products);
+      setResult(res.data.result);
+    };
+    getProducts();
+  }, [page,sort]);
+  useEffect(() => {
+    const getProducts = async () => {
+      const res = await axios.get(`/api/products?limit=${page1 * 8}&${sort1}`);
+      setSort1('');
+      setProduct2(res.data.products);
+      setResult1(res.data.result);
+    };
+    getProducts();
+  }, [page1,sort1]);
+  useEffect(() => {
+    const getProducts = async () => {
+      const res = await axios.get(`/api/products?limit=${page2 * 6}&${sort2}`);
+      setSort2('sort=oldest');
+      setProduct3(res.data.products);
+      setResult2(res.data.result);
+    };
+    getProducts();
+  }, [page2,sort2]);
   return (
     <>
       <Helmet title="Trang chủ">
@@ -60,7 +95,7 @@ const Home = () => {
               smCol={2}
               gap={20}
             >
-              {products.map((item, index) => {
+              {product1.map((item, index) => {
                 return (
                   <ProductCard
                     key={index}
@@ -85,12 +120,12 @@ const Home = () => {
           <SectionTitle>sản phẩm mới </SectionTitle>
           <SectionBody>
             <Grid
-              col={6}
+              col={4}
               mdCol={3}
               smCol={2}
               gap={20}
             >
-                  {products.map((item, index) => {
+              {product2.map((item, index) => {
                 return (
                   <ProductCard
                     key={index}
@@ -109,46 +144,13 @@ const Home = () => {
                 );
               })}
             </Grid>
-            {btnNewLoadMore ? (
-              <button
-                className="btn-load-more"
-                onClick={handleNewLoadMore}
-              >
-                Tải thêm sản phẩm
-              </button>
-            ) : null}
+            <div className="btn-load-more ">
+            {
+                result1 < page1 * 8 ? ""
+                : <button onClick={() => setPage1(page1+1)}>Tải thêm</button>
+            }
+        </div>
           </SectionBody>
-          <div
-            className="section__new-load-more"
-            ref={newLoadMore}
-          >
-            <SectionBody>
-              <Grid
-                col={6}
-                mdCol={3}
-                smCol={2}
-                gap={20}
-              >    {products.map((item, index) => {
-                return (
-                  <ProductCard
-                    key={index}
-                    id={item._id}
-                    name={item.title}
-                    price={item.price}
-                    old_price={item.old_price}
-                    discount={item.discount}
-                    image01={item.image01.url}
-                    image02={item.image02.url}
-                    checked={item.checked}
-                    color={item.color}
-                    size={item.size}
-                    sold={item.sold}
-                  ></ProductCard>
-                );
-              })}
-              </Grid>
-            </SectionBody>
-          </div>
         </Section>
         <Section>
           <SectionBody>
@@ -169,7 +171,7 @@ const Home = () => {
               smCol={2}
               gap={20}
             >
-                 {products.map((item, index) => {
+                 {product3.map((item, index) => {
                 return (
                   <ProductCard
                     key={index}
@@ -189,7 +191,12 @@ const Home = () => {
               })}
             </Grid>
 
-            <button className="btn-load-more">Tải thêm sản phẩm</button>
+            <div className="btn-load-more ">
+            {
+                result2 < page2 * 6 ? ""
+                : <button onClick={() => setPage2(page2+1)}>Tải thêm</button>
+            }
+        </div>
           </SectionBody>
         </Section>
         <ChatBot></ChatBot>

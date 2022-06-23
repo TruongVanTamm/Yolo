@@ -12,19 +12,20 @@ const CreateProduct = () => {
       price: price,
       description: '',
       category: '',
-      old_price: 0,
-      discount: 0,
+      old_price: '',
+      discount: '',
       _id: '',
       color: '',
       size: '',
     };
-  }, [price]);
+  }, []);
   const state = useContext(GlobalState);
   const [product, setProduct] = useState(initialStateMemo);
   const [categories] = state.categoriesAPI.categories;
   const [image01, setImage01] = useState(false);
   const [image02, setImage02] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const [isAdmin] = state.userAPI.isAdmin;
   const [token] = state.token;
   const navigate = useNavigate();
@@ -50,9 +51,6 @@ const CreateProduct = () => {
       setImage02(false);
     }
   }, [param.id, products, initialStateMemo]);
-  useEffect(() => {
-    setPrice((product.old_price * product.discount) / 100);
-  }, [product.old_price, product.discount]);
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
@@ -97,20 +95,19 @@ const CreateProduct = () => {
 
       let formData = new FormData();
       formData.append('file', file);
-      setLoading(true);
+      setLoading2(true);
       const res = await axios.post('/api/upload', formData, {
         headers: {
           'content-type': 'multipart/form-data',
           Authorization: token,
         },
       });
-      setLoading(false);
+      setLoading2(false);
       setImage02(res.data);
     } catch (err) {
       alert(err.response.data.msg);
     }
   };
-
   const handleDestroy = async () => {
     try {
       if (!isAdmin) return alert("You're not an admin");
@@ -131,7 +128,7 @@ const CreateProduct = () => {
   const handleDestroy2 = async () => {
     try {
       if (!isAdmin) return alert("You're not an admin");
-      setLoading(true);
+      setLoading2(true);
       await axios.post(
         '/api/destroy',
         { public_id: image02.public_id },
@@ -139,14 +136,13 @@ const CreateProduct = () => {
           headers: { Authorization: token },
         }
       );
-      setLoading(false);
+      setLoading2(false);
       setImage02(false);
     } catch (err) {
       alert(err.response.data.msg);
     }
   };
   const images = { image01, image02 };
-
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
@@ -154,6 +150,7 @@ const CreateProduct = () => {
   useEffect(() => {
     setPrice(product.old_price - (product.old_price * product.discount) / 100);
   }, [product.old_price, product.discount, product, price]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -225,7 +222,7 @@ const CreateProduct = () => {
           id="file_up_2"
           onChange={handleUpload2}
         />
-        {loading ? (
+        {loading2 ? (
           <div id="file_img_2">
             <Loading />
           </div>

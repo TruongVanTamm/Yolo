@@ -8,8 +8,6 @@ const ProductView = (props) => {
   const addCart = state.userAPI.addCart;
   const [previewImg, setPreviewImg] = useState(props.image01);
   const [descriptionExpand, setDescriptionExpand] = useState(false);
-    const descriptionHeight = useRef();
-  const [desnHeight,setDesHeight]=useState(0);
   const handleProductDescriptionClick = () => {
     setDescriptionExpand(!descriptionExpand);
     if (descriptionExpand === true) {
@@ -20,7 +18,6 @@ const ProductView = (props) => {
   };
   useEffect(() => {
     setPreviewImg(props.image01);
-    setDesHeight(descriptionHeight.current.offsetHeight);
   }, [props]);
   return (
     <div className="product">
@@ -76,7 +73,7 @@ const ProductView = (props) => {
         <div className="product__info__title">{props.name}</div>
         <div className="product__info__item">
         <span className="product__info__item__title">Giá tiền</span>
-          <span className="product__info__item__price">{` $${props.price}`}</span>
+          <span className="product__info__item__price">${props.price}</span>
         </div>
         <div className="product__info__item">
           <span className="product__info__item__title">Màu sắc</span>
@@ -138,11 +135,11 @@ const ProductView = (props) => {
       >
         <div className="product__description__title">Chi tiết sản phẩm</div>
         <div
-          ref={descriptionHeight}
+    
           className="product__description__content"
           dangerouslySetInnerHTML={{ __html: props.description }}
         ></div>
-        {desnHeight < 200 ? null : (
+  
           <div className="product__description__toggle">
             <Button
               size="sm"
@@ -151,7 +148,6 @@ const ProductView = (props) => {
               {descriptionExpand ? 'Ẩn bớt' : 'Xem thêm'}
             </Button>
           </div>
-        )}
       </div>
     </div>
   );

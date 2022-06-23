@@ -6,6 +6,7 @@ import NoProduct from '../components/NotFound/NoProduct';
 import { GlobalState } from '../GlobalState';
 import Loading from '../components/Notice/Loading';
 import axios from 'axios';
+import Filters from '../components/Filters';
 
 const Catalog = () => {
   const state = useContext(GlobalState);
@@ -16,12 +17,24 @@ const Catalog = () => {
   const [callback, setCallback] = state.productsAPI.callback;
   const [loading, setLoading] = useState(false);
   const [isCheck, setIsCheck] = useState(false);
+  const [page,] = useState(1);
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
   }, []);
+  useEffect(() => {
+    const getProducts = async () => {
+      const res = await axios.get(
+        `/api/products?limit=${
+          page * 6
+        }}`
+      );
+      setProducts(res.data.products);
+    };
+    getProducts();
+  }, [ page,setProducts]);
   const NotFound = useCallback(() => {
     if (products.length === 0) {
       setNotFound(true);
@@ -32,7 +45,6 @@ const Catalog = () => {
   useEffect(() => {
     NotFound();
   }, [NotFound]);
-  console.log(products.length);
   const handleCheck = (id) => {
     products.forEach((product) => {
       if (product._id === id) product.checked = !product.checked;
@@ -60,7 +72,7 @@ const Catalog = () => {
     try {
       setLoading(true);
       const destroyImg = axios.post(
-        '/api/destroy',
+        '/api/destroyAll',
         { ...public_id },
         {
           headers: { Authorization: token },
@@ -89,24 +101,27 @@ const Catalog = () => {
       <Helmet title="Sản phẩm">
         <div className="catalog">
           <div className="catalog__content">
-            {isAdmin &&
-              (products.length !== 0 ? (
-                <div className="catalog__content__delete-all">
-                  <span>Select all</span>
-                  <input
-                    type="checkbox"
-                    checked={isCheck}
-                    onChange={checkAll}
-                  />
+            <div className="catalog__content__action">
+              {isAdmin &&
+                (products.length !== 0 ? (
+                  <div className="catalog__content__action__delete-all">
+                    <span>Select all</span>
+                    <input
+                      type="checkbox"
+                      checked={isCheck}
+                      onChange={checkAll}
+                    />
 
-                  <button
-                    onClick={deleteAll}
-                    className={isCheck ? '' : 'show'}
-                  >
-                    Delete ALL
-                  </button>
-                </div>
-              ) : null)}
+                    <button
+                      onClick={deleteAll}
+                      className={isCheck ? '' : 'show'}
+                    >
+                      Delete ALL
+                    </button>
+                  </div>
+                ) : null)}
+              <Filters></Filters>
+            </div>
             <InfinityList
               data={products}
               handleCheck={handleCheck}

@@ -35,7 +35,7 @@ const ProductCard = (props) => {
             onChange={() => props.handleCheck(props.id)}
           />
         )}
-        <Link to={`/catalog/${props.id}`}>
+        <Link to={`/${props.id}`}>
           <div className="product-card__img">
             {data.map((item, index) => {
               return (
@@ -58,9 +58,9 @@ const ProductCard = (props) => {
           <h3 className="product-card__name">{props.name}</h3>
           <div className="product-card__price">
             <span className="product-card__price__old">
-              <del>{`$${props.old_price} `}</del>
+              <del>${props.old_price}</del>
             </span>
-            {`$${props.price}`}
+            ${props.price}
           </div>
         </Link>
         <div className="product-card__btn">
@@ -131,7 +131,7 @@ const ProductCard = (props) => {
             );
           })}
         </div>
-        <div className={props.discount ? 'product-card__sale' : ''}>
+        <div className={props.discount ? 'product-card__sale' : 'product-card__hide'}>
           {`-${props.discount}%`}
         </div>
         <div

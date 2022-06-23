@@ -36,13 +36,13 @@ class APIfeatures {
 		return this;
 	}
 
-	paginating() {
-		const page = this.queryString.page * 1 || 1;
-		const limit = this.queryString.limit * 1 || 12;
-		const skip = (page - 1) * limit;
-		this.query = this.query.skip(skip).limit(limit);
-		return this;
-	}
+	paginating(){
+        const page = this.queryString.page * 1 || 1
+        const limit = this.queryString.limit * 1 || 600
+        const skip = (page - 1) * limit;
+        this.query = this.query.skip(skip).limit(limit)
+        return this;
+    }
 }
 
 const productCtrl = {
@@ -70,7 +70,7 @@ const productCtrl = {
 
 			const newProduct = new Products({
 				product_id,
-				title: title.toUpperCase(),
+				title: title,
 				price,
                 old_price,
 				description,

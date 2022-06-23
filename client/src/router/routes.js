@@ -19,8 +19,8 @@ const RoutesWrap = () => {
   return ( 
         <Routes>
           <Route path='/' exact element={<Home></Home>}></Route>
-          <Route path='/catalog/:id' exact  element={<Products></Products>}></Route>
-          <Route path='/cart/:id' exact  element={<Products></Products>}></Route>
+          <Route path='/:id' element={<Products></Products>}></Route>
+          <Route path='/cart/:id' element={<Products></Products>}></Route>
           <Route path='/catalog' exact element={<Catalog></Catalog> }></Route>
           <Route path='/cart' exact element={<Cart></Cart>}></Route>
           <Route path='/category' exact element={isAdmin? <Categories></Categories>:<NotFound></NotFound>}></Route>
