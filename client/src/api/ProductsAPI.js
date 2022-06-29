@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function ProductsAPI() {
   const [products, setProducts] = useState([]);
+  const [slider, setSlider] = useState([]);
   const [callback, setCallback] = useState(false);
   const [category, setCategory] = useState('');
   const [sort, setSort] = useState('');
@@ -21,8 +22,20 @@ function ProductsAPI() {
     };
     getProducts();
   }, [callback, category, sort, search, page]);
+  useEffect(() => {
+    const getSlider = async () => {
+      const res = await axios.get(
+        `/api/hero-slider`
+      );
+
+      setSlider(res.data);
+    };
+    getSlider();
+  }, []);
+  
   return {
     products: [products, setProducts],
+    slider:  [slider, setSlider] ,
     callback: [callback, setCallback],
     category: [category, setCategory],
     sort: [sort, setSort],

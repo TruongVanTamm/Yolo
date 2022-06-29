@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Helmet from '../components/Notice/Helmet';
+import Helmet from '../components/utils/Helmet';
 import Section, { SectionBody, SectionTitle } from '../components/Layout/Section';
 import Grid from '../components/Layout/Grid';
 import ProductCard from '../components/Card/ProductCard';

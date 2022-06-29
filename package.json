@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js",
+    "server": "nodemon server.js --ignore client",
     "client": "cd client && npm run start",
     "server-install": "npm install",
     "client-install": "cd client && npm install",
@@ -31,6 +31,7 @@
     "express": "^4.18.1",
     "express-fileupload": "^1.4.0",
     "googleapis": "^101.0.0",
+    "http-proxy-middleware": "^2.0.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.6",
     "node-fetch": "^3.2.5",

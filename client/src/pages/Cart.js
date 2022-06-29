@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Helmet from '../components/Notice/Helmet';
+import Helmet from '../components/utils/Helmet';
 import Button from '../components/Button/Button';
 import numberWithCommas from '../utils/numberWithCommas';
 import { GlobalState } from '../GlobalState';

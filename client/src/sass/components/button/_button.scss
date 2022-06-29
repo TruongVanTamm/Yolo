@@ -10,7 +10,6 @@
   overflow: hidden;
   position: relative;
   border-radius: 10px;
-  margin-right: 10px;
   &:hover{
     transform: scale(1.03);
     @include shadow(1)

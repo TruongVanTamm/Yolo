@@ -2,8 +2,10 @@ import React, { useState, useContext, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GlobalState } from '../../GlobalState';
-import Loading from '../Notice/Loading';
+import Loading from '../utils/Loading';
+import { useAlert, types } from 'react-alert';
 const CreateProduct = () => {
+  const alert = useAlert();
   const [price, setPrice] = useState(0);
   const initialStateMemo = useMemo(() => {
     return {
@@ -54,14 +56,33 @@ const CreateProduct = () => {
   const handleUpload = async (e) => {
     e.preventDefault();
     try {
-      if (!isAdmin) return alert("You're not an admin");
+      if (!isAdmin)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Không có quyền truy nhập tài nguyên
+          </div>,
+          { type: types.ERROR }
+        );
       const file = e.target.files[0];
-      if (!file) return alert('File not exist.');
+      if (!file)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Không có file nào được tải lên
+          </div>,
+          { type: types.ERROR }
+        );
 
-      if (file.size > 1024 * 1024) return alert('Size too large!');
+      if (file.size > 1024 * 1024)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>Kích thước quá lớn</div>,
+          { type: types.ERROR }
+        );
 
       if (file.type !== 'image/jpeg' && file.type !== 'image/png')
-        return alert('File format is incorrect.');
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>Định dạng file không hợp lệ</div>,
+          { type: types.ERROR }
+        );
 
       let formData = new FormData();
       formData.append('file', file);
@@ -75,23 +96,44 @@ const CreateProduct = () => {
       setLoading(false);
       setImage01(res.data);
     } catch (err) {
-      alert(err.response.data.msg);
+      alert.show(
+        <div style={{ fontSize: '12px' }}>{err.response.data.msg}</div>,
+        { type: types.ERROR }
+      );
     }
   };
   const handleUpload2 = async (e) => {
     e.preventDefault();
     try {
-      if (!isAdmin) return alert("You're not an admin");
+      if (!isAdmin)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Không có quyền truy nhập tài nguyên
+          </div>,
+          { type: types.ERROR }
+        );
       const file = e.target.files[0];
-      if (!file) return alert('File not exist.');
+      if (!file)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Không có file nào được tải lên
+          </div>,
+          { type: types.ERROR }
+        );
 
       if (file.size > 1024 * 1024)
         // 1mb
-        return alert('Size too large!');
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>Kích thước quá lớn</div>,
+          { type: types.ERROR }
+        );
 
       if (file.type !== 'image/jpeg' && file.type !== 'image/png')
         // 1mb
-        return alert('File format is incorrect.');
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>Định dạng file không hợp lệ</div>,
+          { type: types.ERROR }
+        );
 
       let formData = new FormData();
       formData.append('file', file);
@@ -105,12 +147,21 @@ const CreateProduct = () => {
       setLoading2(false);
       setImage02(res.data);
     } catch (err) {
-      alert(err.response.data.msg);
+      alert.show(
+        <div style={{ fontSize: '12px' }}>{err.response.data.msg}</div>,
+        { type: types.ERROR }
+      );
     }
   };
   const handleDestroy = async () => {
     try {
-      if (!isAdmin) return alert("You're not an admin");
+      if (!isAdmin)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Không có quyền truy nhập tài nguyên
+          </div>,
+          { type: types.ERROR }
+        );
       setLoading(true);
       await axios.post(
         '/api/destroy',
@@ -122,12 +173,21 @@ const CreateProduct = () => {
       setLoading(false);
       setImage01(false);
     } catch (err) {
-      alert(err.response.data.msg);
+      alert.show(
+        <div style={{ fontSize: '12px' }}>{err.response.data.msg}</div>,
+        { type: types.ERROR }
+      );
     }
   };
   const handleDestroy2 = async () => {
     try {
-      if (!isAdmin) return alert("You're not an admin");
+      if (!isAdmin)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Không có quyền truy nhập tài nguyên
+          </div>,
+          { type: types.ERROR }
+        );
       setLoading2(true);
       await axios.post(
         '/api/destroy',
@@ -139,7 +199,10 @@ const CreateProduct = () => {
       setLoading2(false);
       setImage02(false);
     } catch (err) {
-      alert(err.response.data.msg);
+      alert.show(
+        <div style={{ fontSize: '12px' }}>{err.response.data.msg}</div>,
+        { type: types.ERROR }
+      );
     }
   };
   const images = { image01, image02 };

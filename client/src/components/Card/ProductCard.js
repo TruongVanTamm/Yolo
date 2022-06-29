@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
-import AlertLike from '../Notice/AlertLike';
+import AlertLike from '../utils/AlertLike';
 import { GlobalState } from '../../GlobalState';
 const ProductCard = (props) => {
   const [activeProduct, setActiveProduct] = useState(0);

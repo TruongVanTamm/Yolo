@@ -12,6 +12,8 @@ import OrderHistory from '../components/History/OrderHistory'
 import OrderDetail from '../components/History/OrderDetail'
 import Categories from '../components/Navbar/Categories'
 import CreateProduct from '../components/CreateProduct/CreateProduct'
+import Profile from '../components/Profile/Profile'
+import EditUser from '../components/Profile/EditUser'
 const RoutesWrap = () => {
   const state = useContext(GlobalState);
   const [isLogged] = state.userAPI.isLogged;
@@ -30,6 +32,9 @@ const RoutesWrap = () => {
           <Route path='/history/:id' exact element={<OrderDetail></OrderDetail>}></Route>
           <Route path='/signup' exact element={isLogged ? <NotFound></NotFound>:<SignUpPage></SignUpPage>}></Route>
           <Route path='/signin' exact element={isLogged ? <NotFound></NotFound>:<SignInPage></SignInPage>}></Route>
+          <Route path="/user/activate/:activation_token" exact element={<SignInPage></SignInPage>} ></Route>
+          <Route path="/profile" exact element={<Profile></Profile>} ></Route>
+          <Route path="/edit_user/:id" exact element={<EditUser></EditUser>} ></Route>
         </Routes>
   )
 }

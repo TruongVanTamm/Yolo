@@ -3,7 +3,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useAlert } from 'react-alert';
 const SignInForm = () => {
+  const alert = useAlert();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -18,11 +20,12 @@ const SignInForm = () => {
           'Địa chỉ email không hợp lệ'
         ),
       password: Yup.string()
-        .required('Vui lòng nhập trường này')
-        .matches(
-          /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/,
-          'Mật khẩu yêu cầu 7-19 ký tự, chứa ít nhất một chữ cái, một số và một ký tự đặc biệt'
-        ),
+      .required('Vui lòng nhập trường này')
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+        
+        'Mật khẩu yêu cầu 8 ký tự, chứa ít nhất một chữ cái và một số '
+      ),
     }),
     onSubmit: async (values) => {
       try {
@@ -32,10 +35,13 @@ const SignInForm = () => {
 
         window.location.href = '/';
       } catch (err) {
-        alert(err.response.data.msg);
+        alert.show(
+          <div style={{ fontSize: '12px' }}>{err.response.data.msg }</div>
+        );
       }
     },
   });
+  
   return (
     <section>
       <form
@@ -75,6 +81,7 @@ const SignInForm = () => {
             Đăng kí
           </Link>
 
+          <Link to="/forgot_password">Forgot your password?</Link>
           <button type="submit"> Tiếp tục </button>
         </div>
       </form>

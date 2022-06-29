@@ -18,9 +18,10 @@ app.use(
 app.use("/user", require("./routes/userRouter"));
 app.use("/api", require("./routes/categoryRouter"));
 app.use("/api", require("./routes/upload"));
+app.use("/api", require("./routes/uploadAvatar"));
 app.use("/api", require("./routes/productRouter"));
 app.use("/api", require("./routes/paymentRouter"));
-
+app.use("/api", require("./routes/heroSliderRouter"));
 // Connect to mongodb
 const URI = process.env.MONGODB_URL;
 mongoose.connect(
@@ -31,7 +32,7 @@ mongoose.connect(
 	},
 	(err) => {
 		if (err) throw err;
-		console.log("Connected to MongoDB");
+		console.log("Đã kết nối tới MongoDB");
 	}
 	);
 	if(process.env.NODE_ENV === 'production'){

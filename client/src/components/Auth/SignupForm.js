@@ -2,9 +2,13 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
-
+import axios from 'axios';
+import { useAlert } from 'react-alert';
+import {
+ types
+} from 'react-alert';
 const SignupForm = () => {
+  const alert = useAlert();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -27,8 +31,9 @@ const SignupForm = () => {
       password: Yup.string()
         .required('Vui lòng nhập trường này')
         .matches(
-          /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/,
-          'Mật khẩu yêu cầu 7-19 ký tự, chứa ít nhất một chữ cái, một số và một ký tự đặc biệt'
+          /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+          
+          'Mật khẩu yêu cầu 8 ký tự, chứa ít nhất một chữ cái và một số '
         ),
       confirmedPassword: Yup.string()
         .required('Vui lòng nhập trường này')
@@ -37,12 +42,18 @@ const SignupForm = () => {
     onSubmit: async (values) => {
       try {
         await axios.post('/user/register', { ...values });
-
         localStorage.setItem('firstLogin', true);
-
-        window.location.href = '/';
+        alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Chúng tôi vừa gửi một email xác nhận cho bạn, vui lòng xác nhận để
+            hoàn tất đăng kí
+          </div>,
+          { type: types.INFO}
+        );
       } catch (err) {
-        alert(err.response.data.msg);
+        alert.show(
+          <div style={{ fontSize: '12px' }}>{err.response.data.msg}</div>
+        );
       }
     },
   });

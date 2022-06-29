@@ -47,6 +47,7 @@
       &__detail {
         width: 80%;
         @include flex(center, space-between);
+     
         @include mobile {
           width: 70%;
           &__price {

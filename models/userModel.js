@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     cart: {
         type: Array,
         default: []
+    },
+    avatar: {
+        type: String,
+        default: "https://res.cloudinary.com/truongvantam/image/upload/v1656034929/yolo/feitkp4k0664v334luu8.png"
     }
 }, {
     timestamps: true

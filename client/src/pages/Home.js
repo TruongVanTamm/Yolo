@@ -1,7 +1,6 @@
-import React, {  useEffect, useState } from 'react';
-import heroSliderData from '../Asset/fake-data/hero-slider';
+import React, {  useContext, useEffect, useState } from 'react';
 import policy from '../Asset/fake-data/policy';
-import Helmet from '../components/Notice/Helmet';
+import Helmet from '../components/utils/Helmet';
 import HeroSlider from '../components/Hero/HeroSlider';
 import Section, {
   SectionBody,
@@ -10,16 +9,21 @@ import Section, {
 import PolicyCard from '../components/Card/PolicyCard';
 import Grid from '../components/Layout/Grid';
 import ProductCard from '../components/Card/ProductCard';
-import banner from '../Asset/images/banner.png';
+import banner from '../Asset/images/banner3.jpg';
+import banner1 from '../Asset/images/banner1.jpg'
+import banner2 from '../Asset/images/banner5.jpg'
 import { Link } from 'react-router-dom';
 import ButtonSTT from '../components/Button/ButtonSTT';
 import ChatBot from '../components/Chatbot/ChatBot';
 import axios from 'axios';
+import { GlobalState } from '../GlobalState';
 
 const Home = () => {
+  const state = useContext(GlobalState);
   const [product1, setProduct1] = useState([]);
   const [product2, setProduct2] = useState([]);
   const [product3, setProduct3] = useState([]);
+  const [slider] = state.productsAPI.slider;
   const [sort, setSort] = useState('');
   const [sort1, setSort1] = useState('');
   const [sort2, setSort2] = useState('');
@@ -60,9 +64,9 @@ const Home = () => {
     <>
       <Helmet title="Trang chủ">
         <HeroSlider
-          data={heroSliderData}
+          data={slider}
           control={true}
-          // auto={true}
+          auto={true}
           timeOut={5000}
         ></HeroSlider>
         <Section>
@@ -150,6 +154,26 @@ const Home = () => {
                 : <button onClick={() => setPage1(page1+1)}>Tải thêm</button>
             }
         </div>
+          </SectionBody>
+        </Section>
+        <Section>
+          <SectionBody>
+            <Link to="./catalog">
+              <img
+                src={banner1}
+                alt=""
+              />
+            </Link>
+          </SectionBody>
+        </Section>
+        <Section>
+          <SectionBody>
+            <Link to="./catalog">
+              <img
+                src={banner2}
+                alt=""
+              />
+            </Link>
           </SectionBody>
         </Section>
         <Section>

@@ -1,10 +1,10 @@
 import React, { useCallback, useState, useEffect, useContext } from 'react';
-import Helmet from '../components/Notice/Helmet';
+import Helmet from '../components/utils/Helmet';
 import InfinityList from '../components/Catalog/InfinityList';
 import ButtonSTT from '../components/Button/ButtonSTT';
 import NoProduct from '../components/NotFound/NoProduct';
 import { GlobalState } from '../GlobalState';
-import Loading from '../components/Notice/Loading';
+import Loading from '../components/utils/Loading';
 import axios from 'axios';
 import Filters from '../components/Filters';
 import LoadMore from '../components/Button/ButtonLoadMore';

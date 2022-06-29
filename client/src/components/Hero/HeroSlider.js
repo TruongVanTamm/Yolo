@@ -81,7 +81,7 @@ const HeroSliderItem = (props) => {
           <span>{props.item.description}</span>
         </div>
         <div className="hero-slider__item__info__btn">
-          <Link to={props.item.path}>
+          <Link to={props.item._id}>
             <Button
               backgroundColor={props.item.color}
               icon="bx bxs-right-arrow"
@@ -96,7 +96,7 @@ const HeroSliderItem = (props) => {
       <div className="hero-slider__item__img">
         <div className={`shape bg-${props.item.color}`}></div>
         <img
-          src={props.item.img}
+          src={props.item.image.url}
           alt=""
         />
       </div>

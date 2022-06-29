@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Asset/images/Logo-2.png';
 import logoAdmin from '../../Asset/images/logoAdmin.png';
 import { GlobalState } from '../../GlobalState';
 import Tippy from '@tippyjs/react';
-import TippyStyle from '../Notice/TippyStyle';
+import TippyStyle from '../utils/TippyStyle';
 const mainNav = [
   {
     display: 'Trang chủ',
@@ -30,16 +30,11 @@ const Header = () => {
   const [isLogged] = state.userAPI.isLogged;
   const [isAdmin] = state.userAPI.isAdmin;
   const [cart] = state.userAPI.cart;
-  const [menu, setMenu] = useState(false);
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
   const headerRef = useRef(null);
   const menuLeft = useRef(null);
   const menuToggle = () => {
     menuLeft.current.classList.toggle('active');
-  };
-  const userOption = useRef(null);
-  const UserOptionToggle = () => {
-    userOption.current.classList.toggle('active');
   };
   const logoutUser = async () => {
     await axios.get('/user/logout');
@@ -51,19 +46,15 @@ const Header = () => {
   const adminRouter = () => {
     return (
       <>
-        <div className="header__menu__right__item header__menu__item">
-          <Tippy content={<TippyStyle content="Tạo sản phẩm "></TippyStyle>}>
+        <div className="header__menu__right__item header__menu__item" title="Tạo sản phẩm ">
             <Link to="/create_product">
               <i className="bx bx-list-plus"></i>
             </Link>
-          </Tippy>
         </div>
-        <div className="header__menu__right__item header__menu__item">
-          <Tippy content={<TippyStyle content="Danh mục"></TippyStyle>}>
+        <div className="header__menu__right__item header__menu__item" title="Danh mục sản phẩm ">
             <Link to="/category">
               <i className="bx bxs-category"></i>
             </Link>
-          </Tippy>
         </div>
       </>
     );
@@ -71,6 +62,9 @@ const Header = () => {
   const loggedRouter = () => {
     return (
       <>
+      <li>
+          <Link to="/profile">Thông tin khách hàng</Link>
+        </li>
         <li>
           <Link to="/history">Lịch sử đơn hàng</Link>
         </li>
@@ -157,24 +151,20 @@ const Header = () => {
           </div>
           <div className="header__menu__right">
             {isAdmin && adminRouter()}
-            <div className="header__menu__right__item header__menu__item">
+            <div className="header__menu__right__item header__menu__item" title='Giỏ hàng'>
               <span className="header__menu__right__item__quantity">
                 {cart.length}
               </span>
-              <Tippy content={<TippyStyle content="Giỏ hàng "></TippyStyle>}>
                 <Link to="/cart">
                   <i className="bx bx-cart"></i>
                 </Link>
-              </Tippy>
             </div>
             <div
-              className="header__menu__right__item header__menu__item"
-              onClick={UserOptionToggle}
+              className="header__menu__right__item header__menu__item header__menu__right__user-option" 
             >
               <i className="bx bx-user"></i>
               <div
                 className="header__menu__right__item__user-option"
-                ref={userOption}
               >
                 <ul className="header__menu__right__item__user-option__list">
                   {isLogged ? (
@@ -187,9 +177,9 @@ const Header = () => {
                 </ul>
               </div>
             </div>
-            <div className="header__menu__right__item header__menu__item">
+            {/* <div className="header__menu__right__item header__menu__item">
               <i className="bx bx-search"></i>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

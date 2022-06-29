@@ -22,7 +22,8 @@ const heroSliderData = [
         img: img3,
         path: "/catalog/ao-thun-dinosaur-03",
         color: "orange"
-    }
+    },
+    
 ]
 
 export default heroSliderData
