@@ -22,6 +22,7 @@ app.use("/api", require("./routes/uploadAvatar"));
 app.use("/api", require("./routes/productRouter"));
 app.use("/api", require("./routes/paymentRouter"));
 app.use("/api", require("./routes/heroSliderRouter"));
+app.use("/api", require("./routes/chatbotRouter"));
 // Connect to mongodb
 const URI = process.env.MONGODB_URL;
 mongoose.connect(
