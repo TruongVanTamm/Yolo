@@ -3,10 +3,7 @@ import SignupForm from '../Auth/SignupForm'
 
 const SignUp = () => {
   return (
-    <div className="Signup_container">
-        <header>
-            Đăng kí
-        </header>
+    <div className="Signup_container__main">
          <SignupForm></SignupForm>
     </div>
   )

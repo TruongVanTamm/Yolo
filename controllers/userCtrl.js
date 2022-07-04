@@ -117,7 +117,7 @@ const userCtrl = {
 			const url = `${CLIENT_URL}/user/reset/${access_token}`;
 
 			sendMail(email, url, "Đặt lại mật khẩu");
-			res.json({ msg: "Re-send the password, please check your email." });
+			res.json({ msg: "  Chúng tôi vừa gửi một email xác nhận cho bạn, vui lòng xác nhận để đặt lại mật khẩu" });
 		} catch (err) {
 			return res.status(500).json({ msg: err.message });
 		}

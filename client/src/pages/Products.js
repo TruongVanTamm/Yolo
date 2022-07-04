@@ -9,6 +9,7 @@ import { GlobalState } from '../GlobalState';
 import axios from 'axios';
 const Product = () => {
   const [products, setProducts] = useState([]);
+  const [slider, setSlider] = useState([]);
   const params = useParams();
   const [detailProduct, setDetailProduct] = useState([]);
   useEffect(() => {
@@ -27,17 +28,26 @@ const Product = () => {
     getProducts();
   }, []);
   useEffect(() => {
+    const getProducts = async () => {
+      const res = await axios.get(
+        `/api/hero-slider`
+      );
+      setSlider(res.data)
+    };
+    getProducts();
+  }, [products]);
+  const allProduct=products.concat(slider)
+  useEffect(() => {
     if (params.id) {
-      products.forEach((product) => {
+      allProduct.forEach((product) => {
         if (product._id === params.id) setDetailProduct(product);
       });
     }
-  }, [params.id, products]);
+  }, [params.id, allProduct]);
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [detailProduct]);
   if (detailProduct.length === 0) return null;
-  
   return (
     <Helmet title={detailProduct.title}>
       <Section>

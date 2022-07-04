@@ -32,15 +32,13 @@ const sendEmail = (to, url,txt) => {
 		subject: "Yolo",
 		html: `
             <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
-            <h2 style="text-align: center; text-transform: uppercase;color:  #4267b2;">Welcome to the Shop Yolo.</h2>
-            <p>Congratulations! You're almost set become to a member of Yolo.
-                Just click the button below to validate your email address.
+            <h2 style="text-align: center; text-transform: uppercase;color:  #4267b2;">Chăm sóc khách hàng Yolo.</h2>
+            <p>Để hoàn tất việc xác thực Email, vui lòng bấm vào nút bên dưới, Yolo vinh hạnh được hỗ trợ bạn:
             </p>
 			<div style="  display: flex;">
 			<a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 0 auto">${txt}</a>
 			</div>
-            <p>If the button doesn't work for any reason, you can also click on the link below:</p>
-
+            <p>Nếu nút bấm không hoạt đông, vui lòng bấm vào liên kết dưới đây:</p>
             <div>${url}</div>
             </div>
         `,

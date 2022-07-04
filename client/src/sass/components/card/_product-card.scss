@@ -96,6 +96,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-transform: capitalize;
   }
   &__price {
     font-size: 1.6rem;

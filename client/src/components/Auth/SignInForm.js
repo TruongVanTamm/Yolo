@@ -20,12 +20,12 @@ const SignInForm = () => {
           'Địa chỉ email không hợp lệ'
         ),
       password: Yup.string()
-      .required('Vui lòng nhập trường này')
-      .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-        
-        'Mật khẩu yêu cầu 8 ký tự, chứa ít nhất một chữ cái và một số '
-      ),
+        .required('Vui lòng nhập trường này')
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+
+          'Mật khẩu yêu cầu 8 ký tự, chứa ít nhất một chữ cái và một số '
+        ),
     }),
     onSubmit: async (values) => {
       try {
@@ -36,14 +36,15 @@ const SignInForm = () => {
         window.location.href = '/';
       } catch (err) {
         alert.show(
-          <div style={{ fontSize: '12px' }}>{err.response.data.msg }</div>
+          <div style={{ fontSize: '12px' }}>{err.response.data.msg}</div>
         );
       }
     },
   });
-  
+
   return (
     <section>
+      <header>Đăng nhập</header>
       <form
         className="infoform"
         onSubmit={formik.handleSubmit}
@@ -81,7 +82,12 @@ const SignInForm = () => {
             Đăng kí
           </Link>
 
-          <Link to="/forgot_password">Forgot your password?</Link>
+          <Link
+            to="/forgot_password"
+            className="infoform__control__forgot"
+          >
+            Forgot your password?
+          </Link>
           <button type="submit"> Tiếp tục </button>
         </div>
       </form>

@@ -10,12 +10,10 @@ function EditUser() {
   const navigate = useNavigate();
   const [editUser, setEditUser] = useState([]);
   const state = useContext(GlobalState);
-  const [users, setUsers] = state.userAPI.users;
+  const [users,] = state.userAPI.users;
   const [token] = state.token;
   const [checkAdmin, setCheckAdmin] = useState(false);
   const [num, setNum] = useState(0);
-  const [isAdmin, setIsAdmin] = state.userAPI.isAdmin;
-  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (users !== false) {
       users.forEach((user) => {
@@ -68,7 +66,7 @@ function EditUser() {
             navigate('/profile');
           }}
         >
-          <i className='bx bx-left-arrow-alt'></i> Quay lại
+          <i className="bx bx-left-arrow-alt"></i> Quay lại
         </button>
       </div>
 

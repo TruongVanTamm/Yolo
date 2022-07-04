@@ -13,6 +13,12 @@ const Cart = () => {
   const [token] = state.token;
   const [total, setTotal] = useState(0);
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+  useEffect(() => {
     const getTotal = () => {
       const total = cart.reduce((prev, item) => {
         return prev + item.price * item.quantity;

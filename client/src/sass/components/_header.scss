@@ -32,16 +32,13 @@
     top: 50%;
     transform: translate(-50%, -50%);
     width: 110px;
-    @include mobile{
-      left: 35%;
-    }
-    &__user{
+    &__user {
       height: 30px;
       @include mobile {
         height: 20px;
       }
     }
-    &__admin{
+    &__admin {
       height: 60px;
       background-color: #fff;
       @include mobile {
@@ -82,7 +79,7 @@
       height: 100%;
       position: relative;
       &__item {
-        &__quantity{
+        &__quantity {
           position: absolute;
           font-size: 18px;
           @include mobile {
@@ -90,11 +87,11 @@
             top: 2px;
           }
           top: 0;
-          right:0;
-          transform: translate(50%, -50%)
+          right: 0;
+          transform: translate(50%, -50%);
         }
         &:hover {
-          font-weight: bold
+          font-weight: bold;
         }
         &__user-option {
           display: none;
@@ -102,42 +99,42 @@
           box-shadow: $box-shadow;
           font-size: 1.6rem;
           width: 200px;
-          @include mobile{
-            right:-50px;
+          @include mobile {
+            right: -50px;
             width: 230px;
             font-size: 1.4rem;
             padding: 5px 20px;
           }
           position: absolute;
           top: 100%;
-          right:-100px;
+          right: -100px;
           z-index: 100;
           padding: 10px 20px;
           border-radius: 10px;
           margin-top: 10px;
           transition: all 1s;
           &:after {
-            content: " ";
-            position:absolute;
+            content: ' ';
+            position: absolute;
             width: 100%;
             height: 40px;
             background-color: transparent;
             top: -40px;
-            left:0;
+            left: 0;
           }
-          &__list{
+          &__list {
             @include flex(flex-start, flex-start);
             flex-direction: column;
-            li{
+            li {
               width: 100%;
             }
-            a{
-              display:block;
-              width:100%;
+            a {
+              display: block;
+              width: 100%;
               border-bottom: 1px solid #ccc;
               padding: 10px 0;
             }
-            a:last-child{
+            a:last-child {
               border-bottom: none;
             }
           }
@@ -152,10 +149,10 @@
         }
       }
       &__user-option:hover {
-       .header__menu__right__item__user-option{
-        display:block;
-        animation: dropdown ease 0.25s
-       }
+        .header__menu__right__item__user-option {
+          display: block;
+          animation: dropdown ease 0.25s;
+        }
       }
       @include tabletPro {
         font-size: 2.2rem;
@@ -183,6 +180,9 @@
         bottom: 0;
         transition: width 0.5s ease;
         left: 50%;
+        @include mobile {
+          display: none;
+        }
       }
       &__item::before {
         content: '';
@@ -194,6 +194,9 @@
         bottom: 0;
         transition: width 0.5s ease;
         right: 50%;
+        @include mobile {
+          display: none;
+        }
       }
       &__item {
         &.active {
@@ -286,7 +289,7 @@
   from {
     transform: translateY(20px);
   }
-  to{
+  to {
     transform: translateY(0);
   }
 }

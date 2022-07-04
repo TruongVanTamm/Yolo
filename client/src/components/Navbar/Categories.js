@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import axios from 'axios';
 import { GlobalState } from '../../GlobalState';
@@ -56,39 +56,54 @@ function Categories() {
       alert(err.response.data.msg);
     }
   };
-
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
   return (
-    <div className="categories">
-      <form onSubmit={createCategory}>
-        <label htmlFor="category">Category</label>
-        <input
-          type="text"
-          name="category"
-          value={category}
-          required
-          onChange={(e) => setCategory(e.target.value)}
+    <div className="categories-wrapper">
+      <div className="categories-wrapper__img">
+      <img
+          src={require('../../Asset/images/category.svg').default}
+          alt=""
         />
+      </div>
+      <div className="categories-wrapper__main">
+        <form onSubmit={createCategory}>
+          <label htmlFor="category">Category</label>
+          <input
+            type="text"
+            name="category"
+            value={category}
+            required
+            onChange={(e) => setCategory(e.target.value)}
+          />
 
-        <button type="submit">{onEdit ? 'Update' : 'Create'}</button>
-      </form>
+          <button type="submit">{onEdit ? 'Update' : 'Create'}</button>
+        </form>
 
-      <div className="col">
-        {categories.map((category) => (
-          <div
-            className="row"
-            key={category._id}
-          >
-            <p>{category.name}</p>
-            <div>
-              <button onClick={() => editCategory(category._id, category.name)}>
-                Edit
-              </button>
-              <button onClick={() => deleteCategory(category._id)}>
-                Delete
-              </button>
+        <div className="col">
+          {categories.map((category) => (
+            <div
+              className="row"
+              key={category._id}
+            >
+              <p>{category.name}</p>
+              <div>
+                <button
+                  onClick={() => editCategory(category._id, category.name)}
+                >
+                  Edit
+                </button>
+                <button onClick={() => deleteCategory(category._id)}>
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

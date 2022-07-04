@@ -66,6 +66,7 @@
           @include flex(flex-start, flex-start);
           @include mobile {
             @include flex(center, space-between);
+            flex-wrap: wrap;
             p {
               font-size: 1.3rem;
             }

@@ -4,9 +4,7 @@ import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
-import {
- types
-} from 'react-alert';
+import { types } from 'react-alert';
 const SignupForm = () => {
   const alert = useAlert();
   const formik = useFormik({
@@ -32,7 +30,7 @@ const SignupForm = () => {
         .required('Vui lòng nhập trường này')
         .matches(
           /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-          
+
           'Mật khẩu yêu cầu 8 ký tự, chứa ít nhất một chữ cái và một số '
         ),
       confirmedPassword: Yup.string()
@@ -48,7 +46,7 @@ const SignupForm = () => {
             Chúng tôi vừa gửi một email xác nhận cho bạn, vui lòng xác nhận để
             hoàn tất đăng kí
           </div>,
-          { type: types.INFO}
+          { type: types.INFO }
         );
       } catch (err) {
         alert.show(
@@ -60,6 +58,7 @@ const SignupForm = () => {
 
   return (
     <section>
+      <header>Đăng kí</header>
       <form
         className="infoform"
         onSubmit={formik.handleSubmit}

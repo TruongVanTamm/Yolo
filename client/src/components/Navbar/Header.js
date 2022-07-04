@@ -4,8 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Asset/images/Logo-2.png';
 import logoAdmin from '../../Asset/images/logoAdmin.png';
 import { GlobalState } from '../../GlobalState';
-import Tippy from '@tippyjs/react';
-import TippyStyle from '../utils/TippyStyle';
+
 const mainNav = [
   {
     display: 'Trang chủ',

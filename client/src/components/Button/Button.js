@@ -22,7 +22,6 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-  backgroundColor: PropTypes.string,
   size: PropTypes.string,
   icon: PropTypes.string,
   animate: PropTypes.bool,

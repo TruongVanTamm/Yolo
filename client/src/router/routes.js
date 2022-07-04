@@ -14,6 +14,8 @@ import Categories from '../components/Navbar/Categories'
 import CreateProduct from '../components/CreateProduct/CreateProduct'
 import Profile from '../components/Profile/Profile'
 import EditUser from '../components/Profile/EditUser'
+import ForgotPassword from '../components/Auth/ForgotPassword'
+import ResetPassword from '../components/Auth/ResetPassword'
 const RoutesWrap = () => {
   const state = useContext(GlobalState);
   const [isLogged] = state.userAPI.isLogged;
@@ -35,6 +37,8 @@ const RoutesWrap = () => {
           <Route path="/user/activate/:activation_token" exact element={<SignInPage></SignInPage>} ></Route>
           <Route path="/profile" exact element={<Profile></Profile>} ></Route>
           <Route path="/edit_user/:id" exact element={<EditUser></EditUser>} ></Route>
+          <Route path="/forgot_password" exact element={<ForgotPassword></ForgotPassword>} ></Route>
+          <Route path="/user/reset/:token" exact element={<ResetPassword></ResetPassword>} ></Route>
         </Routes>
   )
 }

@@ -11,8 +11,9 @@ const heroSilderCtrl={
 	},
 	createHeroSilder: async (req, res) => {
 		try {
-			const { product_id, title, price, old_price, description,discount,image, category , color, size} = req.body;
-			if (!image) return res.status(400).json({ msg: "No image upload" });
+			const { product_id, title, price, old_price, description,discount,image01,image02 ,category , color, size} = req.body;
+			if (!image01) return res.status(400).json({ msg: "No image upload" });
+			if (!image02) return res.status(400).json({ msg: "No image upload" });
 			const slider = await heroSilder.findOne({ product_id });
 			if (slider) return res.status(400).json({ msg: "This product already exists." });
 
@@ -23,7 +24,8 @@ const heroSilderCtrl={
                 old_price,
 				description,
 				discount,
-				image,
+				image01,
+				image02,
 				category,
 				color,
 				size,

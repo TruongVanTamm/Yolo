@@ -27,7 +27,7 @@ const Home = () => {
   const [sort, setSort] = useState('');
   const [sort1, setSort1] = useState('');
   const [sort2, setSort2] = useState('');
-  const [page, setPage] = useState(1);
+  const [page,] = useState(1);
   const [page1, setPage1] = useState(1);
   const [page2, setPage2] = useState(1);
   const [result, setResult] = useState(0);

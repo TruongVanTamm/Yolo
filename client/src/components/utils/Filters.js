@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { GlobalState } from '../GlobalState';
+import { GlobalState } from '../../GlobalState';
 
 function Filters() {
   const state = useContext(GlobalState);

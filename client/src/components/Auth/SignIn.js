@@ -27,12 +27,9 @@ const SignIn = () => {
         }
         activationEmail()
     }
-},[activation_token])
+},[activation_token, alert])
   return (
-    <div className="Signup_container">
-    <header>
-        Đăng nhập
-    </header>
+    <div className="Signup_container__main">
      <SignInForm></SignInForm>
 </div>
   )

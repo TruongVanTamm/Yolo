@@ -6,7 +6,7 @@ import NoProduct from '../components/NotFound/NoProduct';
 import { GlobalState } from '../GlobalState';
 import Loading from '../components/utils/Loading';
 import axios from 'axios';
-import Filters from '../components/Filters';
+import Filters from '../components/utils/Filters';
 import LoadMore from '../components/Button/ButtonLoadMore';
 
 const Catalog = () => {

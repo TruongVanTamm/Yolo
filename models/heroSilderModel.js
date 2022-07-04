@@ -31,7 +31,11 @@ const heroSilderSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    image:{
+    image01:{
+        type: Object,
+        required: true
+    },
+    image02:{
         type: Object,
         required: true
     },
