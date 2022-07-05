@@ -1,4 +1,5 @@
 .cart {
+  z-index: 99;
   &__empty {
     height: 100%;
     width: 100%;
@@ -14,9 +15,8 @@
 
   &__list {
     width: 60%;
-    @include flex(center, space-between);
+    @include flex(unset, space-between);
     flex-direction: column;
-    gap: 20px;
     @include tablet {
       width: 100%;
     }
@@ -32,8 +32,12 @@
         }
       }
       @include flex(flex-start, space-between);
-      gap: 20px;
-
+      gap: 40px;
+      padding: 20px 0;
+      border-bottom: 2px solid $text-second-color;
+      &:last-child {
+        border-bottom: none;
+      }
       &__img {
         width: 20%;
         @include mobile {
@@ -46,14 +50,24 @@
       }
       &__detail {
         width: 80%;
-        @include flex(center, space-between);
+        @include flex(center, flex-start);
      
         @include mobile {
           width: 70%;
           &__price {
+            order: 1;
             h3 {
               font-size: 1.4rem;
             }
+          }
+          &__info{
+            order: 1;
+          }
+          &__amount{
+            order: 3;
+          }
+          &__delete{
+            order: 4;
           }
         }
         font-size: 1.6rem;
@@ -65,13 +79,14 @@
         &__info {
           @include flex(flex-start, flex-start);
           @include mobile {
-            @include flex(center, space-between);
+            @include flex(flex-start, unset);
             flex-wrap: wrap;
             p {
               font-size: 1.3rem;
             }
             flex-direction: row;
           }
+          width: 250px;
           gap: 10px;
           flex-direction: column;
           span {
@@ -87,6 +102,7 @@
             height: 30px;
             border-radius: 50%;
             border: 2px solid $main-color;
+            margin-top: 5px;
           }
           &__size{
             display:flex;
@@ -96,6 +112,7 @@
         }
         &__amount {
           @include flex(center, space-between);
+          width: 200px;
           gap: 20px;
           font-size: 1.6rem;
           button {
@@ -111,6 +128,10 @@
               font-size: 1.6rem;
             }
           }
+        }
+        &__price{
+          flex-grow:1;
+          text-align: center;
         }
         &__delete {
           font-size: 2.4rem;

@@ -168,6 +168,9 @@
           top: 0%;
           right: -20%;
         }
+        @include mobile{
+          right: 0;
+        }
       }
       .shape {
         height: 442px;
@@ -182,6 +185,7 @@
         @include tablet {
           height: 272px;
           width: 272px;
+          right: 80px;
         }
         @include mobile {
           height: 180px;
@@ -191,8 +195,9 @@
           transform: translate(-50%, -50%);
         }
         @include tabletPro {
-          height: 252px;
-          width: 252px;
+          height: 350px;
+          width: 350px;
+          right: 0;
         }
       }
     }

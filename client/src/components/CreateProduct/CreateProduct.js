@@ -218,8 +218,20 @@ const CreateProduct = () => {
     e.preventDefault();
     try {
       if (!isAdmin) return alert('Bạn không có quyền này');
-      if (!image01) return alert('No Image ');
-
+      if (!image01)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Cung cấp đầy đủ thông tin sản phẩm
+          </div>,
+          { type: types.ERROR }
+        );
+      if (!image02)
+        return alert.show(
+          <div style={{ fontSize: '12px' }}>
+            Cung cấp đầy đủ thông tin sản phẩm
+          </div>,
+          { type: types.ERROR }
+        );
       if (onEdit) {
         await axios.put(
           `/api/products/${product._id}`,
@@ -240,7 +252,11 @@ const CreateProduct = () => {
       setCallback(!callback);
       navigate('/');
     } catch (err) {
-      alert(err.response.data.msg);
+      alert.show(  <div style={{ fontSize: '12px' }}>
+      {err.response.data.msg}
+    </div>,
+    { type: types.ERROR})
+     
     }
   };
 

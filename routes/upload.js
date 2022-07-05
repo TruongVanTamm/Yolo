@@ -46,7 +46,6 @@ router.post('/destroyAll',auth , authAdmin, (req, res) =>{
     try {
         const {public_id_1, public_id_2} = req.body;
         if(!public_id_1) return res.status(400).json({msg: 'Không có ảnh nào được chọn'})
-        if(!public_id_2) return res.status(400).json({msg: 'Không có ảnh nào '})
         cloudinary.v2.uploader.destroy( public_id_1, async(err, result) =>{
             if(err) throw err;
         })

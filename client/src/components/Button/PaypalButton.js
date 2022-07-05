@@ -30,7 +30,8 @@ export default class PaypalButton extends React.Component {
       color: 'silver',
       shape: 'rect',
       label: 'checkout',
-      tagline: false
+      tagline: false,
+
   }
 
     return (
