@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import AlertLike from '../utils/AlertLike';
 import { GlobalState } from '../../GlobalState';
+import ProductViewModal from '../ProductsView/ProductViewModal';
 const ProductCard = (props) => {
   const [activeProduct, setActiveProduct] = useState(0);
   const handleProductClick = (index) => {
@@ -19,7 +20,7 @@ const ProductCard = (props) => {
     reset = 'activeAlert';
   }
   const state = useContext(GlobalState);
-  const addCart=state.userAPI.addCart
+  const addCart = state.userAPI.addCart;
   return (
     <>
       <AlertLike
@@ -45,7 +46,7 @@ const ProductCard = (props) => {
                     alt=""
                     className={activeProduct === index ? 'active' : null}
                   />
-                  
+
                   <img
                     src={item.image02}
                     alt=""
@@ -58,7 +59,7 @@ const ProductCard = (props) => {
           <h3 className="product-card__name">{props.name}</h3>
           <div className="product-card__price">
             <span className="product-card__price__old">
-              <del>${props.old_price}</del>
+              {props.old_price ? <del>${props.old_price}</del> : null}
             </span>
             ${props.price}
           </div>
@@ -72,18 +73,20 @@ const ProductCard = (props) => {
                 icon="bx bx-cart-add"
                 animate={false}
                 backgroundColor="red"
-                onClick={()=>{props.deleteProduct(props.id,props.public_id )}}
+                onClick={() => {
+                  props.deleteProduct(props.id, props.public_id);
+                }}
               >
                 Xóa
               </Button>
               <Link to={`/edit-product/${props.id}`}>
-              <Button
-                size="sm"
-                icon="bx bx-cart-add"
-                animate={false}
-              >
-                Sửa
-              </Button>
+                <Button
+                  size="sm"
+                  icon="bx bx-cart-add"
+                  animate={false}
+                >
+                  Sửa
+                </Button>
               </Link>
             </>
           ) : (
@@ -97,7 +100,10 @@ const ProductCard = (props) => {
               >
                 Mua
               </Button>
-              <Link  to={`/${props.id}`} className='mobile-hide' >
+              {/* <Link
+                to={`/${props.id}`}
+                className="mobile-hide"
+              >
                 <Button
                   size="sm"
                   icon="bx bx-cart-add"
@@ -105,7 +111,21 @@ const ProductCard = (props) => {
                 >
                   Xem
                 </Button>
-              </Link>
+              </Link> */}
+              <ProductViewModal
+                id={props.id}
+                name={props.name}
+                price={props.price}
+                old_price={props.old_price}
+                discount={props.discount}
+                image01={props.image01}
+                image02={props.image02}
+                checked={props.checked}
+                color={props.color}
+                size={props.size}
+                description={props.description}
+                sold={props.sold}
+              ></ProductViewModal>
             </>
           )}
         </div>
@@ -121,7 +141,7 @@ const ProductCard = (props) => {
                   alt=""
                   onClick={() => handleProductClick(index)}
                 />
-                
+
                 <img
                   src={item.image02}
                   alt=""
@@ -131,7 +151,11 @@ const ProductCard = (props) => {
             );
           })}
         </div>
-        <div className={props.discount ? 'product-card__sale' : 'product-card__hide'}>
+        <div
+          className={
+            props.discount ? 'product-card__sale' : 'product-card__hide'
+          }
+        >
           {`-${props.discount}%`}
         </div>
         <div

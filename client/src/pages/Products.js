@@ -1,16 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Helmet from '../components/utils/Helmet';
-import Section, { SectionBody, SectionTitle } from '../components/Layout/Section';
+import Section, {
+  SectionBody,
+  SectionTitle,
+} from '../components/Layout/Section';
 import Grid from '../components/Layout/Grid';
 import ProductCard from '../components/Card/ProductCard';
 import { useParams } from 'react-router-dom';
-import ProductView from '../components/ProductsView/ProductView'
-import { GlobalState } from '../GlobalState';
+import ProductView from '../components/ProductsView/ProductView';
 import axios from 'axios';
 const Product = () => {
   const [products, setProducts] = useState([]);
   const [slider, setSlider] = useState([]);
   const params = useParams();
+
   const [detailProduct, setDetailProduct] = useState([]);
   useEffect(() => {
     window.scrollTo({
@@ -20,23 +23,19 @@ const Product = () => {
   }, []);
   useEffect(() => {
     const getProducts = async () => {
-      const res = await axios.get(
-        `/api/products`
-      );
+      const res = await axios.get(`/api/products`);
       setProducts(res.data.products);
     };
     getProducts();
   }, []);
   useEffect(() => {
     const getProducts = async () => {
-      const res = await axios.get(
-        `/api/hero-slider`
-      );
-      setSlider(res.data)
+      const res = await axios.get(`/api/hero-slider`);
+      setSlider(res.data);
     };
     getProducts();
   }, [products]);
-  const allProduct=products.concat(slider)
+  const allProduct = products.concat(slider);
   useEffect(() => {
     if (params.id) {
       allProduct.forEach((product) => {

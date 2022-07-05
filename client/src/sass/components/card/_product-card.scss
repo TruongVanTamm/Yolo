@@ -5,7 +5,7 @@
   padding-bottom: 50px;
   &__input {
     position: absolute;
-    z-index: 99;
+    z-index: 98;
     bottom: 50%;
     width: 20px;
     height: 20px;
@@ -40,7 +40,7 @@
       }
     }
     &:hover {
-      transform: scale(1.03);
+      transform: scale(1.07);
     }
   }
   &__btn {
@@ -97,6 +97,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: capitalize;
+    @include mobile{
+      font-size: 1.6rem;
+    }
   }
   &__price {
     font-size: 1.6rem;
@@ -148,6 +151,7 @@
     }
     @include mobile {
       left: -7%;
+      font-size: 1rem;
     }
     &::after {
       content: '';
@@ -186,6 +190,11 @@
     border-radius: 50%;
     width: 35px;
     height: 35px;
+    @include mobile{
+      font-size: 2.2rem;
+      width: 30px;
+      height: 30px;
+    }
     @include flex(center, center);
     &:hover {
       animation: likeAnimation linear 1.2s infinite;

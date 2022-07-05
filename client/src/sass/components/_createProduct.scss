@@ -14,7 +14,8 @@
     margin: 20px;
     position: relative;
   }
-  #file_up, #file_up_2  {
+  #file_up,
+  #file_up_2 {
     position: relative;
     width: 100%;
     height: 100%;
@@ -48,7 +49,8 @@
     cursor: pointer;
     margin: auto;
   }
-  #file_img , #file_img_2 {
+  #file_img,
+  #file_img_2 {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -79,28 +81,29 @@
     min-width: 290px;
     width: 100%;
     margin: 15px 30px;
-    h1{
+    h1 {
       text-align: center;
       color: $main-color;
     }
-    .hint-price{
+    .hint-price {
       position: absolute;
       bottom: 16%;
-      left:-15%;
-      @include mobile{
+      left: -15%;
+      @include mobile {
         @include flex(center, space-between);
         flex-direction: column;
       }
-      i{
-        font-size:3rem;
-        color:$main-color;
+      i {
+        font-size: 3rem;
+        color: $main-color;
       }
     }
     .row {
       width: 100%;
       margin: 15px 0;
       border-bottom: 1px solid $text-main-color;
-      label,select{
+      label,
+      select {
         font-size: 1.4rem;
       }
     }
@@ -114,15 +117,32 @@
     button {
       width: 200px;
       height: 40px;
-      background:$btn-main-bg;
+      background: $btn-main-bg;
       color: white;
       text-transform: uppercase;
       letter-spacing: 2px;
       font-weight: 700;
       border-radius: 12px;
-      &:active{
-        transform: scale(0.9)
+      &:active {
+        transform: scale(0.9);
       }
+    }
+  }
+  @include mobile {
+    &__upload {
+      max-width: 100%;
+      height: 300px;
+      width: 100%;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin: 20px;
+      position: relative;
+    }
+    #file_up::before {
+      top: 10%;
+    }
+    #file_up_2::before {
+      top: 10%;
     }
   }
 }

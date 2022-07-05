@@ -4,6 +4,7 @@
   height: 55px;
   bottom: 11%;
   right: 0%;
+  overflow: hidden;
   @include tablet{
     right: 1%;
   }

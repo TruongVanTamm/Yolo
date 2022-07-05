@@ -1,4 +1,4 @@
-import React, {  useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import policy from '../Asset/fake-data/policy';
 import Helmet from '../components/utils/Helmet';
 import HeroSlider from '../components/Hero/HeroSlider';
@@ -10,8 +10,8 @@ import PolicyCard from '../components/Card/PolicyCard';
 import Grid from '../components/Layout/Grid';
 import ProductCard from '../components/Card/ProductCard';
 import banner from '../Asset/images/banner3.jpg';
-import banner1 from '../Asset/images/banner1.jpg'
-import banner2 from '../Asset/images/banner5.jpg'
+import banner1 from '../Asset/images/banner1.jpg';
+import banner2 from '../Asset/images/banner5.jpg';
 import { Link } from 'react-router-dom';
 import ButtonSTT from '../components/Button/ButtonSTT';
 import ChatBot from '../components/Chatbot/ChatBot';
@@ -27,7 +27,7 @@ const Home = () => {
   const [sort, setSort] = useState('');
   const [sort1, setSort1] = useState('');
   const [sort2, setSort2] = useState('');
-  const [page,] = useState(1);
+  const [page] = useState(1);
   const [page1, setPage1] = useState(1);
   const [page2, setPage2] = useState(1);
   const [result, setResult] = useState(0);
@@ -41,16 +41,16 @@ const Home = () => {
       setResult(res.data.result);
     };
     getProducts();
-  }, [page,sort]);
+  }, [page, sort]);
   useEffect(() => {
     const getProducts = async () => {
-      const res = await axios.get(`/api/products?limit=${page1 * 8}&${sort1}`);
+      const res = await axios.get(`/api/products?limit=${page1 * 12}&${sort1}`);
       setSort1('');
       setProduct2(res.data.products);
       setResult1(res.data.result);
     };
     getProducts();
-  }, [page1,sort1]);
+  }, [page1, sort1]);
   useEffect(() => {
     const getProducts = async () => {
       const res = await axios.get(`/api/products?limit=${page2 * 6}&${sort2}`);
@@ -59,7 +59,7 @@ const Home = () => {
       setResult2(res.data.result);
     };
     getProducts();
-  }, [page2,sort2]);
+  }, [page2, sort2]);
   return (
     <>
       <Helmet title="Trang chủ">
@@ -110,6 +110,7 @@ const Home = () => {
                     discount={item.discount}
                     image01={item.image01.url}
                     image02={item.image02.url}
+                    description={item.description}
                     checked={item.checked}
                     color={item.color}
                     size={item.size}
@@ -124,7 +125,7 @@ const Home = () => {
           <SectionTitle>sản phẩm mới </SectionTitle>
           <SectionBody>
             <Grid
-              col={4}
+              col={6}
               mdCol={3}
               smCol={2}
               gap={20}
@@ -140,6 +141,7 @@ const Home = () => {
                     discount={item.discount}
                     image01={item.image01.url}
                     image02={item.image02.url}
+                    description={item.description}
                     checked={item.checked}
                     color={item.color}
                     size={item.size}
@@ -149,11 +151,12 @@ const Home = () => {
               })}
             </Grid>
             <div className="btn-load-more ">
-            {
-                result1 < page1 * 8 ? ""
-                : <button onClick={() => setPage1(page1+1)}>Tải thêm</button>
-            }
-        </div>
+              {result1 < page1 * 8 ? (
+                ''
+              ) : (
+                <button onClick={() => setPage1(page1 + 1)}>Tải thêm</button>
+              )}
+            </div>
           </SectionBody>
         </Section>
         <Section>
@@ -195,7 +198,7 @@ const Home = () => {
               smCol={2}
               gap={20}
             >
-                 {product3.map((item, index) => {
+              {product3.map((item, index) => {
                 return (
                   <ProductCard
                     key={index}
@@ -206,6 +209,7 @@ const Home = () => {
                     discount={item.discount}
                     image01={item.image01.url}
                     image02={item.image02.url}
+                    description={item.description}
                     checked={item.checked}
                     color={item.color}
                     size={item.size}
@@ -216,11 +220,12 @@ const Home = () => {
             </Grid>
 
             <div className="btn-load-more ">
-            {
-                result2 < page2 * 6 ? ""
-                : <button onClick={() => setPage2(page2+1)}>Tải thêm</button>
-            }
-        </div>
+              {result2 < page2 * 6 ? (
+                ''
+              ) : (
+                <button onClick={() => setPage2(page2 + 1)}>Tải thêm</button>
+              )}
+            </div>
           </SectionBody>
         </Section>
         <ChatBot></ChatBot>

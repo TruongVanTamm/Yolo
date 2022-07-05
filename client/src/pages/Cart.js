@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from '../components/utils/Helmet';
 import Button from '../components/Button/Button';
-import numberWithCommas from '../utils/numberWithCommas';
+import numberWithCommas from '../components/utils/numberWithCommas';
 import { GlobalState } from '../GlobalState';
 import axios from 'axios';
 import PaypalButton from '../components/Button/PaypalButton';
@@ -12,6 +12,7 @@ const Cart = () => {
   const [cart, setCart] = state.userAPI.cart;
   const [token] = state.token;
   const [total, setTotal] = useState(0);
+  const quantity = useRef(0);
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -100,7 +101,9 @@ const Cart = () => {
       <div className="cart">
         <div className="cart__info">
           <div className="cart__info__txt">
-            <p>Bạn đang có {cart.length} loại sản phẩm trong giỏ hàng</p>
+            <p>
+              Bạn đang có {quantity.current.innerHTML} sản phẩm trong giỏ hàng
+            </p>
             <div className="cart__info__txt__price">
               <span>Thành tiền:</span>{' '}
               <span>
@@ -109,7 +112,6 @@ const Cart = () => {
             </div>
           </div>
           <div className="cart__info__btn">
-            <Button size="sm">Đặt hàng</Button>
             <PaypalButton
               total={total}
               tranSuccess={tranSuccess}
@@ -127,10 +129,10 @@ const Cart = () => {
             >
               <div className="cart__list__item__img">
                 <Link to={product.id}>
-                <img
-                  src={product.image01}
-                  alt=""
-                />
+                  <img
+                    src={product.image01}
+                    alt=""
+                  />
                 </Link>
               </div>
 
@@ -142,18 +144,19 @@ const Cart = () => {
                   </p>
                   <p>
                     {' '}
-                    <span>Màu sắc: </span> {product.color}
+                    <span>Màu sắc: </span>{' '}
+                    <div className={`cart__list__item__detail__info__color bg-${product.color}`}></div>
                   </p>
                   <p>
                     {' '}
                     <span>Kích cỡ: </span>
-                    {product.size}
+                    <div className={`cart__list__item__detail__info__size`}>{product.size}</div>
                   </p>
                 </div>
 
                 <div className="cart__list__item__detail__amount">
                   <button onClick={() => decrement(product.id)}> - </button>
-                  <span>{product.quantity}</span>
+                  <span ref={quantity}>{product.quantity}</span>
                   <button onClick={() => increment(product.id)}> + </button>
                 </div>
                 <div className="cart__list__item__detail__price">

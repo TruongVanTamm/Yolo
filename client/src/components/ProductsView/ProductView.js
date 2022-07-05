@@ -1,20 +1,19 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
-import { useNavigate } from 'react-router-dom';
 import { GlobalState } from '../../GlobalState';
+import { useNavigate } from 'react-router-dom';
 const ProductView = (props) => {
+  const navigate = useNavigate();
   const state = useContext(GlobalState);
   const addCart = state.userAPI.addCart;
   const [previewImg, setPreviewImg] = useState(props.image01);
   const [descriptionExpand, setDescriptionExpand] = useState(false);
   const handleProductDescriptionClick = () => {
-    setDescriptionExpand(!descriptionExpand);
-    if (descriptionExpand === true) {
-      window.scrollTo(0, 500);
-    } else {
-      window.scrollTo(0, 1000);
+    if (descriptionExpand) {
+      window.scrollTo(0, 0);
     }
+    setDescriptionExpand(!descriptionExpand);
   };
   useEffect(() => {
     setPreviewImg(props.image01);
@@ -72,7 +71,7 @@ const ProductView = (props) => {
       <div className="product__info">
         <div className="product__info__title">{props.name}</div>
         <div className="product__info__item">
-        <span className="product__info__item__title">Giá tiền</span>
+          <span className="product__info__item__title">Giá tiền</span>
           <span className="product__info__item__price">${props.price}</span>
         </div>
         <div className="product__info__item">
@@ -122,32 +121,14 @@ const ProductView = (props) => {
           </Button>
           <Button
             size="sm"
-            onClick={() => addCart(props)}
+            onClick={() => {
+              addCart(props);
+              return navigate('/cart');
+            }}
           >
             Mua ngay
           </Button>
         </div>
-      </div>
-      <div
-        className={`product__description  mobile ${
-          descriptionExpand ? 'expand ' : ''
-        }`}
-      >
-        <div className="product__description__title">Chi tiết sản phẩm</div>
-        <div
-    
-          className="product__description__content"
-          dangerouslySetInnerHTML={{ __html: props.description }}
-        ></div>
-  
-          <div className="product__description__toggle">
-            <Button
-              size="sm"
-              onClick={handleProductDescriptionClick}
-            >
-              {descriptionExpand ? 'Ẩn bớt' : 'Xem thêm'}
-            </Button>
-          </div>
       </div>
     </div>
   );
