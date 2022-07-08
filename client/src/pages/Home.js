@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import policy from '../Asset/fake-data/policy';
-import Helmet from '../components/utils/Helmet';
+import { Helmet } from 'react-helmet';
 import HeroSlider from '../components/Hero/HeroSlider';
 import Section, {
   SectionBody,
@@ -62,175 +62,186 @@ const Home = () => {
   }, [page2, sort2]);
   return (
     <>
-      <Helmet title="Trang chủ">
-        <HeroSlider
-          data={slider}
-          control={true}
-          auto={false}
-          timeOut={5000}
-        ></HeroSlider>
-        <Section>
-          <SectionBody>
-            <Grid
-              col={4}
-              mdCol={2}
-              smCol={1}
-              gap={20}
-            >
-              {policy.map((item, index) => {
-                return (
-                  <PolicyCard
-                    key={index}
-                    name={item.name}
-                    description={item.description}
-                    icon={item.icon}
-                  ></PolicyCard>
-                );
-              })}
-            </Grid>
-          </SectionBody>
-        </Section>
-        <Section>
-          <SectionTitle>top sản phẩm bán chạy trong tuần</SectionTitle>
-          <SectionBody>
-            <Grid
-              col={4}
-              mdCol={4}
-              smCol={2}
-              gap={20}
-            >
-              {product1.map((item, index) => {
-                return (
-                  <ProductCard
-                    key={index}
-                    id={item._id}
-                    name={item.title}
-                    price={item.price}
-                    old_price={item.old_price}
-                    discount={item.discount}
-                    image01={item.image01.url}
-                    image02={item.image02.url}
-                    description={item.description}
-                    checked={item.checked}
-                    color={item.color}
-                    size={item.size}
-                    sold={item.sold}
-                  ></ProductCard>
-                );
-              })}
-            </Grid>
-          </SectionBody>
-        </Section>
-        <Section>
-          <SectionTitle>sản phẩm mới </SectionTitle>
-          <SectionBody>
-            <Grid
-              col={6}
-              mdCol={3}
-              smCol={2}
-              gap={20}
-            >
-              {product2.map((item, index) => {
-                return (
-                  <ProductCard
-                    key={index}
-                    id={item._id}
-                    name={item.title}
-                    price={item.price}
-                    old_price={item.old_price}
-                    discount={item.discount}
-                    image01={item.image01.url}
-                    image02={item.image02.url}
-                    description={item.description}
-                    checked={item.checked}
-                    color={item.color}
-                    size={item.size}
-                    sold={item.sold}
-                  ></ProductCard>
-                );
-              })}
-            </Grid>
-            <div className="btn-load-more ">
-              {result1 < page1 * 8 ? (
-                ''
-              ) : (
-                <button onClick={() => setPage1(page1 + 1)}>Tải thêm</button>
-              )}
-            </div>
-          </SectionBody>
-        </Section>
-        <Section>
-          <SectionBody>
-            <Link to="./catalog">
-              <img
-                src={banner1}
-                alt=""
-              />
-            </Link>
-          </SectionBody>
-        </Section>
-        <Section>
-          <SectionBody>
-            <Link to="./catalog">
-              <img
-                src={banner2}
-                alt=""
-              />
-            </Link>
-          </SectionBody>
-        </Section>
-        <Section>
-          <SectionBody>
-            <Link to="./catalog">
-              <img
-                src={banner}
-                alt=""
-              />
-            </Link>
-          </SectionBody>
-        </Section>
-        <Section>
-          <SectionTitle>phổ biến </SectionTitle>
-          <SectionBody>
-            <Grid
-              col={6}
-              mdCol={3}
-              smCol={2}
-              gap={20}
-            >
-              {product3.map((item, index) => {
-                return (
-                  <ProductCard
-                    key={index}
-                    id={item._id}
-                    name={item.title}
-                    price={item.price}
-                    old_price={item.old_price}
-                    discount={item.discount}
-                    image01={item.image01.url}
-                    image02={item.image02.url}
-                    description={item.description}
-                    checked={item.checked}
-                    color={item.color}
-                    size={item.size}
-                    sold={item.sold}
-                  ></ProductCard>
-                );
-              })}
-            </Grid>
-
-            <div className="btn-load-more ">
-              {result2 < page2 * 6 ? (
-                ''
-              ) : (
-                <button onClick={() => setPage2(page2 + 1)}>Tải thêm</button>
-              )}
-            </div>
-          </SectionBody>
-        </Section>
-        <ChatBot></ChatBot>
-        <ButtonSTT></ButtonSTT>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Trang chủ</title>
+        <link
+          rel="canonical"
+          href="http://mysite.com/example"
+        />
+        <meta
+          name="description"
+          content="Nested component"
+        />
       </Helmet>
+      
+      <HeroSlider
+        data={slider}
+        control={true}
+        auto={false}
+        timeOut={5000}
+      ></HeroSlider>
+      <Section>
+        <SectionBody>
+          <Grid
+            col={4}
+            mdCol={2}
+            smCol={1}
+            gap={20}
+          >
+            {policy.map((item, index) => {
+              return (
+                <PolicyCard
+                  key={index}
+                  name={item.name}
+                  description={item.description}
+                  icon={item.icon}
+                ></PolicyCard>
+              );
+            })}
+          </Grid>
+        </SectionBody>
+      </Section>
+      <Section>
+        <SectionTitle>top sản phẩm bán chạy trong tuần</SectionTitle>
+        <SectionBody>
+          <Grid
+            col={4}
+            mdCol={4}
+            smCol={2}
+            gap={20}
+          >
+            {product1.map((item, index) => {
+              return (
+                <ProductCard
+                  key={index}
+                  id={item._id}
+                  name={item.title}
+                  price={item.price}
+                  old_price={item.old_price}
+                  discount={item.discount}
+                  image01={item.image01.url}
+                  image02={item.image02.url}
+                  description={item.description}
+                  checked={item.checked}
+                  color={item.color}
+                  size={item.size}
+                  sold={item.sold}
+                ></ProductCard>
+              );
+            })}
+          </Grid>
+        </SectionBody>
+      </Section>
+      <Section>
+        <SectionTitle>sản phẩm mới </SectionTitle>
+        <SectionBody>
+          <Grid
+            col={6}
+            mdCol={3}
+            smCol={2}
+            gap={20}
+          >
+            {product2.map((item, index) => {
+              return (
+                <ProductCard
+                  key={index}
+                  id={item._id}
+                  name={item.title}
+                  price={item.price}
+                  old_price={item.old_price}
+                  discount={item.discount}
+                  image01={item.image01.url}
+                  image02={item.image02.url}
+                  description={item.description}
+                  checked={item.checked}
+                  color={item.color}
+                  size={item.size}
+                  sold={item.sold}
+                ></ProductCard>
+              );
+            })}
+          </Grid>
+          <div className="btn-load-more ">
+            {result1 < page1 * 8 ? (
+              ''
+            ) : (
+              <button onClick={() => setPage1(page1 + 1)}>Tải thêm</button>
+            )}
+          </div>
+        </SectionBody>
+      </Section>
+      <Section>
+        <SectionBody>
+          <Link to="./catalog">
+            <img
+              src={banner1}
+              alt=""
+            />
+          </Link>
+        </SectionBody>
+      </Section>
+      <Section>
+        <SectionBody>
+          <Link to="./catalog">
+            <img
+              src={banner2}
+              alt=""
+            />
+          </Link>
+        </SectionBody>
+      </Section>
+      <Section>
+        <SectionBody>
+          <Link to="./catalog">
+            <img
+              src={banner}
+              alt=""
+            />
+          </Link>
+        </SectionBody>
+      </Section>
+      <Section>
+        <SectionTitle>phổ biến </SectionTitle>
+        <SectionBody>
+          <Grid
+            col={6}
+            mdCol={3}
+            smCol={2}
+            gap={20}
+          >
+            {product3.map((item, index) => {
+              return (
+                <ProductCard
+                  key={index}
+                  id={item._id}
+                  name={item.title}
+                  price={item.price}
+                  old_price={item.old_price}
+                  discount={item.discount}
+                  image01={item.image01.url}
+                  image02={item.image02.url}
+                  description={item.description}
+                  checked={item.checked}
+                  color={item.color}
+                  size={item.size}
+                  sold={item.sold}
+                ></ProductCard>
+              );
+            })}
+          </Grid>
+
+          <div className="btn-load-more ">
+            {result2 < page2 * 6 ? (
+              ''
+            ) : (
+              <button onClick={() => setPage2(page2 + 1)}>Tải thêm</button>
+            )}
+          </div>
+        </SectionBody>
+      </Section>
+      <ChatBot></ChatBot>
+      <ButtonSTT></ButtonSTT>
     </>
   );
 };
