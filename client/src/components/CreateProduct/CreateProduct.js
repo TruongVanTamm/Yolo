@@ -122,14 +122,12 @@ const CreateProduct = () => {
         );
 
       if (file.size > 1024 * 1024)
-        // 1mb
         return alert.show(
           <div style={{ fontSize: '12px' }}>Kích thước quá lớn</div>,
           { type: types.ERROR }
         );
 
       if (file.type !== 'image/jpeg' && file.type !== 'image/png')
-        // 1mb
         return alert.show(
           <div style={{ fontSize: '12px' }}>Định dạng file không hợp lệ</div>,
           { type: types.ERROR }
@@ -252,11 +250,10 @@ const CreateProduct = () => {
       setCallback(!callback);
       navigate('/');
     } catch (err) {
-      alert.show(  <div style={{ fontSize: '12px' }}>
-      {err.response.data.msg}
-    </div>,
-    { type: types.ERROR})
-     
+      alert.show(
+        <div style={{ fontSize: '12px' }}>{err.response.data.msg}</div>,
+        { type: types.ERROR }
+      );
     }
   };
 
@@ -270,53 +267,56 @@ const CreateProduct = () => {
 
   return (
     <div className="create_product">
-      <div className="create_product__upload">
-        <input
-          type="file"
-          name="file"
-          id="file_up"
-          onChange={handleUpload}
-        />
-        {loading ? (
-          <div id="file_img">
-            <Loading />
-          </div>
-        ) : (
-          <div
-            id="file_img"
-            style={styleUpload}
-          >
-            <img
-              src={image01 ? image01.url : ''}
-              alt=""
-            />
-            <span onClick={handleDestroy}>X</span>
-          </div>
-        )}
-      </div>
-      <div className="create_product__upload">
-        <input
-          type="file"
-          name="file_2"
-          id="file_up_2"
-          onChange={handleUpload2}
-        />
-        {loading2 ? (
-          <div id="file_img_2">
-            <Loading />
-          </div>
-        ) : (
-          <div
-            id="file_img_2"
-            style={styleUpload2}
-          >
-            <img
-              src={image02 ? image02.url : ''}
-              alt=""
-            />
-            <span onClick={handleDestroy2}>X</span>
-          </div>
-        )}
+      <div className="create_product__wrap">
+        
+        <div className="create_product__upload">
+          <input
+            type="file"
+            name="file"
+            id="file_up"
+            onChange={handleUpload}
+          />
+          {loading ? (
+            <div id="file_img">
+              <Loading />
+            </div>
+          ) : (
+            <div
+              id="file_img"
+              style={styleUpload}
+            >
+              <img
+                src={image01 ? image01.url : ''}
+                alt=""
+              />
+              <span onClick={handleDestroy}>X</span>
+            </div>
+          )}
+        </div>
+        <div className="create_product__upload">
+          <input
+            type="file"
+            name="file_2"
+            id="file_up_2"
+            onChange={handleUpload2}
+          />
+          {loading2 ? (
+            <div id="file_img_2">
+              <Loading />
+            </div>
+          ) : (
+            <div
+              id="file_img_2"
+              style={styleUpload2}
+            >
+              <img
+                src={image02 ? image02.url : ''}
+                alt=""
+              />
+              <span onClick={handleDestroy2}>X</span>
+            </div>
+          )}
+        </div>
       </div>
       <form onSubmit={handleSubmit}>
         <h1>Thông tin sản phẩm</h1>

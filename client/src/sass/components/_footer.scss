@@ -26,6 +26,9 @@
   &__content {
     p {
       margin-bottom: 1.25rem;
+      &:hover{
+        color: $main-color;
+      }
     }
   }
   &__end {

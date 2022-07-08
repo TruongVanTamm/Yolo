@@ -5,7 +5,7 @@ export default class PaypalButton extends React.Component {
   render() {
     const onSuccess = (payment) => {
       console.log('The payment was succeeded!', payment);
-      this.props.tranSuccess(payment)
+      this.props.tranSuccess(payment);
     };
 
     const onCancel = (data) => {
@@ -31,8 +31,7 @@ export default class PaypalButton extends React.Component {
       shape: 'rect',
       label: 'checkout',
       tagline: false,
-
-  }
+    };
 
     return (
       <PaypalExpressBtn

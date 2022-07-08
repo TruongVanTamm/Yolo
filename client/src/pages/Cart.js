@@ -102,7 +102,7 @@ const Cart = () => {
         <div className="cart__info">
           <div className="cart__info__txt">
             <p>
-              Bạn đang có {quantity.current.innerHTML} sản phẩm trong giỏ hàng
+              Bạn đang có {cart.length} sản phẩm trong giỏ hàng
             </p>
             <div className="cart__info__txt__price">
               <span>Thành tiền:</span>{' '}
@@ -145,12 +145,16 @@ const Cart = () => {
                   <p>
                     {' '}
                     <span>Màu sắc: </span>{' '}
-                    <div className={`cart__list__item__detail__info__color bg-${product.color}`}></div>
+                    <span
+                      className={`cart__list__item__detail__info__color bg-${product.color}`}
+                    ></span>
                   </p>
                   <p>
                     {' '}
                     <span>Kích cỡ: </span>
-                    <div className={`cart__list__item__detail__info__size`}>{product.size}</div>
+                    <span className={`cart__list__item__detail__info__size`}>
+                      {product.size}
+                    </span>
                   </p>
                 </div>
 

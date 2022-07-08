@@ -20,6 +20,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@formkit/auto-animate": "^1.0.0-beta.1",
 		"@reduxjs/toolkit": "^1.8.2",
 		"axios": "^0.27.2",
 		"bcrypt": "^5.0.1",

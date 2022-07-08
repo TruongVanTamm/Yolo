@@ -98,16 +98,14 @@
             }
           }
           &__color,  &__size{
+            display:flex;
+            align-items: center;
+            justify-content:center;
             width: 30px;
             height: 30px;
             border-radius: 50%;
             border: 2px solid $main-color;
             margin-top: 5px;
-          }
-          &__size{
-            display:flex;
-            align-items: center;
-            justify-content:center;
           }
         }
         &__amount {

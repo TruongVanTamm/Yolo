@@ -1,11 +1,23 @@
 .create_product {
+  &__wrap{
+    @include flex(center, center);
+    order: 2;
+
+    @include tablet{
+      order: 1;
+    }
+    @include mobile{
+      flex-direction: column;
+    }
+  }
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
   font-size: 1.4rem;
   &__upload {
+
     max-width: 450px;
     height: 500px;
     width: 100%;
@@ -77,6 +89,10 @@
     }
   }
   form {
+    order: 1;
+    @include tablet{
+      order: 2;
+    }
     max-width: 500px;
     min-width: 290px;
     width: 100%;
