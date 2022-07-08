@@ -35,14 +35,14 @@ const Product = () => {
     };
     getProducts();
   }, [products]);
-  const allProduct = products.concat(slider);
   useEffect(() => {
+    const allProduct = products.concat(slider);
     if (params.id) {
       allProduct.forEach((product) => {
         if (product._id === params.id) setDetailProduct(product);
       });
     }
-  }, [params.id, allProduct]);
+  }, [params.id,products,slider]);
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [detailProduct]);
