@@ -30,6 +30,7 @@ const ProductView = (props) => {
   useEffect(() => {
     setAdded({ ...props, color, size });
   }, [color, size, props]);
+  // console.log(added);
   return (
     <div className="product">
       <div className="product__images">
@@ -159,7 +160,7 @@ const ProductView = (props) => {
                 return navigate('/cart')
               } else {
                 alert.show(
-                  <div style={{ fontSize: '12px', zIndex: 100000 }}>
+                  <div style={{ fontSize: '12px'}}>
                     Vui lòng chọn màu và kích thước
                   </div>,
                   { type: types.ERROR }

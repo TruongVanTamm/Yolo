@@ -59,6 +59,7 @@ const ProductViewModal = (props) => {
         <div style={{ paddingRight: "20px", paddingLeft: "20px",paddingTop: "10px"}}>
           <ProductView
             id={props.id}
+            name={props.name}
             price={props.price}
             old_price={props.old_price}
             discount={props.discount}

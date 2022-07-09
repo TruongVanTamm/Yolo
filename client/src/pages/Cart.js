@@ -109,6 +109,7 @@ const Cart = () => {
         </div>
       </>
     );
+    // console.log(cart)
   return (
     <>
       <Helmet>
@@ -162,12 +163,12 @@ const Cart = () => {
               <div className="cart__list__item__detail">
                 <div className="cart__list__item__detail__info">
                   <p>
-                    {' '}
+                  
                     <span>Sản phẩm</span> {product.name}
                   </p>
                   <p>
                     {' '}
-                    <span>Màu sắc</span>{' '}
+                    <span>Màu sắc</span>
                     <span
                       className={`cart__list__item__detail__info__color bg-${product.color}`}
                     ></span>

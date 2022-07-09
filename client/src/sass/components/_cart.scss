@@ -105,17 +105,21 @@
           width: 250px;
           gap: 10px;
           flex-direction: column;
-          span {
-            color: $text-main-color;
-            font-weight: bold;
-            font-size: 1.8rem;
-            @include mobile {
-              font-size: 1.4rem;
-            }
+          p{
+            text-transform: capitalize;
+            span {
+              display: block;
+              color: $text-main-color;
+              font-weight: bold;
+              font-size: 1.8rem;
+              @include mobile {
+                font-size: 1.4rem;
+              }
+          }
           }
           &__color,
           &__size {
-            display: flex;
+            display: flex !important;
             align-items: center;
             justify-content: center;
             width: 30px;
@@ -123,6 +127,7 @@
             border-radius: 50%;
             border: 2px solid $main-color;
             margin-top: 5px;
+            font-size: 1.4rem !important;
           }
         }
         &__amount {
