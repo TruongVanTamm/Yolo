@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 
 import axios from 'axios';
 import { GlobalState } from '../../GlobalState';
+import { Helmet } from 'react-helmet';
 
 function Categories() {
   const state = useContext(GlobalState);
@@ -63,6 +64,19 @@ function Categories() {
     });
   }, []);
   return (
+    <>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Tạo danh mục </title>
+          <link
+            rel="canonical"
+            href="http://mysite.com/example"
+          />
+          <meta
+            name="description"
+            content="Truong Van Tam dang dev Yolo"
+          />
+        </Helmet>
     <div className="categories-wrapper">
       <div className="categories-wrapper__img">
       <img
@@ -72,7 +86,7 @@ function Categories() {
       </div>
       <div className="categories-wrapper__main">
         <form onSubmit={createCategory}>
-          <label htmlFor="category">Category</label>
+          <label htmlFor="category">Danh mục</label>
           <input
             type="text"
             name="category"
@@ -81,7 +95,7 @@ function Categories() {
             onChange={(e) => setCategory(e.target.value)}
           />
 
-          <button type="submit">{onEdit ? 'Update' : 'Create'}</button>
+          <button type="submit">{onEdit ? 'Cập nhật' : 'Tạo'}</button>
         </form>
 
         <div className="col">
@@ -95,10 +109,10 @@ function Categories() {
                 <button
                   onClick={() => editCategory(category._id, category.name)}
                 >
-                  Edit
+                 Sửa
                 </button>
                 <button onClick={() => deleteCategory(category._id)}>
-                  Delete
+                 Xóa
                 </button>
               </div>
             </div>
@@ -106,6 +120,7 @@ function Categories() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

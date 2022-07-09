@@ -51,7 +51,7 @@
       &__detail {
         width: 80%;
         @include flex(center, flex-start);
-     
+
         @include mobile {
           width: 70%;
           &__price {
@@ -60,13 +60,13 @@
               font-size: 1.4rem;
             }
           }
-          &__info{
+          &__info {
             order: 1;
           }
-          &__amount{
+          &__amount {
             order: 3;
           }
-          &__delete{
+          &__delete {
             order: 4;
           }
         }
@@ -82,7 +82,23 @@
             @include flex(flex-start, unset);
             flex-wrap: wrap;
             p {
+              position: relative;
               font-size: 1.3rem;
+              min-height:55px;
+              span {
+                display:block;
+               margin-right: 10px;
+                &::after {
+                  content: '';
+                  display: block;
+                  position: absolute;
+                  width: 2px;
+                  height: 100%;
+                  background-color: $text-second-color;
+                  top: 0;
+                  right: 0;
+                }
+              }
             }
             flex-direction: row;
           }
@@ -97,10 +113,11 @@
               font-size: 1.4rem;
             }
           }
-          &__color,  &__size{
-            display:flex;
+          &__color,
+          &__size {
+            display: flex;
             align-items: center;
-            justify-content:center;
+            justify-content: center;
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -127,8 +144,8 @@
             }
           }
         }
-        &__price{
-          flex-grow:1;
+        &__price {
+          flex-grow: 1;
           text-align: center;
         }
         &__delete {

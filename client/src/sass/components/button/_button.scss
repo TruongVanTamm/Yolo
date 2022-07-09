@@ -58,6 +58,9 @@
     }
   }
 }
+.noMargin{
+  margin:0
+}
 @include mobile{
   .BtnHide{
     display: none;

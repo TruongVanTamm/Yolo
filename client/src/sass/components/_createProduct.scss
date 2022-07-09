@@ -161,4 +161,21 @@
       top: 10%;
     }
   }
+  .dropdown-heading{
+    button{
+      width:40px;
+      @include flex(center,space-between);
+    }
+  }
+  .select-item{
+    @include flex(center,space-between);
+    .item-renderer{
+      @include flex(center,space-between);
+      gap:10px;
+    }
+    input{
+      width: 25px;
+      height: 25px;
+    }
+  }
 }

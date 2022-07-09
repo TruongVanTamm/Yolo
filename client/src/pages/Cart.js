@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Helmet from '../components/utils/Helmet';
 import Button from '../components/Button/Button';
 import numberWithCommas from '../components/utils/numberWithCommas';
 import { GlobalState } from '../GlobalState';
 import axios from 'axios';
 import PaypalButton from '../components/Button/PaypalButton';
-
+import { Helmet } from 'react-helmet';
 const Cart = () => {
   const state = useContext(GlobalState);
   const [cart, setCart] = state.userAPI.cart;
@@ -89,21 +88,45 @@ const Cart = () => {
   };
   if (cart.length === 0)
     return (
-      <div className="cart__empty">
-        <img
-          src={require('../Asset/images/cart-empty.png')}
-          alt="kanh "
-        />
-      </div>
+      <>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Giỏ hàng</title>
+          <link
+            rel="canonical"
+            href="http://mysite.com/example"
+          />
+          <meta
+            name="description"
+            content="Truong Van Tam dang dev Yolo"
+          />
+        </Helmet>
+        <div className="cart__empty">
+          <img
+            src={require('../Asset/images/cart-empty.png')}
+            alt="kanh "
+          />
+        </div>
+      </>
     );
   return (
-    <Helmet title="Giỏ hàng">
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Giỏ hàng</title>
+        <link
+          rel="canonical"
+          href="http://mysite.com/example"
+        />
+        <meta
+          name="description"
+          content="Truong Van Tam dang dev Yolo"
+        />
+      </Helmet>
       <div className="cart">
         <div className="cart__info">
           <div className="cart__info__txt">
-            <p>
-              Bạn đang có {cart.length} sản phẩm trong giỏ hàng
-            </p>
+            <p>Bạn đang có {cart.length} sản phẩm trong giỏ hàng</p>
             <div className="cart__info__txt__price">
               <span>Thành tiền:</span>{' '}
               <span>
@@ -140,18 +163,18 @@ const Cart = () => {
                 <div className="cart__list__item__detail__info">
                   <p>
                     {' '}
-                    <span>Sản phẩm : </span> {product.name}
+                    <span>Sản phẩm</span> {product.name}
                   </p>
                   <p>
                     {' '}
-                    <span>Màu sắc: </span>{' '}
+                    <span>Màu sắc</span>{' '}
                     <span
                       className={`cart__list__item__detail__info__color bg-${product.color}`}
                     ></span>
                   </p>
                   <p>
                     {' '}
-                    <span>Kích cỡ: </span>
+                    <span>Kích cỡ</span>
                     <span className={`cart__list__item__detail__info__size`}>
                       {product.size}
                     </span>
@@ -177,7 +200,7 @@ const Cart = () => {
           ))}
         </div>
       </div>
-    </Helmet>
+    </>
   );
 };
 

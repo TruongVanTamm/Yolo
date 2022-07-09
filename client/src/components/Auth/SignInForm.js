@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
+import { Helmet } from 'react-helmet';
 const SignInForm = () => {
   const alert = useAlert();
   const formik = useFormik({
@@ -44,6 +45,18 @@ const SignInForm = () => {
 
   return (
     <section>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Đăng nhập</title>
+        <link
+          rel="canonical"
+          href="http://mysite.com/example"
+        />
+        <meta
+          name="description"
+          content="Truong Van Tam dang dev Yolo"
+        />
+      </Helmet>
       <header>Đăng nhập</header>
       <form
         className="infoform"

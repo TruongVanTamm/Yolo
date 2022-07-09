@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Helmet from '../components/utils/Helmet';
 import Section, {
   SectionBody,
   SectionTitle,
@@ -8,6 +7,8 @@ import Grid from '../components/Layout/Grid';
 import ProductCard from '../components/Card/ProductCard';
 import { useParams } from 'react-router-dom';
 import ProductView from '../components/ProductsView/ProductView';
+import { Helmet } from 'react-helmet';
+
 import axios from 'axios';
 const Product = () => {
   const [products, setProducts] = useState([]);
@@ -42,13 +43,25 @@ const Product = () => {
         if (product._id === params.id) setDetailProduct(product);
       });
     }
-  }, [params.id,products,slider]);
+  }, [params.id, products, slider]);
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [detailProduct]);
   if (detailProduct.length === 0) return null;
   return (
-    <Helmet title={detailProduct.title}>
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{detailProduct.title}</title>
+        <link
+          rel="canonical"
+          href="http://mysite.com/example"
+        />
+        <meta
+          name="description"
+          content="Truong Van Tam dang dev Yolo"
+        />
+      </Helmet>
       <Section>
         <SectionBody>
           <ProductView
@@ -94,7 +107,7 @@ const Product = () => {
           </Grid>
         </SectionBody>
       </Section>
-    </Helmet>
+    </>
   );
 };
 

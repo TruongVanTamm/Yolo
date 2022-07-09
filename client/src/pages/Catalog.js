@@ -1,5 +1,4 @@
 import React, { useCallback, useState, useEffect, useContext } from 'react';
-import Helmet from '../components/utils/Helmet';
 import InfinityList from '../components/Product/ListProduct';
 import ButtonSTT from '../components/Button/ButtonSTT';
 import NoProduct from '../components/utils/NoProduct';
@@ -8,17 +7,18 @@ import Loading from '../components/utils/Loading';
 import axios from 'axios';
 import Filters from '../components/utils/Filters';
 import LoadMore from '../components/Button/ButtonLoadMore';
+import { Helmet } from 'react-helmet';
 
 const Catalog = () => {
   const state = useContext(GlobalState);
-  const [products, setProducts] =  state.productsAPI.products;
+  const [products, setProducts] = state.productsAPI.products;
   const [notFound, setNotFound] = useState(false);
   const [isAdmin] = state.userAPI.isAdmin;
   const [token] = state.token;
   const [callback, setCallback] = state.productsAPI.callback;
   const [loading, setLoading] = useState(false);
   const [isCheck, setIsCheck] = useState(false);
-  const [page] = state.productsAPI.page
+  const [page] = state.productsAPI.page;
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -31,7 +31,7 @@ const Catalog = () => {
       setProducts(res.data.products);
     };
     getProducts();
-  }, [ page,setProducts]);
+  }, [page, setProducts]);
   const NotFound = useCallback(() => {
     if (products.length === 0) {
       setNotFound(true);
@@ -95,44 +95,55 @@ const Catalog = () => {
     );
   return (
     <>
-      <Helmet title="Sản phẩm">
-        <div className="catalog">
-          <div className="catalog__content">
-            <div className="catalog__content__action">
-              {isAdmin &&
-                (products.length !== 0 ? (
-                  <div className="catalog__content__action__delete-all">
-                    <span>Select all</span>
-                    <input
-                      type="checkbox"
-                      checked={isCheck}
-                      onChange={checkAll}
-                    />
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Danh sách sản phẩm</title>
+        <link
+          rel="canonical"
+          href="http://mysite.com/example"
+        />
+        <meta
+          name="description"
+          content="Truong Van Tam dang dev Yolo"
+        />
+      </Helmet>
 
-                    <button
-                      onClick={deleteAll}
-                      className={isCheck ? '' : 'show'}
-                    >
-                      Delete ALL
-                    </button>
-                  </div>
-                ) : null)}
-              <Filters></Filters>
-            </div>
-            <InfinityList
-              data={products}
-              handleCheck={handleCheck}
-              deleteAll={deleteAll}
-              checkAll={checkAll}
-              deleteProduct={deleteProduct}
-            ></InfinityList>
-              <LoadMore></LoadMore>
-            <div className="catalog__content__not-found">
-              {notFound ? <NoProduct></NoProduct> : null}
-            </div>
+      <div className="catalog">
+        <div className="catalog__content">
+          <div className="catalog__content__action">
+            {isAdmin &&
+              (products.length !== 0 ? (
+                <div className="catalog__content__action__delete-all">
+                  <span>Select all</span>
+                  <input
+                    type="checkbox"
+                    checked={isCheck}
+                    onChange={checkAll}
+                  />
+
+                  <button
+                    onClick={deleteAll}
+                    className={isCheck ? '' : 'show'}
+                  >
+                    Delete ALL
+                  </button>
+                </div>
+              ) : null)}
+            <Filters></Filters>
+          </div>
+          <InfinityList
+            data={products}
+            handleCheck={handleCheck}
+            deleteAll={deleteAll}
+            checkAll={checkAll}
+            deleteProduct={deleteProduct}
+          ></InfinityList>
+          <LoadMore></LoadMore>
+          <div className="catalog__content__not-found">
+            {notFound ? <NoProduct></NoProduct> : null}
           </div>
         </div>
-      </Helmet>
+      </div>
       <ButtonSTT></ButtonSTT>
     </>
   );

@@ -5,6 +5,7 @@ import { GlobalState } from '../../GlobalState';
 import { useAlert, types } from 'react-alert';
 import Loading from '../utils/Loading';
 import { isLength, isMatch, isPassword } from '../utils/Validation';
+import { Helmet } from 'react-helmet';
 const initialState = {
   name: '',
   password: '',
@@ -196,6 +197,18 @@ function Profile() {
   };
   return (
     <>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Thông tin người dùng</title>
+          <link
+            rel="canonical"
+            href="http://mysite.com/example"
+          />
+          <meta
+            name="description"
+            content="Truong Van Tam dang dev Yolo"
+          />
+        </Helmet>
       {loading ? (
         <Loading></Loading>
       ) : (

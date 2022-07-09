@@ -16,6 +16,7 @@ import Profile from '../components/Profile/Profile'
 import EditUser from '../components/Profile/EditUser'
 import ForgotPassword from '../components/Auth/ForgotPassword'
 import ResetPassword from '../components/Auth/ResetPassword'
+// import Accessories from '../pages/Accessories'
 const RoutesWrap = () => {
   const state = useContext(GlobalState);
   const [isLogged] = state.userAPI.isLogged;
@@ -24,6 +25,7 @@ const RoutesWrap = () => {
         <Routes>
           <Route path='/' exact element={<Home></Home>}></Route>
           <Route path='/:id' element={<Products></Products>}></Route>
+          {/* <Route path='/accessories' exact element={<Accessories></Accessories>}></Route> */}
           <Route path='/cart/:id' element={<Products></Products>}></Route>
           <Route path='/catalog' exact element={<Catalog></Catalog> }></Route>
           <Route path='/cart' exact element={<Cart></Cart>}></Route>

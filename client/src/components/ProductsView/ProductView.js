@@ -3,21 +3,33 @@ import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import { GlobalState } from '../../GlobalState';
 import { useNavigate } from 'react-router-dom';
+import { useAlert, types } from 'react-alert';
+
 const ProductView = (props) => {
   const navigate = useNavigate();
+  const alert = useAlert();
   const state = useContext(GlobalState);
   const addCart = state.userAPI.addCart;
   const [previewImg, setPreviewImg] = useState(props.image01);
   const [descriptionExpand, setDescriptionExpand] = useState(false);
+  const [color, setColor] = useState([]);
+  const [size, setSize] = useState([]);
+  const [added, setAdded] = useState({});
   const handleProductDescriptionClick = () => {
     if (descriptionExpand) {
       window.scrollTo(0, 0);
     }
     setDescriptionExpand(!descriptionExpand);
   };
+
   useEffect(() => {
     setPreviewImg(props.image01);
+    setColor(undefined);
+    setSize(undefined);
   }, [props]);
+  useEffect(() => {
+    setAdded({ ...props, color, size });
+  }, [color, size, props]);
   return (
     <div className="product">
       <div className="product__images">
@@ -80,8 +92,11 @@ const ProductView = (props) => {
             {props.color.map((item, index) => {
               return (
                 <div
-                  className={`product__info__item__list__item `}
+                  className={`product__info__item__list__item ${
+                    color === item ? 'active' : ''
+                  }`}
                   key={index}
+                  onClick={() => setColor(item)}
                 >
                   <div className={`circle bg-${item}`}></div>
                 </div>
@@ -95,7 +110,10 @@ const ProductView = (props) => {
             {props.size.map((item, index) => {
               return (
                 <div
-                  className={`product__info__item__list__item`}
+                  className={`product__info__item__list__item ${
+                    size === item ? 'active' : ''
+                  }`}
+                  onClick={() => setSize(item)}
                   key={index}
                 >
                   <div className="product__info__item__list__item__size">
@@ -108,22 +126,45 @@ const ProductView = (props) => {
         </div>
         <div className="product__info__item">
           <span className="product__info__item__title">
-            {' '}
             Số sản phẩm đã bán: {props.sold}{' '}
           </span>
         </div>
         <div className="product__info__item">
           <Button
             size="sm"
-            onClick={() => addCart(props)}
+            icon="bx bx-cart-add"
+            animate={true}
+            onClick={() => {
+              if (size !== undefined && color !== undefined) {
+                addCart(added);
+              } else {
+                alert.show(
+                  <div style={{ fontSize: '12px' }}>
+                    Vui lòng chọn màu và kích thước
+                  </div>,
+                  { type: types.ERROR }
+                );
+              }
+            }}
           >
             thêm vào giỏ hàng
           </Button>
           <Button
             size="sm"
-            onClick={() => {
-              addCart(props);
-              return navigate('/cart');
+            icon="bx bx-cart-add"
+            animate={true}
+            o    onClick={() => {
+              if (size !== undefined && color !== undefined) {
+                addCart(added);
+                return navigate('/cart')
+              } else {
+                alert.show(
+                  <div style={{ fontSize: '12px', zIndex: 100000 }}>
+                    Vui lòng chọn màu và kích thước
+                  </div>,
+                  { type: types.ERROR }
+                );
+              }
             }}
           >
             Mua ngay

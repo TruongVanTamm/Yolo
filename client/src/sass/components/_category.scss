@@ -16,6 +16,10 @@
       width: 290px;
       margin-bottom: 20px;
     }
+    .col{
+      height: 60vh;
+      overflow:auto;
+    }
     label {
       display: block;
       font-weight: 700;
@@ -47,7 +51,7 @@
       }
     }
     .row {
-      min-width: 290px;
+      // min-width: space-between;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -55,6 +59,20 @@
       margin-bottom: 10px;
       border: 1px solid #ccc;
       font-size: 1.4rem;
+      animation : anime 1.25s ease-in-out;
+      overflow: hidden;
+      width: 290px;
     }
+  }
+}
+@keyframes anime {
+  0% {
+    transform: translateY(500%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) ;
+   width: 290px;
+   opacity: 1;
   }
 }

@@ -9,15 +9,11 @@ import Section, {
 import PolicyCard from '../components/Card/PolicyCard';
 import Grid from '../components/Layout/Grid';
 import ProductCard from '../components/Card/ProductCard';
-import banner from '../Asset/images/banner3.jpg';
-import banner1 from '../Asset/images/banner1.jpg';
-import banner2 from '../Asset/images/banner5.jpg';
-import { Link } from 'react-router-dom';
 import ButtonSTT from '../components/Button/ButtonSTT';
 import ChatBot from '../components/Chatbot/ChatBot';
 import axios from 'axios';
 import { GlobalState } from '../GlobalState';
-
+import Swiper from '../components/utils/Swiper';
 const Home = () => {
   const state = useContext(GlobalState);
   const [product1, setProduct1] = useState([]);
@@ -35,7 +31,7 @@ const Home = () => {
   const [result2, setResult2] = useState(0);
   useEffect(() => {
     const getProducts = async () => {
-      const res = await axios.get(`/api/products?limit=${page * 4}&${sort}`);
+      const res = await axios.get(`/api/products?limit=${page * 6}&${sort}`);
       setSort('sort=-sold');
       setProduct1(res.data.products);
       setResult(res.data.result);
@@ -64,17 +60,17 @@ const Home = () => {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Trang chủ</title>
+        <title>Yolo</title>
         <link
           rel="canonical"
           href="http://mysite.com/example"
         />
         <meta
           name="description"
-          content="Nested component"
+          content="Truong Van Tam dang dev Yolo"
         />
       </Helmet>
-      
+
       <HeroSlider
         data={slider}
         control={true}
@@ -106,7 +102,7 @@ const Home = () => {
         <SectionTitle>top sản phẩm bán chạy trong tuần</SectionTitle>
         <SectionBody>
           <Grid
-            col={4}
+            col={6}
             mdCol={4}
             smCol={2}
             gap={20}
@@ -172,34 +168,13 @@ const Home = () => {
         </SectionBody>
       </Section>
       <Section>
-        <SectionBody>
-          <Link to="./catalog">
-            <img
-              src={banner1}
-              alt=""
-            />
-          </Link>
-        </SectionBody>
-      </Section>
-      <Section>
-        <SectionBody>
-          <Link to="./catalog">
-            <img
-              src={banner2}
-              alt=""
-            />
-          </Link>
-        </SectionBody>
-      </Section>
-      <Section>
-        <SectionBody>
-          <Link to="./catalog">
-            <img
-              src={banner}
-              alt=""
-            />
-          </Link>
-        </SectionBody>
+        <div className="Section__swiper" >
+            <Swiper></Swiper> 
+          <div className="Section__swiper__static">
+            <img src={require('../Asset/images/banner1.jpg')} alt="" />
+            <img src={require('../Asset/images/banner3.jpg')} alt="" />
+          </div>
+        </div>
       </Section>
       <Section>
         <SectionTitle>phổ biến </SectionTitle>

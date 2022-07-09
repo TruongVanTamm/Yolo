@@ -6,9 +6,10 @@ const Button = (props) => {
   const size = props.size ? 'btn-' + props.size : '';
   const animate = props.animate ? 'btn-animate' : '';
   const BtnHide = props.BtnHide ? 'BtnHide' : '';
+  const noMargin=props.noMargin ? 'noMargin' : '';
   return (
     <button
-      className={` btn ${bg} ${size} ${animate} ${BtnHide} `}
+      className={` btn ${bg} ${size} ${animate} ${BtnHide}  ${noMargin}`}
       onClick={props.onClick ? props.onClick : null}
     >
       <span className="btn__text">{props.children}</span>

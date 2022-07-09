@@ -56,7 +56,7 @@ const ProductCard = (props) => {
               );
             })}
           </div>
-          <h3 className="product-card__name">{props.name}</h3>
+          <h3 className="product-card__name" >{props.name}</h3>
           <div className="product-card__price">
             <span className="product-card__price__old">
               {props.old_price ? <del>${props.old_price}</del> : null}
@@ -91,7 +91,7 @@ const ProductCard = (props) => {
             </>
           ) : (
             <>
-              {' '}
+              {/* {' '}
               <Button
                 size="sm"
                 icon="bx bx-cart-add"
@@ -99,7 +99,7 @@ const ProductCard = (props) => {
                 onClick={() => addCart(props)}
               >
                 Mua
-              </Button>
+              </Button> */}
               {/* <Link
                 to={`/${props.id}`}
                 className="mobile-hide"

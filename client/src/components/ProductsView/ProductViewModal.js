@@ -6,7 +6,7 @@ Modal.setAppElement('#root');
 const customStyles = {
   overlay: {
     zIndex: 1000,
-    backgroundColor: '#808080',
+    // backgroundColor: '#808080',
   },
 
 };
@@ -21,10 +21,11 @@ const ProductViewModal = (props) => {
     setIsOpen(false);
   }
   return (
-    <div>
+    <div >
       <Button
         size="sm"
         onClick={openModal}
+        noMargin='noMargin'
       >
         Xem
       </Button>
@@ -36,19 +37,9 @@ const ProductViewModal = (props) => {
         shouldCloseOnEsc={true}
       >
         <div
-          style={{
-            width: '100%',
-            height: '60px',
-            backgroundColor:"#4267b2",
-            fontSize:' 2rem',
-            color:'#fff',
-            display: 'flex',
-            alignItems:'center',
-            justifyContent: 'spaceBetween'
-
-          }} 
+          className="product_view_modal__header"
         >
-          <span style={{marginLeft:'20px',textTransform:'capitalize'}}>{props.name}</span>
+          <span >{props.name}</span>
           <div
             style={{
               fontSize: '3.5rem',

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAlert } from 'react-alert';
+import { useAlert, types } from 'react-alert';
 import axios from 'axios';
 function UserAPI(token) {
   const [isLogged, setIsLogged] = useState(false);
@@ -42,12 +42,11 @@ function UserAPI(token) {
         }
       };
       getUsers();
+    } else {
     }
-    else{
-      
-    }
-  }, [token, alert,isAdmin]);
+  }, [token, alert, isAdmin]);
   const addCart = async (product) => {
+    console.log(product);
     if (!isLogged)
       return alert.show(
         <div style={{ fontSize: '12px' }}>Bạn phải đăng nhập để mua hàng !</div>
@@ -65,8 +64,19 @@ function UserAPI(token) {
           headers: { Authorization: token },
         }
       );
+      alert.show(
+        <div style={{ fontSize: '12px' }}>
+          Thêm sản phẩm thành công
+        </div>,
+        { type: types.INFO }
+      );
     } else {
-      alert('Sản phẩm đã có trong giỏ hàng !');
+      alert.show(
+        <div style={{ fontSize: '12px'}}>
+          Sản phẩm đã có trong giỏ hàng
+        </div>,
+        { type: types.INFO }
+      );
     }
   };
   return {

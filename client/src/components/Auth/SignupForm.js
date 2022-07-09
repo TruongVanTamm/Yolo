@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
 import { types } from 'react-alert';
+import { Helmet } from 'react-helmet';
 const SignupForm = () => {
   const alert = useAlert();
   const formik = useFormik({
@@ -58,6 +59,18 @@ const SignupForm = () => {
 
   return (
     <section>
+       <Helmet>
+        <meta charSet="utf-8" />
+        <title>Đăng kí</title>
+        <link
+          rel="canonical"
+          href="http://mysite.com/example"
+        />
+        <meta
+          name="description"
+          content="Truong Van Tam dang dev Yolo"
+        />
+      </Helmet>
       <header>Đăng kí</header>
       <form
         className="infoform"
