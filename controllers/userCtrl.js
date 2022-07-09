@@ -66,7 +66,7 @@ const userCtrl = {
 		try {
 			const { email, password } = req.body;
 			const user = await Users.findOne({ email });
-			if (!user) return res.status(400).json({ msg: "Email không tồn tại !" });
+			if (!user) return res.status(400).json({ msg: "Email không + !" });
 
 			const isMatch = await bcrypt.compare(password, user.password);
 			if (!isMatch) return res.status(400).json({ msg: "Sai mật khẩu !" });

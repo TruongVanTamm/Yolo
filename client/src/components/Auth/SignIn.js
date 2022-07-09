@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const SignIn = () => {
   const {activation_token} = useParams()
+  console.log(activation_token);
   const alert = useAlert();
     useEffect(() => {
     if(activation_token){
