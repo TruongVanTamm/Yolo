@@ -50,17 +50,22 @@ const Footer = () => {
         gap={10}
       >
         <div className="">
-          <div className="footer__title">Tổng đài hỗ trợ</div>
+          <div className="footer__title">Hỗ trợ khách hàng</div>
           <div className="footer__content">
             <p>
-              Liên hệ đặt hàng: <strong>0399817202</strong>
+              Hotline: <a href="tel:0399817202">0399817202</a>
+              <br />
+              (1000 đ/phút, 8-21h kể cả T7, CN)
             </p>
-            <p>
-              Thắc mắc đơn hàng: <strong>0399817202</strong>
-            </p>
-            <p>
-              Góp ý, khiếu nại: <strong>0399817202</strong>
-            </p>
+            <p>Các câu hỏi thường gặp</p>
+            <p>Gửi yêu cầu hỗ trợ</p>
+            <p>Hướng dẫn đặt hàng</p>
+            <p>Phương thức vận chuyển</p>
+            <p>Chính sách đổi trả</p>
+            <p>Hướng dẫn trả góp</p>
+            <p>Chính sách hàng nhập khẩu</p>
+            <p>Hỗ trợ khách hàng: anhtamqwer79@gmail.com</p>
+            <p>Báo lỗi bảo mật: anhtamqwer79@gmail.com</p>
           </div>
         </div>
         <div>
