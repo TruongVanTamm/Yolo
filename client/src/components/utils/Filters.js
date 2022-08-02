@@ -7,6 +7,18 @@ function Filters() {
   const [category, setCategory] = state.productsAPI.category;
   const [sort, setSort] = state.productsAPI.sort;
   const [search, setSearch] = state.productsAPI.search;
+  const fix = categories
+    .map((category) => category._id)
+    .find((item) => item === category.split('=')[1]);
+  const searchCate = categories
+    .map((item) => {
+      if (item._id === fix) {
+        return item.name;
+      } else {
+        return null;
+      }
+    })
+    .filter((items) => items !== null).toString()
   const handleCategory = (e) => {
     setCategory(e.target.value);
     setSearch('');
@@ -47,7 +59,7 @@ function Filters() {
       <input
         type="text"
         value={search}
-        placeholder="Tìm kiếm sản phẩm !"
+        placeholder={searchCate ? ` Tìm kiếm ${searchCate} ` : 'Tìm kiếm sản phẩm !'}
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
         className="catalog__content__action__filter_menu__search"
       />
