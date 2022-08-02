@@ -45,15 +45,21 @@ const Header = () => {
   const adminRouter = () => {
     return (
       <>
-        <div className="header__menu__right__item header__menu__item" title="Tạo sản phẩm ">
-            <Link to="/create_product">
-              <i className="bx bx-list-plus"></i>
-            </Link>
+        <div
+          className="header__menu__right__item header__menu__item"
+          title="Tạo sản phẩm "
+        >
+          <Link to="/create_product">
+            <i className="bx bx-list-plus"></i>
+          </Link>
         </div>
-        <div className="header__menu__right__item header__menu__item" title="Danh mục sản phẩm ">
-            <Link to="/category">
-              <i className="bx bxs-category"></i>
-            </Link>
+        <div
+          className="header__menu__right__item header__menu__item"
+          title="Danh mục sản phẩm "
+        >
+          <Link to="/category">
+            <i className="bx bxs-category"></i>
+          </Link>
         </div>
       </>
     );
@@ -61,7 +67,7 @@ const Header = () => {
   const loggedRouter = () => {
     return (
       <>
-      <li>
+        <li>
           <Link to="/profile">Thông tin khách hàng</Link>
         </li>
         <li>
@@ -150,21 +156,23 @@ const Header = () => {
           </div>
           <div className="header__menu__right">
             {isAdmin && adminRouter()}
-            <div className="header__menu__right__item header__menu__item" title='Giỏ hàng'>
-              <span className="header__menu__right__item__quantity">
-                {cart.length}
-              </span>
+            {!isAdmin && (
+              <div
+                className="header__menu__right__item header__menu__item"
+                title="Giỏ hàng"
+              >
+                <span className="header__menu__right__item__quantity">
+                  {cart.length}
+                </span>
                 <Link to="/cart">
                   <i className="bx bx-cart"></i>
                 </Link>
-            </div>
-            <div
-              className="header__menu__right__item header__menu__item header__menu__right__user-option" 
-            >
+              </div>
+            )}
+
+            <div className="header__menu__right__item header__menu__item header__menu__right__user-option">
               <i className="bx bx-user"></i>
-              <div
-                className="header__menu__right__item__user-option"
-              >
+              <div className="header__menu__right__item__user-option">
                 <ul className="header__menu__right__item__user-option__list">
                   {isLogged ? (
                     loggedRouter()
