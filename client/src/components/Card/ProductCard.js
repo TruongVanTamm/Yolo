@@ -5,8 +5,10 @@ import Button from '../Button/Button';
 import AlertLike from '../utils/AlertLike';
 import { GlobalState } from '../../GlobalState';
 import ProductViewModal from '../ProductsView/ProductViewModal';
+import { useTranslation } from 'react-i18next';
 const ProductCard = (props) => {
   const [activeProduct, setActiveProduct] = useState(0);
+  const { t } = useTranslation();
   const handleProductClick = (index) => {
     setActiveProduct(index);
   };
@@ -56,7 +58,7 @@ const ProductCard = (props) => {
               );
             })}
           </div>
-          <h3 className="product-card__name" >{props.name}</h3>
+          <h3 className="product-card__name">{props.name}</h3>
           <div className="product-card__price">
             <span className="product-card__price__old">
               {props.old_price ? <del>${props.old_price}</del> : null}
@@ -77,7 +79,7 @@ const ProductCard = (props) => {
                   props.deleteProduct(props.id, props.public_id);
                 }}
               >
-                Xóa
+                {t('Xóa')}
               </Button>
               <Link to={`/edit-product/${props.id}`}>
                 <Button
@@ -85,7 +87,7 @@ const ProductCard = (props) => {
                   icon="bx bx-cart-add"
                   animate={false}
                 >
-                  Sửa
+                  {t('Sửa')}
                 </Button>
               </Link>
             </>

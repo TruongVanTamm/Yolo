@@ -1,0 +1,20 @@
+.header#dark {
+  background-color: black;
+  color: white !important;
+}
+.container#dark {
+  h3,
+  .cart__list__item__detail__info__size,
+  .cart__list__item__detail__info span {
+    color: white !important;
+  }
+  .profile_page__left__avatar__img {
+    background-color: #fff;
+    border-radius: 50%;
+  }
+  .load-page{
+    background-color: black;
+  }
+  background-color: black;
+  color: white !important;
+}

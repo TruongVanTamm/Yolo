@@ -6,7 +6,9 @@ import Loading from '../utils/Loading';
 import { useAlert, types } from 'react-alert';
 import { Helmet } from 'react-helmet';
 import { MultiSelect } from 'react-multi-select-component';
+import { useTranslation } from 'react-i18next';
 const CreateProduct = () => {
+  const { t } = useTranslation();
   const alert = useAlert();
   const [price, setPrice] = useState(0);
   const initialStateMemo = useMemo(() => {
@@ -345,7 +347,7 @@ const CreateProduct = () => {
           </div>
         </div>
         <form onSubmit={handleSubmit}>
-          <h1>Thông tin sản phẩm</h1>
+          <h1>{t("Thông tin sản phẩm")}</h1>
 
           <div className="row">
             <label htmlFor="product_id">ID </label>

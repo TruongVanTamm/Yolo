@@ -8,7 +8,7 @@
 * {
   margin: 0;
   padding: 0;
-  user-select: none;
+  // user-select: none;
   scroll-behavior: smooth;
 }
 
@@ -107,14 +107,14 @@ a {
   }
 }
 .main {
-  margin-top: $header-height;
-  margin-bottom: 2rem;
+  padding-top: $header-height;
+  padding-bottom: 2rem;
   min-height: 100vh;
   @include tablet {
-    margin-top: calc(#{$header-tablet-height} + 20px);
+    padding-top: calc(#{$header-tablet-height} + 20px);
   }
   @include mobile {
-    margin-top: calc(#{$header-mobile-height} + 10px);
+    padding-top: calc(#{$header-mobile-height} + 10px);
   }
 }
 

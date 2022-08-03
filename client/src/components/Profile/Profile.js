@@ -6,6 +6,7 @@ import { useAlert, types } from 'react-alert';
 import Loading from '../utils/Loading';
 import { isLength, isMatch, isPassword } from '../utils/Validation';
 import { Helmet } from 'react-helmet';
+import { useTranslation } from 'react-i18next';
 const initialState = {
   name: '',
   password: '',
@@ -24,6 +25,7 @@ function Profile() {
   const [loading, setLoading] = useState(false);
   const [callback, setCallback] = useState(false);
   const [users, setUsers] = state.userAPI.users;
+  const { t } = useTranslation();
   useEffect(() => {
     if (isAdmin) {
       const getUsers = async () => {
@@ -234,7 +236,7 @@ function Profile() {
             </div>
             <div className="profile_page__left__form">
               <div className="profile_page__left__form-group">
-                <label htmlFor="name">Tên </label>
+                <label htmlFor="name">{t('Tên')} </label>
                 <input
                   type="text"
                   name="name"
@@ -258,7 +260,7 @@ function Profile() {
               </div>
 
               <div className="profile_page__left__form-group">
-                <label htmlFor="password">Mật khẩu mới </label>
+                <label htmlFor="password">{t('Mật khẩu mới')}</label>
                 <input
                   type="password"
                   name="password"
@@ -270,7 +272,7 @@ function Profile() {
               </div>
 
               <div className="profile_page__left__form-group">
-                <label htmlFor="cf_password">Nhập lại mật khẩu </label>
+                <label htmlFor="cf_password">{t('Nhập lại mật khẩu')} </label>
                 <input
                   type="password"
                   name="cf_password"
@@ -293,7 +295,7 @@ function Profile() {
                 onClick={handleUpdate}
                 className="profile_page__left__form__btn"
               >
-                Update
+                {t('Cập nhật')}
               </button>
             </div>
           </div>
@@ -305,7 +307,7 @@ function Profile() {
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Name</th>
+                      <th>{t('Tên')}</th>
                       <th>Email</th>
                       <th>Admin</th>
                       <th>Action</th>

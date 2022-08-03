@@ -1,5 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import i18n from 'i18next';
+import {initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import HttpApi from 'i18next-http-backend';
 import Layout from './components/Layout/Layout';
 import './Asset/boxicons-2.1.2/css/boxicons.min.css';
 import './sass/index.scss';
@@ -13,6 +17,29 @@ import AlertTemplate from 'react-alert-template-basic';
 import { DataProvider } from './GlobalState';
 const container = document.getElementById('root');
 const root = createRoot(container);
+
+i18n
+  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(LanguageDetector)
+  .use(HttpApi)
+  .init({
+    supportedLngs:['en', 'vi'],
+    fallbackLng: 'vi',
+    detection: {
+      order: [
+        'cookie',
+        'htmlTag',
+        'localStorage',
+        'path',
+        'subdomain',
+      ],
+      caches: ['cookie']
+    },
+    backend: {
+      loadPath: '/assets/locales/{{lng}}/translation.json',
+    }
+  });
+
 const options = {
   // you can also just use 'bottom center'
   position: positions.TOP_RIGHT,
@@ -22,6 +49,7 @@ const options = {
   transition: transitions.SCALE,
   type: types.ERROR,
 };
+
 function App() {
   return (
     <AlertProvider

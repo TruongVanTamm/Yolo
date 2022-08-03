@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
+import { useTranslation } from 'react-i18next';
 
 const HeroSlider = (props) => {
   const data = props.data;
+  const { t } = useTranslation();
   const timeOut = props.timeOut ? props.timeOut : 3000;
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -69,16 +71,17 @@ HeroSlider.propTypes = {
   timeOut: PropTypes.number,
 };
 const HeroSliderItem = (props) => {
+  const { t } = useTranslation();
   return (
     <div className={`hero-slider__item ${props.active ? 'active' : ''}`}>
       <div className="hero-slider__item__info">
         <div
           className={`hero-slider__item__info__title color-${props.item.color}`}
         >
-          <span>{props.item.title}</span>
+          <span>{t(props.item.title)}</span>
         </div>
         <div className="hero-slider__item__info__description">
-          <span>{props.item.description}</span>
+          <span>{t(props.item.description)}</span>
         </div>
         <div className="hero-slider__item__info__btn">
           <Link to={props.item._id}>
@@ -88,7 +91,7 @@ const HeroSliderItem = (props) => {
               animate={true}
               // size='sm'
             >
-              Xem chi tiết
+              {t('Xem chi tiết')}
             </Button>
           </Link>
         </div>

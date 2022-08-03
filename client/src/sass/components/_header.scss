@@ -98,21 +98,25 @@
           background-color: white;
           box-shadow: $box-shadow;
           font-size: 1.6rem;
-          width: 200px;
-          @include mobile {
-            right: -50px;
-            width: 230px;
-            font-size: 1.4rem;
-            padding: 5px 20px;
-          }
+          width: 230px;
           position: absolute;
           top: 100%;
-          right: -100px;
+          right: -90px;
           z-index: 100;
           padding: 10px 20px;
           border-radius: 10px;
           margin-top: 10px;
           transition: all 1s;
+          @include tablet {
+            right: 0px;
+            width: 200px;
+          }
+          @include mobile {
+            right: 0px;
+            width: 230px;
+            font-size: 1.4rem;
+            padding: 5px 20px;
+          }
           &:after {
             content: ' ';
             position: absolute;
@@ -127,6 +131,9 @@
             flex-direction: column;
             li {
               width: 100%;
+            }
+            li:last-child {
+              padding-top: 10px;
             }
             a {
               display: block;
@@ -284,7 +291,7 @@
     }
   }
 }
-
+// 
 @keyframes dropdown {
   from {
     transform: translateY(20px);

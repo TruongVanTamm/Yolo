@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useTranslation } from 'react-i18next';
 const Section = (props) => {
   return (
     <div className='section'>
@@ -8,9 +8,10 @@ const Section = (props) => {
   )
 }
  export const SectionTitle = (props) => {
+  const { t } = useTranslation();
     return (
       <div className='section__title'>
-          {props.children}
+          {t(props.children)}
       </div>
     )
  }

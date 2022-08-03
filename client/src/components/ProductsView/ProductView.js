@@ -4,9 +4,10 @@ import Button from '../Button/Button';
 import { GlobalState } from '../../GlobalState';
 import { useNavigate } from 'react-router-dom';
 import { useAlert, types } from 'react-alert';
-
+import { useTranslation } from 'react-i18next';
 const ProductView = (props) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const alert = useAlert();
   const state = useContext(GlobalState);
   const addCart = state.userAPI.addCart;
@@ -15,12 +16,12 @@ const ProductView = (props) => {
   const [color, setColor] = useState([]);
   const [size, setSize] = useState([]);
   const [added, setAdded] = useState({});
-  const handleProductDescriptionClick = () => {
-    if (descriptionExpand) {
-      window.scrollTo(0, 0);
-    }
-    setDescriptionExpand(!descriptionExpand);
-  };
+  // const handleProductDescriptionClick = () => {
+  //   if (descriptionExpand) {
+  //     window.scrollTo(0, 0);
+  //   }
+  //   setDescriptionExpand(!descriptionExpand);
+  // };
 
   useEffect(() => {
     setPreviewImg(props.image01);
@@ -66,29 +67,29 @@ const ProductView = (props) => {
             descriptionExpand ? 'expand ' : ''
           }`}
         >
-          <div className="product__description__title">Chi tiết sản phẩm</div>
+          <div className="product__description__title">{t("Chi tiết sản phẩm")}</div>
           <div
             className="product__description__content"
             dangerouslySetInnerHTML={{ __html: props.description }}
           ></div>
           <div className="product__description__toggle">
-            <Button
+            {/* <Button
               size="sm"
               onClick={handleProductDescriptionClick}
             >
               {descriptionExpand ? 'Ẩn bớt' : 'Xem thêm'}
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
       <div className="product__info">
         <div className="product__info__title">{props.name}</div>
         <div className="product__info__item">
-          <span className="product__info__item__title">Giá tiền</span>
+          <span className="product__info__item__title">{t("Giá tiền")}</span>
           <span className="product__info__item__price">${props.price}</span>
         </div>
         <div className="product__info__item">
-          <span className="product__info__item__title">Màu sắc</span>
+          <span className="product__info__item__title">{t("Màu sắc")}</span>
           <span className="product__info__item__list">
             {props.color.map((item, index) => {
               return (
@@ -106,7 +107,7 @@ const ProductView = (props) => {
           </span>
         </div>
         <div className="product__info__item">
-          <span className="product__info__item__title">Kích cỡ</span>
+          <span className="product__info__item__title">{t("Kích cỡ")}</span>
           <span className="product__info__item__list">
             {props.size.map((item, index) => {
               return (
@@ -127,7 +128,7 @@ const ProductView = (props) => {
         </div>
         <div className="product__info__item">
           <span className="product__info__item__title">
-            Số sản phẩm đã bán: {props.sold}{' '}
+            {t('Số sản phẩm đã bán: ')} {props.sold}
           </span>
         </div>
         <div className="product__info__item">
@@ -141,14 +142,14 @@ const ProductView = (props) => {
               } else {
                 alert.show(
                   <div style={{ fontSize: '12px' }}>
-                    Vui lòng chọn màu và kích thước
+                    {t("Vui lòng chọn màu và kích thước")}
                   </div>,
                   { type: types.ERROR }
                 );
               }
             }}
           >
-            thêm vào giỏ hàng
+            {t('thêm vào giỏ hàng')}
           </Button>
           <Button
             size="sm"
@@ -161,14 +162,14 @@ const ProductView = (props) => {
               } else {
                 alert.show(
                   <div style={{ fontSize: '12px'}}>
-                    Vui lòng chọn màu và kích thước
+                      {t("Vui lòng chọn màu và kích thước")}
                   </div>,
                   { type: types.ERROR }
                 );
               }
             }}
           >
-            Mua ngay
+              {t('mua ngay')}
           </Button>
         </div>
       </div>

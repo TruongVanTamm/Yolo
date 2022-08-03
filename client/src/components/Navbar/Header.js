@@ -1,10 +1,16 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Asset/images/Logo-2.png';
 import logoAdmin from '../../Asset/images/logoAdmin.png';
 import { GlobalState } from '../../GlobalState';
-
+import Switch from 'react-switch';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import i18next from 'i18next';
+import { useTranslation} from 'react-i18next';
+import { useParams } from 'react-router-dom';
 const mainNav = [
   {
     display: 'Trang chủ',
@@ -15,23 +21,24 @@ const mainNav = [
     path: '/catalog',
   },
   {
-    display: 'Phụ kiện',
-    path: '/accessories',
-  },
-  {
     display: 'Liên hệ',
     path: '/contact',
   },
 ];
 const Header = () => {
+  const { param } = useParams();
+  console.log(param);
   const { pathname } = useLocation();
+  const [themeCheck, setThemeCheck] = useState(false);
   const state = useContext(GlobalState);
   const [isLogged] = state.userAPI.isLogged;
   const [isAdmin] = state.userAPI.isAdmin;
   const [cart] = state.userAPI.cart;
+  const [theme, setTheme] = state.theme;
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
   const headerRef = useRef(null);
   const menuLeft = useRef(null);
+  const { t } = useTranslation();
   const menuToggle = () => {
     menuLeft.current.classList.toggle('active');
   };
@@ -68,17 +75,65 @@ const Header = () => {
     return (
       <>
         <li>
-          <Link to="/profile">Thông tin khách hàng</Link>
+          <Link to="/profile"> {t('Thông tin khách hàng')}
+</Link>
         </li>
         <li>
-          <Link to="/history">Lịch sử đơn hàng</Link>
+          <Link to="/history"> {t('Lịch sử đơn hàng')}</Link>
+        </li>
+        <li
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingTop: '10px',
+          }}
+        >
+          <span>{t('Chế độ tối')}</span>
+          <Switch
+            onChange={changeTheme}
+            checked={themeCheck}
+            height={20}
+            width={40}
+            onColor={'#4267b2'}
+          />
+        </li>
+        <li>
+          <Navbar
+            bg="light"
+            expand="lg"
+          >
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <NavDropdown
+                  title={t('Ngôn Ngữ')}
+                  id="basic-nav-dropdown"
+                >
+                  {languages.map(({ code, name }) => (
+                    <li key={code}>
+                      <a
+                        href="/"
+                        onClick={() => {
+                          i18next.changeLanguage(code);
+                        }}
+                      >
+                        {t(name)}
+                      </a>
+                    </li>
+                  ))}
+                  <NavDropdown.Divider />
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
         </li>
         <li>
           <Link
             to="/"
             onClick={logoutUser}
           >
-            Đăng xuất
+            {t('Đăng xuất')}
           </Link>
         </li>
       </>
@@ -97,10 +152,25 @@ const Header = () => {
     });
     return () => window.addEventListener('scroll');
   }, []);
+  const changeTheme = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light');
+    setThemeCheck(!themeCheck);
+  };
+  const languages = [
+    {
+      code: 'en',
+      name: 'Tiếng Anh',
+    },
+    {
+      code: 'vi',
+      name: 'Việt Nam',
+    },
+  ];
   return (
     <div
       className="header"
       ref={headerRef}
+      id={theme}
     >
       <div className="container">
         <div className="header__logo">
@@ -148,7 +218,9 @@ const Header = () => {
                   onClick={menuToggle}
                 >
                   <Link to={item.path}>
-                    <span className="header__menu__item">{item.display}</span>
+                    <span className="header__menu__item">
+                      {t(item.display)}
+                    </span>
                   </Link>
                 </div>
               );
@@ -178,7 +250,7 @@ const Header = () => {
                     loggedRouter()
                   ) : (
                     <li>
-                      <Link to="/signin">Đăng nhập</Link>
+                      <Link to="/signin"> {t('Đăng nhập')}</Link>
                     </li>
                   )}
                 </ul>

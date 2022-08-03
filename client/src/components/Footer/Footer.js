@@ -1,7 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Grid from '../Layout/Grid';
 import logo from '../../Asset/images/Logo.png';
+import { GlobalState } from '../../GlobalState';
+import { useTranslation } from 'react-i18next';
+const footerSupportLink = [
+  {
+    display: 'Các câu hỏi thường gặp',
+    path: '/about',
+  },
+  {
+    display: 'Hướng dẫn đặt hàng',
+    path: '/about',
+  },
+  {
+    display: 'Phương thức vận chuyển',
+    path: '/about',
+  },
+  {
+    display: 'Hướng dẫn trả góp',
+    path: '/about',
+  },
+  {
+    display: 'Chính sách hàng nhập khẩu',
+    path: '/about',
+  },
+  {
+    display: 'Hỗ trợ khách hàng: anhtamqwer79@gmail.com',
+    path: '/about',
+  },
+  {
+    display: 'Báo lỗi bảo mật: anhtamqwer79@gmail.com',
+    path: '/about',
+  },
+];
 
 const footerAboutLink = [
   {
@@ -41,8 +73,14 @@ const footerCustomeLink = [
   },
 ];
 const Footer = () => {
+  const { t } = useTranslation();
+  const state = useContext(GlobalState);
+  const [theme] = state.theme;
   return (
-    <footer className="container footer">
+    <footer
+      className="container footer"
+      id={theme}
+    >
       <Grid
         col={4}
         mdCol={2}
@@ -50,31 +88,29 @@ const Footer = () => {
         gap={10}
       >
         <div className="">
-          <div className="footer__title">Hỗ trợ khách hàng</div>
+          <div className="footer__title">{t('Hỗ trợ khách hàng')}</div>
           <div className="footer__content">
             <p>
               Hotline: <a href="tel:0399817202">0399817202</a>
               <br />
-              (1000 đ/phút, 8-21h kể cả T7, CN)
+              (1000 đ/{t('phút')}, 8-21h {t('kể cả')} T7, CN)
             </p>
-            <p>Các câu hỏi thường gặp</p>
-            <p>Gửi yêu cầu hỗ trợ</p>
-            <p>Hướng dẫn đặt hàng</p>
-            <p>Phương thức vận chuyển</p>
-            <p>Chính sách đổi trả</p>
-            <p>Hướng dẫn trả góp</p>
-            <p>Chính sách hàng nhập khẩu</p>
-            <p>Hỗ trợ khách hàng: anhtamqwer79@gmail.com</p>
-            <p>Báo lỗi bảo mật: anhtamqwer79@gmail.com</p>
+            {footerSupportLink.map((item, index) => {
+              return (
+                <p key={index}>
+                  <Link to={item.path}>{t(item.display)}</Link>
+                </p>
+              );
+            })}
           </div>
         </div>
         <div>
-          <div className="footer__title">Về Yolo</div>
+          <div className="footer__title">{t('Về Yolo')}</div>
           <div className="footer__content">
             {footerAboutLink.map((item, index) => {
               return (
                 <p key={index}>
-                  <Link to={item.path}>{item.display}</Link>
+                  <Link to={item.path}>{t(item.display)}</Link>
                 </p>
               );
             })}
@@ -82,12 +118,12 @@ const Footer = () => {
         </div>
 
         <div>
-          <div className="footer__title">Chăm sóc khách hàng</div>
+          <div className="footer__title">{t('Chăm sóc khách hàng')}</div>
           <div className="footer__content">
             {footerCustomeLink.map((item, index) => {
               return (
                 <p key={index}>
-                  <Link to={item.path}>{item.display}</Link>
+                  <Link to={item.path}>{t(item.display)}</Link>
                 </p>
               );
             })}
@@ -105,11 +141,11 @@ const Footer = () => {
             </Link>
           </p>
           <p>
-            Hướng đến mục tiêu mang lại niềm vui ăn mặc mỗi ngày cho hàng triệu
-            người tiêu dùng Việt. Hãy cùng Yolo hướng đến một cuộc sống năng
-            động, tích cực hơn."Đặt sự hài lòng của khách hàng là ưu tiên số 1
-            trong mọi suy nghĩ hành động của mình” là sứ mệnh, là triết lý,
-            chiến lược.. luôn cùng YOLO tiến bước
+            {t(
+              'Hướng đến mục tiêu mang lại niềm vui ăn mặc mỗi ngày cho hàng triệungười tiêu dùng Việt.' +
+                'Hãy cùng Yolo hướng đến một cuộc sống năng động, tích cực hơn.' +
+                ' Đặt sự hài lòng của khách hàng là ưu tiên số 1 trong mọi suy nghĩ hành động của mình là sứ mệnh, là triết lý, chiến lược.. luôn cùng YOLO tiến bước'
+            )}
           </p>
         </div>
       </Grid>
@@ -120,7 +156,7 @@ const Footer = () => {
       >
         <div className="footer__end">
           <span>
-            @ Bản quyền thuộc về <strong>Yolo.vn</strong> All right reserved
+           {t('@ Bản quyền thuộc về Yolo.vn All right reserved')}
           </span>
         </div>
       </Grid>

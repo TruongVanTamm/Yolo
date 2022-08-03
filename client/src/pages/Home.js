@@ -130,7 +130,7 @@ const Home = () => {
         </SectionBody>
       </Section>
       <Section>
-        <SectionTitle>sản phẩm mới </SectionTitle>
+        <SectionTitle>sản phẩm mới</SectionTitle>
         <SectionBody>
           <Grid
             col={6}
@@ -177,7 +177,7 @@ const Home = () => {
         </div>
       </Section>
       <Section>
-        <SectionTitle>phổ biến </SectionTitle>
+        <SectionTitle>phổ biến</SectionTitle>
         <SectionBody>
           <Grid
             col={6}

@@ -2,6 +2,7 @@ import React from 'react';
 import ProductView from './ProductView';
 import Modal from 'react-modal';
 import Button from '../Button/Button';
+import { useTranslation } from 'react-i18next';
 Modal.setAppElement('#root');
 const customStyles = {
   overlay: {
@@ -12,7 +13,7 @@ const customStyles = {
 };
 const ProductViewModal = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-
+  const { t } = useTranslation();
   function openModal() {
     setIsOpen(true);
   }
@@ -27,7 +28,7 @@ const ProductViewModal = (props) => {
         onClick={openModal}
         noMargin='noMargin'
       >
-        Xem
+        {t('Xem')}
       </Button>
       <Modal
         isOpen={modalIsOpen}
