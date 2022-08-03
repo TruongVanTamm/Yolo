@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { GlobalState } from '../../GlobalState';
 import { Helmet } from 'react-helmet';
-
 function Categories() {
   const state = useContext(GlobalState);
   const [categories] = state.categoriesAPI.categories;

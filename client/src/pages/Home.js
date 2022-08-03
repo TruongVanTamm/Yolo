@@ -14,8 +14,10 @@ import ChatBot from '../components/Chatbot/ChatBot';
 import axios from 'axios';
 import { GlobalState } from '../GlobalState';
 import Swiper from '../components/utils/Swiper';
+import { useTranslation } from 'react-i18next';
 const Home = () => {
   const state = useContext(GlobalState);
+  const { t } = useTranslation();
   const [product1, setProduct1] = useState([]);
   const [product2, setProduct2] = useState([]);
   const [product3, setProduct3] = useState([]);
@@ -162,7 +164,7 @@ const Home = () => {
             {result1 < page1 * 8 ? (
               ''
             ) : (
-              <button onClick={() => setPage1(page1 + 1)}>Tải thêm</button>
+              <button onClick={() => setPage1(page1 + 1)}>{t("Tải thêm")}</button>
             )}
           </div>
         </SectionBody>

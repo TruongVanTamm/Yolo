@@ -31,7 +31,6 @@ const ProductView = (props) => {
   useEffect(() => {
     setAdded({ ...props, color, size });
   }, [color, size, props]);
-  // console.log(added);
   return (
     <div className="product">
       <div className="product__images">

@@ -363,7 +363,7 @@ const CreateProduct = () => {
           </div>
 
           <div className="row">
-            <label htmlFor="title">Tên</label>
+            <label htmlFor="title">{t("Tên")}</label>
             <input
               type="text"
               name="title"
@@ -374,7 +374,7 @@ const CreateProduct = () => {
             />
           </div>
           <div className="row">
-            <label htmlFor="discount">Giảm giá (%)</label>
+            <label htmlFor="discount">{t("Giảm giá")} (%)</label>
             <input
               type="number"
               name="discount"
@@ -384,7 +384,7 @@ const CreateProduct = () => {
             />
           </div>
           <div className="row">
-            <label htmlFor="old_price">Giá cũ ($)</label>
+            <label htmlFor="old_price">{t("Giá cũ")} ($)</label>
             <input
               type="number"
               name="old_price"
@@ -397,7 +397,7 @@ const CreateProduct = () => {
             className="row"
             style={{ position: 'relative' }}
           >
-            <label htmlFor="price">Giá ($)</label>
+            <label htmlFor="price">{t("Giá")} ($)</label>
             <input
               type="number"
               name="price"
@@ -413,7 +413,7 @@ const CreateProduct = () => {
             ) : null}
           </div>
           <div className="row">
-            <label htmlFor="color">Màu sắc</label>
+            <label htmlFor="color">{t("Màu")}</label>
             <MultiSelect
               options={options}
               value={selectedColor}
@@ -422,7 +422,7 @@ const CreateProduct = () => {
             />
           </div>
           <div className="row">
-            <label htmlFor="size">Kích cỡ </label>
+            <label htmlFor="size">{t("Kích cỡ")}</label>
             <MultiSelect
               options={option1}
               value={selectedSize}
@@ -431,7 +431,7 @@ const CreateProduct = () => {
             />
           </div>
           <div className="row">
-            <label htmlFor="description">Mô tả</label>
+            <label htmlFor="description">{t("Mô tả")}</label>
             <textarea
               type="text"
               name="description"
@@ -443,13 +443,13 @@ const CreateProduct = () => {
             />
           </div>
           <div className="row">
-            <label htmlFor="categories">Danh mục: </label>
+            <label htmlFor="categories">{t("Danh mục")}: </label>
             <select
               name="category"
               value={product.category}
               onChange={handleChangeInput}
             >
-              <option value="">Chọn danh mục cho sản phẩm</option>
+              <option value="">{t("Chọn danh mục cho sản phẩm")}</option>
               {categories.map((category) => (
                 <option
                   value={category._id}
@@ -461,7 +461,7 @@ const CreateProduct = () => {
             </select>
           </div>
 
-          <button type="submit">{onEdit ? 'Cập nhật' : 'Tạo'}</button>
+          <button type="submit">{onEdit ? `${t('Cập nhật')}`: `${t('Tạo')}`}</button>
         </form>
       </div>
     </>

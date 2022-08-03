@@ -10,7 +10,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import i18next from 'i18next';
 import { useTranslation} from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import cookie from 'js-cookie';
+import classNames from 'classnames'
 const mainNav = [
   {
     display: 'Trang chủ',
@@ -26,8 +27,18 @@ const mainNav = [
   },
 ];
 const Header = () => {
-  const { param } = useParams();
-  console.log(param);
+  const languages = [
+    {
+      code: 'en',
+      name: 'Tiếng Anh',
+    },
+    {
+      code: 'vi',
+      name: 'Việt Nam',
+    },
+  ];
+  const currentLanguageCode=cookie.get('i18next') || 'vi'
+const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
   const { pathname } = useLocation();
   const [themeCheck, setThemeCheck] = useState(false);
   const state = useContext(GlobalState);
@@ -113,10 +124,13 @@ const Header = () => {
                   {languages.map(({ code, name }) => (
                     <li key={code}>
                       <a
-                        href="/"
+                        href={`${pathname}`}
                         onClick={() => {
                           i18next.changeLanguage(code);
                         }}
+                        className={classNames('dropdown-item', {
+                          disabled: currentLanguageCode === code,
+                        })}
                       >
                         {t(name)}
                       </a>
@@ -156,16 +170,10 @@ const Header = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light');
     setThemeCheck(!themeCheck);
   };
-  const languages = [
-    {
-      code: 'en',
-      name: 'Tiếng Anh',
-    },
-    {
-      code: 'vi',
-      name: 'Việt Nam',
-    },
-  ];
+
+  useEffect(() => {
+    document.title = t('Yolo')
+  }, [currentLanguage, t]);
   return (
     <div
       className="header"

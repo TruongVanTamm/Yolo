@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import i18n from 'i18next';
-import {initReactI18next } from 'react-i18next';
+import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpApi from 'i18next-http-backend';
 import Layout from './components/Layout/Layout';
@@ -15,6 +15,7 @@ import {
 } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { DataProvider } from './GlobalState';
+import Loading from './components/utils/Loading'
 const container = document.getElementById('root');
 const root = createRoot(container);
 
@@ -23,21 +24,15 @@ i18n
   .use(LanguageDetector)
   .use(HttpApi)
   .init({
-    supportedLngs:['en', 'vi'],
+    supportedLngs: ['en'],
     fallbackLng: 'vi',
     detection: {
-      order: [
-        'cookie',
-        'htmlTag',
-        'localStorage',
-        'path',
-        'subdomain',
-      ],
-      caches: ['cookie']
+      order: ['cookie', 'htmlTag', 'localStorage', 'path', 'subdomain'],
+      caches: ['cookie'],
     },
     backend: {
       loadPath: '/assets/locales/{{lng}}/translation.json',
-    }
+    },
   });
 
 const options = {
@@ -52,14 +47,16 @@ const options = {
 
 function App() {
   return (
-    <AlertProvider
-      template={AlertTemplate}
-      {...options}
-    >
-      <DataProvider>
-        <Layout></Layout>
-      </DataProvider>
-    </AlertProvider>
+    <Suspense fallback={<Loading></Loading>}>
+      <AlertProvider
+        template={AlertTemplate}
+        {...options}
+      >
+        <DataProvider>
+          <Layout></Layout>
+        </DataProvider>
+      </AlertProvider>
+    </Suspense>
   );
 }
 root.render(<App />);

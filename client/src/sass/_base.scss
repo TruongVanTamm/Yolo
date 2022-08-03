@@ -66,6 +66,11 @@ a {
   //   color: $main-color;
   // }
 }
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  color:gray;
+}
 @each $color, $val in $colors {
   .color-#{$color} {
     color: $val;

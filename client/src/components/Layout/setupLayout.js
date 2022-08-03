@@ -8,9 +8,9 @@ const SetupLayout = () => {
   const state = useContext(GlobalState);
   const [theme] = state.theme;
   return (
-    <div>
+    <div id={theme}>
       <Header />
-      <div className="container" id={theme}>
+      <div className="container" >
         <div className="main">
             <RoutesWrap></RoutesWrap>
         </div>

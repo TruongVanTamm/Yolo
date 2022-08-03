@@ -109,7 +109,6 @@ const Cart = () => {
         </div>
       </>
     );
-    // console.log(cart)
   return (
     <>
       <Helmet>
