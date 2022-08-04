@@ -69,7 +69,7 @@ const ProductView = (props) => {
           <div className="product__description__title">{t("Chi tiết sản phẩm")}</div>
           <div
             className="product__description__content"
-            dangerouslySetInnerHTML={{ __html: props.description }}
+            dangerouslySetInnerHTML={{ __html: t(props.description) }}
           ></div>
           <div className="product__description__toggle">
             {/* <Button

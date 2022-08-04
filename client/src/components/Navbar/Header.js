@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Asset/images/Logo-2.png';
 import logoAdmin from '../../Asset/images/logoAdmin.png';
 import { GlobalState } from '../../GlobalState';
-import Switch from 'react-switch';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -12,6 +11,7 @@ import i18next from 'i18next';
 import { useTranslation} from 'react-i18next';
 import cookie from 'js-cookie';
 import classNames from 'classnames'
+import DarkMode from '../utils/DarkMode';
 const mainNav = [
   {
     display: 'Trang chủ',
@@ -40,12 +40,10 @@ const Header = () => {
   const currentLanguageCode=cookie.get('i18next') || 'vi'
 const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
   const { pathname } = useLocation();
-  const [themeCheck, setThemeCheck] = useState(false);
   const state = useContext(GlobalState);
   const [isLogged] = state.userAPI.isLogged;
   const [isAdmin] = state.userAPI.isAdmin;
   const [cart] = state.userAPI.cart;
-  const [theme, setTheme] = state.theme;
   const activeNav = mainNav.findIndex((e) => e.path === pathname);
   const headerRef = useRef(null);
   const menuLeft = useRef(null);
@@ -101,13 +99,7 @@ const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
           }}
         >
           <span>{t('Chế độ tối')}</span>
-          <Switch
-            onChange={changeTheme}
-            checked={themeCheck}
-            height={20}
-            width={40}
-            onColor={'#4267b2'}
-          />
+          <DarkMode></DarkMode>
         </li>
         <li>
           <Navbar
@@ -166,10 +158,7 @@ const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
     });
     return () => window.addEventListener('scroll');
   }, []);
-  const changeTheme = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
-    setThemeCheck(!themeCheck);
-  };
+
 
   useEffect(() => {
     document.title = t('Yolo')
@@ -178,7 +167,6 @@ const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
     <div
       className="header"
       ref={headerRef}
-      id={theme}
     >
       <div className="container">
         <div className="header__logo">
