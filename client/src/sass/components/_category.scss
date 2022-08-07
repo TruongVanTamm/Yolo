@@ -7,8 +7,10 @@
     }
   }
   &__main {
+
     max-width: 500px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
     margin: 30px auto;

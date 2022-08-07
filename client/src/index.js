@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { createRoot } from 'react-dom/client';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
@@ -18,7 +19,6 @@ import { DataProvider } from './GlobalState';
 import Loading from './components/utils/Loading'
 const container = document.getElementById('root');
 const root = createRoot(container);
-
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(LanguageDetector)

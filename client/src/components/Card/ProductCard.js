@@ -1,34 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
-import AlertLike from '../utils/AlertLike';
 import { GlobalState } from '../../GlobalState';
 import ProductViewModal from '../ProductsView/ProductViewModal';
 import { useTranslation } from 'react-i18next';
 const ProductCard = (props) => {
+  const navigate=useNavigate()
   const [activeProduct, setActiveProduct] = useState(0);
   const { t } = useTranslation();
   const handleProductClick = (index) => {
     setActiveProduct(index);
   };
-  const [like, setLike] = useState();
-  const handleLike = () => {
-    setLike(!like);
-  };
+  const [like, setLike] = useState(false);
   const data = [{ image01: props.image01 }, { image02: props.image02 }];
-  let reset;
-  if (like === false) {
-    reset = 'activeAlert';
-  }
   const state = useContext(GlobalState);
-  const addCart = state.userAPI.addCart;
+  const addFavorite = state.userAPI.addFavorite;
+  const removeProduct = state.userAPI.removeProduct;
+  const [isLogged] = state.userAPI.isLogged;
+  useEffect(() => {
+    if (localStorage.getItem(`${props.id}`)) {
+      setLike(true);
+    }
+  }, [props.id]);
   return (
     <>
-      <AlertLike
-        activeAlert={like}
-        reset={reset}
-      ></AlertLike>
       <div className="product-card">
         {props.isAdmin && (
           <input
@@ -93,27 +89,6 @@ const ProductCard = (props) => {
             </>
           ) : (
             <>
-              {/* {' '}
-              <Button
-                size="sm"
-                icon="bx bx-cart-add"
-                animate={true}
-                onClick={() => addCart(props)}
-              >
-                Mua
-              </Button> */}
-              {/* <Link
-                to={`/${props.id}`}
-                className="mobile-hide"
-              >
-                <Button
-                  size="sm"
-                  icon="bx bx-cart-add"
-                  animate={false}
-                >
-                  Xem
-                </Button>
-              </Link> */}
               <ProductViewModal
                 id={props.id}
                 name={props.name}
@@ -162,9 +137,29 @@ const ProductCard = (props) => {
         </div>
         <div
           className="product-card__like"
-          onClick={handleLike}
+          onClick={() => {
+            if (isLogged === true) {
+              if (like === false) {
+                localStorage.setItem(`${props.id}`, true);
+                addFavorite(props);
+                setLike(true);
+              } else {
+                removeProduct(props.id);
+                setLike(false);
+              }
+            }
+            else{
+              navigate('/signin')
+            }
+          }}
         >
-          <i className={like ? 'bx bxs-heart' : 'bx bx-heart'}></i>
+          <i
+            className={
+              localStorage.getItem(`${props.id}`)
+                ? 'bx bxs-heart'
+                : 'bx bx-heart'
+            }
+          ></i>
         </div>
       </div>{' '}
     </>

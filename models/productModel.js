@@ -59,7 +59,7 @@ const productSchema = new mongoose.Schema({
     size:{
         type:Array,
         required: true,
-    }
+    },
 }, {
     timestamps: true //important
 })

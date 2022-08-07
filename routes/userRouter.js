@@ -23,6 +23,7 @@ router.patch('/update_role/:id', auth, authAdmin, userCtrl.updateUsersRole)
 
 router.delete('/delete/:id', auth, authAdmin, userCtrl.deleteUser)
 router.patch('/addcart', auth, userCtrl.addCart)
+router.patch('/addfavorite', auth, userCtrl.addFavorite)
 
 router.get('/history', auth, userCtrl.history)
 

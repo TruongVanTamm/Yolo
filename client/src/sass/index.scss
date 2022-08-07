@@ -1,3 +1,4 @@
+@import "~bootstrap/scss/bootstrap";
 @import './variable';
 @import './base';
 @import './mixins';
@@ -23,7 +24,7 @@
 @import './components/history';
 @import './components/category';
 @import './components/createProduct';
-@import './components/tippystyle';
+@import './components/favorite';
 @import './components/profile';
 @import './components/edit-user';
 @import './components/authCss/forgot-password';

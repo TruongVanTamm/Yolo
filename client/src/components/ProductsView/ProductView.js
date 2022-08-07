@@ -22,7 +22,6 @@ const ProductView = (props) => {
   //   }
   //   setDescriptionExpand(!descriptionExpand);
   // };
-
   useEffect(() => {
     setPreviewImg(props.image01);
     setColor(undefined);

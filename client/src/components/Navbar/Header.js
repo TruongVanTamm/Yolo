@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Asset/images/Logo-2.png';
 import logoAdmin from '../../Asset/images/logoAdmin.png';
@@ -8,9 +8,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import i18next from 'i18next';
-import { useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import cookie from 'js-cookie';
-import classNames from 'classnames'
+import classNames from 'classnames';
 import DarkMode from '../utils/DarkMode';
 const mainNav = [
   {
@@ -37,8 +37,8 @@ const Header = () => {
       name: 'Việt Nam',
     },
   ];
-  const currentLanguageCode=cookie.get('i18next') || 'vi'
-const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
+  const currentLanguageCode = cookie.get('i18next') || 'vi';
+  const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
   const { pathname } = useLocation();
   const state = useContext(GlobalState);
   const [isLogged] = state.userAPI.isLogged;
@@ -84,11 +84,13 @@ const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
     return (
       <>
         <li>
-          <Link to="/profile"> {t('Thông tin khách hàng')}
-</Link>
+          <Link to="/profile"> {t('Thông tin khách hàng')}</Link>
         </li>
         <li>
           <Link to="/history"> {t('Lịch sử đơn hàng')}</Link>
+        </li>
+        <li>
+          <Link to="/favorite">{t('Yêu thích')}</Link>
         </li>
         <li
           style={{
@@ -102,41 +104,8 @@ const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
           <DarkMode></DarkMode>
         </li>
         <li>
-          <Navbar
-            bg="light"
-            expand="lg"
-          >
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <NavDropdown
-                  title={t('Ngôn Ngữ')}
-                  id="basic-nav-dropdown"
-                >
-                  {languages.map(({ code, name }) => (
-                    <li key={code}>
-                      <a
-                        href={`${pathname}`}
-                        onClick={() => {
-                          i18next.changeLanguage(code);
-                        }}
-                        className={classNames('dropdown-item', {
-                          disabled: currentLanguageCode === code,
-                        })}
-                      >
-                        {t(name)}
-                      </a>
-                    </li>
-                  ))}
-                  <NavDropdown.Divider />
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-        </li>
-        <li>
           <Link
-            to="/"
+            to="/favorite"
             onClick={logoutUser}
           >
             {t('Đăng xuất')}
@@ -158,10 +127,8 @@ const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
     });
     return () => window.addEventListener('scroll');
   }, []);
-
-
   useEffect(() => {
-    document.title = t('Yolo')
+    document.title = t('Yolo');
   }, [currentLanguage, t]);
   return (
     <div
@@ -242,12 +209,43 @@ const currentLanguage = languages.find((l) => l.code === currentLanguageCode)
               <i className="bx bx-user"></i>
               <div className="header__menu__right__item__user-option">
                 <ul className="header__menu__right__item__user-option__list">
+                  <li>
+                    <Navbar>
+                      <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                          <NavDropdown
+                            title={t('Ngôn Ngữ')}
+                            id="basic-nav-dropdown"
+                          >
+                            {languages.map(({ code, name }) => (
+                              <li key={code}>
+                                <a
+                                  href={`${pathname}`}
+                                  onClick={() => {
+                                    i18next.changeLanguage(code);
+                                  }}
+                                  className={classNames('dropdown-item', {
+                                    disabled: currentLanguageCode === code,
+                                  })}
+                                >
+                                  {t(name)}
+                                </a>
+                              </li>
+                            ))}
+    
+                          </NavDropdown>
+                        </Nav>
+                      </Navbar.Collapse>
+                    </Navbar>
+                  </li>
                   {isLogged ? (
                     loggedRouter()
                   ) : (
-                    <li>
-                      <Link to="/signin"> {t('Đăng nhập')}</Link>
-                    </li>
+                    <>
+                      <li>
+                        <Link to="/signin"> {t('Đăng nhập')}</Link>
+                      </li>
+                    </>
                   )}
                 </ul>
               </div>

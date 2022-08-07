@@ -16,6 +16,7 @@ import Profile from '../components/Profile/Profile'
 import EditUser from '../components/Profile/EditUser'
 import ForgotPassword from '../components/Auth/ForgotPassword'
 import ResetPassword from '../components/Auth/ResetPassword'
+import Favorites from '../components/Favorite/Favorites'
 // import Accessories from '../pages/Accessories'
 const RoutesWrap = () => {
   const state = useContext(GlobalState);
@@ -34,6 +35,7 @@ const RoutesWrap = () => {
           <Route path='/edit-product/:id' exact element={isAdmin? <CreateProduct></CreateProduct>:<NotFound></NotFound>}></Route>
           <Route path='/history' exact element={isLogged ? <OrderHistory></OrderHistory>:<NotFound></NotFound>}></Route>
           <Route path='/history/:id' exact element={<OrderDetail></OrderDetail>}></Route>
+          <Route path='/favorite' exact element={isLogged ? <Favorites></Favorites>:<NotFound></NotFound>}></Route>
           <Route path='/signup' exact element={isLogged ? <NotFound></NotFound>:<SignUpPage></SignUpPage>}></Route>
           <Route path='/signin' exact element={isLogged ? <NotFound></NotFound>:<SignInPage></SignInPage>}></Route>
           <Route path="/user/activate/:activation_token" exact element={<SignInPage></SignInPage>} ></Route>

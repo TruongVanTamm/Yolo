@@ -16,7 +16,7 @@ html,
 body {
   height: 100%;
   font-size: 62.5%;
-  @include mobile{
+  @include mobile {
     font-size: 11px;
   }
 }
@@ -69,7 +69,17 @@ a {
 .disabled {
   pointer-events: none;
   cursor: default;
-  color:gray;
+  color: gray;
+}
+.dropdown-toggle {
+  color: $main-color;
+}
+.dropdown-menu {
+  font-size: 1.6rem;
+  padding: 10px 20px;
+  a {
+    color: $main-color;
+  }
 }
 @each $color, $val in $colors {
   .color-#{$color} {
@@ -123,7 +133,6 @@ a {
   }
 }
 
-.grid{
+.grid {
   display: grid;
-  
 }
