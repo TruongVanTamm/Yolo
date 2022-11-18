@@ -71,6 +71,12 @@ a {
   cursor: default;
   color: gray;
 }
+.dropdown {
+  a {
+    display: block;
+    padding: 0 !important;
+  }
+}
 .dropdown-toggle {
   color: $main-color;
 }

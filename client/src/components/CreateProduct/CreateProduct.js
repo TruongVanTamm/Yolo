@@ -100,12 +100,14 @@ const CreateProduct = () => {
       let formData = new FormData();
       formData.append('file', file);
       setLoading(true);
+
       const res = await axios.post('/api/upload', formData, {
         headers: {
           'content-type': 'multipart/form-data',
           Authorization: token,
         },
       });
+      
       setLoading(false);
       setImage01(res.data);
     } catch (err) {

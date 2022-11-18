@@ -131,15 +131,26 @@
             flex-direction: column;
             li {
               width: 100%;
+              padding: 10px 0;
+              border-bottom: 1px solid #ccc;
+              button {
+                background-color: transparent;
+                color: $main-color;
+              }
             }
             li:last-child {
-              padding-top: 10px;
+              border-bottom: none;
+            }
+            li:hover {
+              a,
+              button,
+              span {
+                color: #fbb96b;
+              }
             }
             a {
               display: block;
               width: 100%;
-              border-bottom: 1px solid #ccc;
-              padding: 10px 0;
             }
             a:last-child {
               border-bottom: none;
@@ -291,7 +302,7 @@
     }
   }
 }
-// 
+//
 @keyframes dropdown {
   from {
     transform: translateY(20px);

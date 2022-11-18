@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useRef} from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Asset/images/Logo-2.png';
 import logoAdmin from '../../Asset/images/logoAdmin.png';
@@ -92,24 +92,8 @@ const Header = () => {
         <li>
           <Link to="/favorite">{t('Yêu thích')}</Link>
         </li>
-        <li
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            paddingTop: '10px',
-          }}
-        >
-          <span>{t('Chế độ tối')}</span>
-          <DarkMode></DarkMode>
-        </li>
-        <li>
-          <Link
-            to="/favorite"
-            onClick={logoutUser}
-          >
-            {t('Đăng xuất')}
-          </Link>
+        <li style={{ order: 6 }}>
+          <button onClick={logoutUser}>{t('Đăng xuất')}</button>
         </li>
       </>
     );
@@ -209,7 +193,7 @@ const Header = () => {
               <i className="bx bx-user"></i>
               <div className="header__menu__right__item__user-option">
                 <ul className="header__menu__right__item__user-option__list">
-                  <li>
+                  <li style={{ order: 4 }}>
                     <Navbar>
                       <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
@@ -232,17 +216,28 @@ const Header = () => {
                                 </a>
                               </li>
                             ))}
-    
                           </NavDropdown>
                         </Nav>
                       </Navbar.Collapse>
                     </Navbar>
                   </li>
+                  <li
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingTop: '10px',
+                      order: 5,
+                    }}
+                  >
+                    <span>{t('Chế độ tối')}</span>
+                    <DarkMode></DarkMode>
+                  </li>
                   {isLogged ? (
                     loggedRouter()
                   ) : (
                     <>
-                      <li>
+                      <li style={{ order: 6 }}>
                         <Link to="/signin"> {t('Đăng nhập')}</Link>
                       </li>
                     </>

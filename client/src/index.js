@@ -16,7 +16,8 @@ import {
 } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { DataProvider } from './GlobalState';
-import Loading from './components/utils/Loading'
+import Loading from './components/utils/Loading';
+import UnsecuredPage from './components/utils/UnsecuredPage';
 const container = document.getElementById('root');
 const root = createRoot(container);
 i18n
@@ -59,4 +60,8 @@ function App() {
     </Suspense>
   );
 }
-root.render(<App />);
+if (window.self === window.top) {
+  root.render(<App />);
+} else {
+  root.render(<UnsecuredPage />);
+}
